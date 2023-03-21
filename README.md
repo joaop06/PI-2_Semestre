@@ -1,57 +1,16 @@
-# essentials
+# PI 2º Semestre
 
-## Project setup
-
-```
-# yarn
-yarn
-
-# npm
-npm install
-
-# pnpm
-pnpm install
-```
-
-### Compiles and hot-reloads for development
+## Projeto:
 
 ```
-# yarn
-yarn dev
-
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
+### Projeto com ideia de um sistema para restaurantes, com objetivo de facilitar as interações entre a empresa e o cliente.
+    #### Interface do Cliente:
+        - Cadastro de Usuário
+        - Gerador de Pedidos
+        - Histórico de Pedidos
+        - Perfil
+    
+    #### Interface Admin:
+        - Gerenciado de todos os pedidos
+        - Adição, remoção e edição de todos os produtos.
 ```
-
-### Compiles and minifies for production
-
-```
-# yarn
-yarn build
-
-# npm
-npm run build
-
-# pnpm
-pnpm build
-```
-
-### Lints and fixes files
-
-```
-# yarn
-yarn lint
-
-# npm
-npm run lint
-
-# pnpm
-pnpm lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://vitejs.dev/config/).
