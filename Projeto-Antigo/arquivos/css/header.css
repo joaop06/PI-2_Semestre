@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.cabecalho{
+    position: fixed;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 8%;
+    background-color: rgb(255, 255, 255);
+    border-bottom: 1px rgba(0, 0, 0, 0.4) solid;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+    top: 0
+}
+
+.cabecalho #logo{
+    width: 40%;
+}
+
+.cabecalho #logo > #img_logo{
+    max-width: 200px;
+    padding-left: 10%;
+}
+
+.cabecalho #menu{
+    width: 35%;
+    height: 60%;
+    justify-content: space-around;
+    align-items: center;
+    display: flex;
+    padding-right: 2%;
+}
+
+.cabecalho  li{
+    list-style: none;
+    height: 100%;
+    padding: 2%;
+    text-align: end;
+    justify-content: flex-end;
+    align-items: flex-end;
+    max-width: 10vw;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    border: rgb(132, 214, 255, 0) 3px solid;
+}
+
+.cabecalho  li:hover{
+    transition: 0.2s;
+    border: rgb(132, 214, 255) 3px solid;
+}
+
+.cabecalho a{
+    display: flex;
+    text-decoration: none;
+    color: black;
+    align-items: center;
+    width: 100%;
+}
+
+.cabecalho > #menu img{
+    max-width: 40px;
+    height: 30px;
+}
+
+/***************************************/
+/****************************************/
+
+#nao_logado .nada{
+    border: none;
+}
+
+#nao_logado li{
+    box-shadow: none;
+    border: rgb(132, 214, 255) solid 3px;
+    text-align: center;
+    height: 85%;
+    font-size: 1.05vw;
+    padding: 1.7%;
+}
+
+/****************************************/
+#entrar{
+    color: rgb(132, 214, 255);
+    font-weight: bold;
+    text-align: center;
+}
+
+#entrar a{
+    color: rgb(132, 214, 255);
+    font-weight: bold;
+    height: 100%;
+}
+
+#entrar:hover{
+    transition: 0.35s;
+    background-color: rgb(132, 214, 255);
+}
+
+#entrar:hover a{
+    transition: 0.35s;
+    color: rgb(255, 255, 255);
+}
+/****************************************/
+#cadastrar{
+    background-color: rgb(132, 214, 255);
+}
+
+#cadastrar a{
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    height: 100%;
+}
+
+#cadastrar a:hover{
+    color: rgb(132, 214, 255);
+    font-weight: bold;
+    height: 100%;
+}
+
+#cadastrar:hover{
+    transition: 0.35s;
+    background-color: rgb(255, 255, 255);
+    border: rgb(132, 214, 255) solid 3px;
+    
+}
+/*
+#cadastrar:hover{
+    transition: 0.35s;
+    background-color: rgb(0, 160, 255);
+    border: rgb(0, 145, 255) solid 3px;
+}
+
+*/
