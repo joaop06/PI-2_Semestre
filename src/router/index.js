@@ -26,7 +26,27 @@ const routes = [
         component: () => import(/* webpackChunkName: "pedidos" */ '@/views/Pedidos.vue'),
       }
     ]
-  }
+  },  {
+    path: '/sobre',
+    component: () => import('@/layouts/default/Default.vue'),
+    children: [
+      {
+        path: '/sobre',
+        name: 'Sobre',
+        component: () => import(/* webpackChunkName: "pedidos" */ '@/views/Sobre.vue'),
+      }
+    ]
+  },  {
+    path: '/perfil',
+    component: () => import('@/layouts/default/Default.vue'),
+    children: [
+      {
+        path: '/perfil',
+        name: 'Perfil',
+        component: () => import(/* webpackChunkName: "pedidos" */ '@/views/Perfil.vue'),
+      }
+    ]
+  },
 ]
 
 const router = createRouter({

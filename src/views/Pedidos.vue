@@ -1,7 +1,13 @@
 <template>
+  <Navbar />
   <h1>PEDIDOS</h1>
 </template>
 
-<script setup>
-
+<script>
+  import Navbar from '../components/Navbar.vue'
+  export default{
+    components:{
+      Navbar
+    }
+  }
 </script>
