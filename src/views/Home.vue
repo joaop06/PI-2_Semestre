@@ -1,6 +1,6 @@
 <template>
   <Navbar />
-  <h1>HOME</h1>
+  <h1>INÍCIO</h1>
 
 
 
