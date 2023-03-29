@@ -1,7 +1,7 @@
 <template>
-  <Navbar />
+  <Navbar>
   <h1>INÍCIO</h1>
-
+  </Navbar>
 
 
 
