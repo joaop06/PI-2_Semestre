@@ -1,34 +1,75 @@
 <template>
-  
-  <v-card>
-    <v-layout>
-      <v-app-bar color="orange-accent-2">
+  <v-app-bar color="orange-lighten-2">
+    <v-app-bar-title>
+      <v-row no-gutters align="start" justify="start">
+        <v-img src="../../public/img/Logo_pizza.png" height="200"></v-img>
+      </v-row>
 
-        <v-app-bar-title><router-link to="/">Teste Título</router-link></v-app-bar-title>
+    </v-app-bar-title>
 
-        <v-spacer></v-spacer>
+    <!-- <div v-if="true" class="d-flex justify-space-between mr-16 pr-16">
+      <v-btn
+        to="/pedidos"
+        width="33%"
+        class="ma-5 bg-orange-lighten-1"
+        color="indigo-darken-3"
+        rounded="sm"
+        :elevation="1"
+        icon
+      >
+        <v-icon>mdi-history</v-icon>
+        Pedidos
+      </v-btn>
 
-        <v-btn to="/pedidos" width="10%" class="text-small" color="indigo-darken-3" rounded="sm" icon>
-          <v-icon >mdi-history</v-icon>
-          Pedidos
-        </v-btn>
+      <v-btn
+        to="/sobre"
+        width="33%"
+        class="ma-5 bg-orange-lighten-1"
+        color="indigo-darken-3"
+        rounded="sm"
+        :elevation="1"
+        icon
+      >
+        <v-icon>mdi-information</v-icon>
+        Sobre
+      </v-btn>
 
-        <v-btn to="/sobre" width="10%" class="text-small" color="indigo-darken-3" rounded="sm" icon>
-          <v-icon>mdi-information</v-icon>
-          Sobre
-        </v-btn>
+      <v-btn
+        to="/perfil"
+        width="33%"
+        class="ma-5 bg-orange-lighten-1"
+        color="indigo-darken-3"
+        rounded="sm"
+        :elevation="1"
+        icon
+      >
+        <v-icon>mdi-account-box</v-icon>
+        Perfil
+      </v-btn>
+    </div>
 
-        <v-btn to="/perfil" width="10%" class="text-small" color="indigo-darken-3" rounded="sm" icon>
-          <v-icon>mdi-account-box</v-icon>
-          Perfil
-        </v-btn>
-      </v-app-bar>
+    <div v-else class="d-flex justify-space-between mr-16 pr-16">
+      <v-btn
+        width="50%"
+        class="ma-5 bg-indigo-accent-3"
+        color="orange-lighten-1"
+        rounded="sm"
+        :elevation="1"
+      >
+        Login
+      </v-btn>
 
-
-      <v-main>
-      </v-main>
-    </v-layout>
-  </v-card>
+      <v-btn
+        width="50%"
+        class="ma-5 bg-indigo-accent-3"
+        color="orange-lighten-1"
+        rounded="sm"
+        :elevation="1"
+      >
+        Cadastrar-se
+      </v-btn>
+    </div> -->
+  </v-app-bar>
 </template>
 
 <script>
