@@ -22,6 +22,12 @@ const routes = [
     name: 'Perfil',
     component: () => import('@/views/Perfil.vue'),
   },
+  
+  {
+    path: '/admin',
+    name: 'login',
+    component: () => import('@/views/admin/login.vue'),
+  },
 ]
 
 const router = createRouter({
