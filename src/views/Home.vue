@@ -9,7 +9,7 @@
         <v-card class="mt-10" height="90%" :elevation="0" rounded="xl">
           <v-row >
             <v-col v-if="true" >
-              <v-card v-for="i in 2" :key="i" cols="12" :title="`Pedido Nº ${i}`" :id="pedido_produto" class="mt-3 text-h1" :elevation="3"></v-card>
+              <v-card v-for="i in 2" :key="i" cols="12" :title="`Pedido Nº ${i}`" class="mt-3 text-h1" :elevation="3"></v-card>
             </v-col>
 
             <v-col v-else>
@@ -51,11 +51,5 @@
 </template>
 
 <script>
-export default {
-  data(){
-    return{
-      pedido_produto:'produto1',
-    },
-  },
-};
+
 </script>
