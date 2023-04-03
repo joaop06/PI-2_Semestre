@@ -1,20 +1,20 @@
 <template>
-  <v-app-bar color="orange-lighten-2">
+  <v-app-bar color="amber-lighten-1" height="75" :elevation="3">
     <v-app-bar-title>
-      <v-row no-gutters align="start" justify="start">
-        <v-img src="../../public/img/Logo_pizza.png" height="200"></v-img>
+      <v-row no-gutters>
+        <v-img src="../../public/img/Logo_Rang-On2.png" height="75" justify="start"></v-img>
       </v-row>
 
     </v-app-bar-title>
 
-    <!-- <div v-if="true" class="d-flex justify-space-between mr-16 pr-16">
+    <div v-if="true" class="d-flex justify-space-between mr-16 pr-16">
       <v-btn
         to="/pedidos"
         width="33%"
-        class="ma-5 bg-orange-lighten-1"
-        color="indigo-darken-3"
+        class="ma-5 bg-amber-darken-2"
+        color="indigo-darken-4"
         rounded="sm"
-        :elevation="1"
+        :elevation="2"
         icon
       >
         <v-icon>mdi-history</v-icon>
@@ -24,10 +24,10 @@
       <v-btn
         to="/sobre"
         width="33%"
-        class="ma-5 bg-orange-lighten-1"
-        color="indigo-darken-3"
+        class="ma-5 bg-amber-darken-2"
+        color="indigo-darken-4"
         rounded="sm"
-        :elevation="1"
+        :elevation="2"
         icon
       >
         <v-icon>mdi-information</v-icon>
@@ -38,9 +38,9 @@
         to="/perfil"
         width="33%"
         class="ma-5 bg-orange-lighten-1"
-        color="indigo-darken-3"
+        color="indigo-darken-4"
         rounded="sm"
-        :elevation="1"
+        :elevation="2"
         icon
       >
         <v-icon>mdi-account-box</v-icon>
@@ -68,7 +68,7 @@
       >
         Cadastrar-se
       </v-btn>
-    </div> -->
+    </div>
   </v-app-bar>
 </template>
 

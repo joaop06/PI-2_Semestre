@@ -1,5 +1,4 @@
 <template>
-  <Navbar />
   <h1>SOBRE</h1>
 </template>
 

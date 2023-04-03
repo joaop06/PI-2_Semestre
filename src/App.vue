@@ -15,3 +15,11 @@ export default {
   },
 };
 </script>
+
+
+<style>
+router-view{
+  background: url('../public/img/fundo_navbar.png');
+
+}
+</style>

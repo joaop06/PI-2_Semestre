@@ -1,5 +1,4 @@
 <template>
-  <Navbar />
   <h1>PERFIL</h1>
 </template>
 
