@@ -1,6 +1,6 @@
 <template>
   <v-row no-gutters justify="space-between">
-    <v-col cols="2" xs="" sm="12" md="5" lg="3" xl="" class="ml-8 mr-5 mt-5 pt-12">
+    <v-col cols="2" xs="2" sm="2" md="2" lg="3" xl="2" class="ml-8 mr-3 mt-5 pt-12">
       <v-card height="65vh" :elevation="5" rounded="lg" class="pa-5" >
         <v-app-bar-title
           class="text-center mt-10  "
@@ -11,7 +11,7 @@
             <v-col v-if="true" >
               <v-card v-for="i in 2" :key="i" cols="12" :title="`Pedido Nº ${i}`" class="mt-3 text-h1" :elevation="3"></v-card>
             </v-col>
-
+            
             <v-col v-else>
 
             </v-col>
@@ -20,7 +20,7 @@
       </v-card>
     </v-col>
 
-    <v-col sm="12" md="10" lg="9" class="mr-8 pa-12" rounded="xl">
+    <v-col xs="2" sm="2" md="2" lg="8" xl="9" class="mr-8 pa-12" rounded="xl">
       <v-row class="pa-5">
         <v-col v-for="n in 21" :key="n" cols="3">
           <v-img

@@ -1,11 +1,7 @@
 <template>
   <v-app-bar color="amber-lighten-1" height="75" :elevation="3">
-    <v-app-bar-title>
-      <v-row no-gutters>
-        <v-img src="../../public/img/Logo_Rang-On2.png" height="75" justify="start"></v-img>
-      </v-row>
 
-    </v-app-bar-title>
+    <v-img src="../../public/img/Logo_Rang-On.png" class="float-left" width="75" height="75"></v-img>
 
     <div v-if="true" class="d-flex justify-space-between mr-16 pr-16">
       <v-btn
