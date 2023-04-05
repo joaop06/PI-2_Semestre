@@ -38,7 +38,7 @@
             <v-card v-if="n%2==0" :key="preco = n+0.99" :title="`R$ ${preco}`" width="35%" :elevation="0"></v-card>
             <v-card v-else :key="preco = n+0.49" :title="`R$ ${preco}`" width="35%" :elevation="0"></v-card>
 
-            <v-btn width="33%" class="ma-4 bg-amber-darken-2" color="indigo-darken-4" rounded="lg">
+            <v-btn width="33%" class="ma-4 bg-red-darken-4" rounded="lg">
               <v-icon class="mr-2">mdi-shopping-outline</v-icon>
               Pedir
             </v-btn>

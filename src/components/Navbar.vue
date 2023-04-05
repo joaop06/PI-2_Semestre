@@ -1,54 +1,59 @@
 <template>
-  <v-app-bar color="amber-lighten-1" height="75" :elevation="3">
+  <v-app-bar color="#533b2d" height="70" :elevation="3">
 
-    <v-img src="../../public/img/Logo_Rang-On.png" class="float-left" width="75" height="75"></v-img>
+    <router-link to="/" class="text-decoration-none text-white ml-12">Rang-On</router-link>
 
-    <div v-if="true" class="d-flex justify-space-between mr-16 pr-16">
+    <v-col v-if="false" class="text-right">
+      
+        <v-btn
+          to="/pedidos"
+          width="7vw"
+          height="5vh"
+          class="ma-5 bg-red-darken-4"
+          color="white"
+          rounded="sm"
+          :elevation="2"
+          icon
+        >
+          <v-icon class="mr-2">mdi-history</v-icon>
+          Pedidos
+        </v-btn>
+
+        <v-btn
+          to="/sobre"
+          width="7vw"
+          height="5vh"
+          class="ma-5 bg-red-darken-4"
+          color="white"
+          rounded="sm"
+          :elevation="2"
+          icon
+        >
+          <v-icon class="mr-2">mdi-information</v-icon>
+          Sobre
+        </v-btn>
+
+        <v-btn
+          to="/perfil"
+          width="7vw"
+          height="5vh"
+          class="ma-5 bg-red-darken-4"
+          color="white"
+          rounded="sm"
+          :elevation="2"
+          icon
+        >
+          <v-icon class="mr-2">mdi-account-box</v-icon>
+          Perfil
+        </v-btn>
+    </v-col>
+
+    <v-col v-else-if="false" class="text-right">
       <v-btn
-        to="/pedidos"
-        width="33%"
-        class="ma-5 bg-amber-darken-2"
-        color="indigo-darken-4"
-        rounded="sm"
-        :elevation="2"
-        icon
-      >
-        <v-icon>mdi-history</v-icon>
-        Pedidos
-      </v-btn>
-
-      <v-btn
-        to="/sobre"
-        width="33%"
-        class="ma-5 bg-amber-darken-2"
-        color="indigo-darken-4"
-        rounded="sm"
-        :elevation="2"
-        icon
-      >
-        <v-icon>mdi-information</v-icon>
-        Sobre
-      </v-btn>
-
-      <v-btn
-        to="/perfil"
-        width="33%"
-        class="ma-5 bg-orange-lighten-1"
-        color="indigo-darken-4"
-        rounded="sm"
-        :elevation="2"
-        icon
-      >
-        <v-icon>mdi-account-box</v-icon>
-        Perfil
-      </v-btn>
-    </div>
-
-    <div v-else class="d-flex justify-space-between mr-16 pr-16">
-      <v-btn
-        width="50%"
-        class="ma-5 bg-indigo-accent-3"
-        color="orange-lighten-1"
+        width="7vw"
+        height="5vh"
+        class="ma-5 bg-white text-body-1"
+        color="red-darken-4"
         rounded="sm"
         :elevation="1"
       >
@@ -56,17 +61,43 @@
       </v-btn>
 
       <v-btn
-        width="50%"
-        class="ma-5 bg-indigo-accent-3"
-        color="orange-lighten-1"
+        width="7vw"
+        height="5vh"
+        class="ma-5 bg-red-darken-4 text-body-1"
+        color="white"
         rounded="sm"
         :elevation="1"
       >
         Cadastrar-se
       </v-btn>
-    </div>
+    </v-col>
+
+    <v-col v-else class="text-right">
+      <v-btn
+        width="7vw"
+        height="5vh"
+        class="ma-5 bg-white text-body-1"
+        color="red-darken-4"
+        rounded="sm"
+        :elevation="1"
+      >
+        <v-icon>mdi-login</v-icon>
+        Entrar
+      </v-btn>
+
+    </v-col>
   </v-app-bar>
 </template>
 
 <script>
+
+$logo_site: 'Special Elite'
 </script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+  #logo{
+    font-family: monospace;
+  }
+</style>
