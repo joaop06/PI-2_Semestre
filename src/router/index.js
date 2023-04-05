@@ -22,17 +22,23 @@ const routes = [
     name: 'Perfil',
     component: () => import('@/views/Perfil.vue'),
   },
-  
   {
     path: '/admin',
     name: 'Login',
     component: () => import('@/views/admin/Login.vue'),
   },
   {
+<<<<<<< HEAD
     path: '/itens',
     name: 'Itens',
     component: () => import('@/views/admin/Itens.vue'),
   }
+=======
+    path: '/login-cadastro',
+    name: 'Login-Cadastro',
+    component: () => import('@/views/Login-Cadastro.vue'),
+  },
+>>>>>>> a5cb3215526de44b9962afd3fa1243f3a24fb0e6
 ]
 
 const router = createRouter({

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <Navbar />
+      <Navbar v-if="true" />
       <router-view />
     </v-main>
   </v-app>
@@ -16,10 +16,3 @@ export default {
 };
 </script>
 
-
-<style>
-router-view{
-  background: url('../public/img/fundo_navbar.png');
-
-}
-</style>
