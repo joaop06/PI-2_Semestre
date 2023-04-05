@@ -6,17 +6,15 @@
           class="text-center mt-10  "
           text="Pedidos em Andamento"
         ></v-app-bar-title>
-        <v-card class="mt-10" height="90%" :elevation="0" rounded="xl">
-          <v-row >
-            <v-col v-if="true" >
-              <v-card v-for="i in 2" :key="i" cols="12" :title="`Pedido Nº ${i}`" class="mt-3 text-h1" :elevation="3"></v-card>
-            </v-col>
+        <v-row class="mt-10" height="90%" :elevation="0" rounded="xl">
+          <v-col>
+            <v-card v-if="false" v-for="i in 2" :key="i" cols="12" :title="`Pedido Nº ${i}`" class="mt-3 text-h1" :elevation="3"></v-card>
             
-            <v-col v-else>
-
-            </v-col>
-          </v-row>
-        </v-card>
+            <div v-else>
+              <p>Sua sacola está vazia!</p>
+            </div>
+          </v-col>
+        </v-row>
       </v-card>
     </v-col>
 

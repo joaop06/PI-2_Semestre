@@ -1,7 +1,7 @@
 <template>
-  <v-app-bar color="#533b2d" height="70" :elevation="3">
+  <v-app-bar color="#533b2d" height="70" :elevation="5">
 
-    <router-link to="/" class="text-decoration-none text-white ml-12">Rang-On</router-link>
+    <router-link to="/" class="text-decoration-none text-white text-h5 font-italic font-weight-bold ml-12">Rang-On</router-link>
 
     <v-col v-if="false" class="text-right">
       
@@ -48,30 +48,6 @@
         </v-btn>
     </v-col>
 
-    <v-col v-else-if="false" class="text-right">
-      <v-btn
-        width="7vw"
-        height="5vh"
-        class="ma-5 bg-white text-body-1"
-        color="red-darken-4"
-        rounded="sm"
-        :elevation="1"
-      >
-        Login
-      </v-btn>
-
-      <v-btn
-        width="7vw"
-        height="5vh"
-        class="ma-5 bg-red-darken-4 text-body-1"
-        color="white"
-        rounded="sm"
-        :elevation="1"
-      >
-        Cadastrar-se
-      </v-btn>
-    </v-col>
-
     <v-col v-else class="text-right">
       <v-btn
         width="7vw"
@@ -80,8 +56,9 @@
         color="red-darken-4"
         rounded="sm"
         :elevation="1"
+        to="/login-cadastro"
       >
-        <v-icon>mdi-login</v-icon>
+        <v-icon class="mr-2">mdi-login</v-icon>
         Entrar
       </v-btn>
 
@@ -90,14 +67,4 @@
 </template>
 
 <script>
-
-$logo_site: 'Special Elite'
 </script>
-
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
-
-  #logo{
-    font-family: monospace;
-  }
-</style>
