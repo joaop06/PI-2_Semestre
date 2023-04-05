@@ -32,14 +32,19 @@ const routes = [
 
   // Rotas Admin
   {
-    path: '/admin/Login',
+    path: '/admin',
     name: 'Admin_Login',
-    component: () => import('@/views/admin/login.vue'),
+    component: () => import('@/views/admin/Login.vue'),
   },
   {
-    path: '/admin',
+    path: '/admin/Home',
     name: 'Admin_Home',
     component: () => import('@/views/admin/Home.vue')
+  },
+  {
+    path: '/admin/Itens',
+    name: 'Admin_Itens',
+    component: () => import('@/views/admin/Itens.vue')
   },
 
 ]
