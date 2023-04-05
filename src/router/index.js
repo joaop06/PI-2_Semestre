@@ -2,6 +2,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
+
+  // Rotas Cliente
   {
     path: '/',
     name: 'Home',
@@ -23,15 +25,23 @@ const routes = [
     component: () => import('@/views/Perfil.vue'),
   },
   {
-    path: '/admin',
-    name: 'login',
-    component: () => import('@/views/admin/login.vue'),
-  },
-  {
     path: '/login-cadastro',
     name: 'Login-Cadastro',
     component: () => import('@/views/Login-Cadastro.vue'),
   },
+
+  // Rotas Admin
+  {
+    path: '/admin/Login',
+    name: 'Admin_Login',
+    component: () => import('@/views/admin/login.vue'),
+  },
+  {
+    path: '/admin',
+    name: 'Admin_Home',
+    component: () => import('@/views/admin/Home.vue')
+  },
+
 ]
 
 const router = createRouter({
