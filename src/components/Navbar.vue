@@ -3,7 +3,7 @@
 
     <router-link to="/" class="text-decoration-none text-white text-h5 font-italic font-weight-bold ml-12">Rang-On</router-link>
 
-    <v-col v-if="false" class="text-right">
+    <v-col v-if="true" class="text-right">
       
         <v-btn
           to="/pedidos"
