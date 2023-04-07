@@ -38,14 +38,14 @@
 
             <v-card width="100%" height="100%" class="pa-6 justify-center" color="rgb(0,0,0,0)" elevation="0">
 
-                <v-text-field name="tel" color="color" bg-color="rgb(255, 255, 255, 0.1)"></v-text-field>
+                <v-text-field name="email" color="color" bg-color="rgb(255, 255, 255, 0.3)" type="email" variant="solo"></v-text-field>
 
-                <v-text-field name="nome_completo" color="white" bg-color="rbg(255, 255, 255, 0.1)" type="text" label="Nome Completo" placeholder="Nome Completo"></v-text-field>
+                <v-text-field name="nome_completo" color="white" bg-color="rgb(255, 255, 255, 0.2)" type="text" variant="solo" label="Nome Completo" input-classes="red--text"></v-text-field>
 
-                <v-text-field name="senha" color="white" bg-color="rbg(255, 255, 255, 0.1)" v-model="password"
+                <v-text-field name="senha" color="white" bg-color="rgb(255, 255, 255, 0.2)" v-model="password"
                     :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                     @click:append-inner="showPassword = !showPassword" :type="showPassword ? 'text' : 'password'"
-                    label="Senha" placeholder="Senha" hint="Digite sua senha para acessar">
+                    label="Senha" placeholder="Senha" hint="Digite sua senha para acessar" variant="solo">
                 </v-text-field>
 
                 <v-row no-gutters justify="center" class="mt-6">
@@ -68,3 +68,10 @@ export default {
     }
 }
 </script>
+
+
+<style>
+.red--text input{
+    color: red;
+}
+</style>
