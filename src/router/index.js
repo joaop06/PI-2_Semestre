@@ -29,6 +29,16 @@ const routes = [
     name: 'Login-Cadastro',
     component: () => import('@/views/Login-Cadastro.vue'),
   },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/Login.vue'),
+  },
+  {
+    path: '/cadastro',
+    name: 'Cadastro',
+    component: () => import('@/views/Cadastro.vue'),
+  },
 
   // Rotas Admin
   {

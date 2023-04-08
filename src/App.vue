@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <Navbar v-if="!$route.path.includes('admin')"/>
+      <Navbar v-if="!$route.path.includes('admin') && !$route.path.includes('login') && !$route.path.includes('cadastro')"/>
       <router-view />
     </v-main>
   </v-app>

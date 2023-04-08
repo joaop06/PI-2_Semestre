@@ -1,17 +1,17 @@
 <template>
-  <v-app-bar color="#533b2d" height="70" :elevation="5">
+  <v-app-bar color="brown-darken-2 pa-2" :elevation="5">
 
-    <router-link to="/" class="text-decoration-none text-white text-h5 font-italic font-weight-bold ml-12">Rang-On</router-link>
+    <v-img src="../../public/img/Logo_Rang-On.png" class="v-image__image--blur"></v-img>
 
-    <v-col v-if="true" class="text-right">
+    <v-col v-if="false" class="text-right">
       
         <v-btn
           to="/pedidos"
           width="7vw"
           height="5vh"
-          class="ma-5 bg-red-darken-4"
+          class="ma-5 bg-red-accent-3"
           color="white"
-          rounded="sm"
+          rounded="shaped"
           :elevation="2"
           icon
         >
@@ -23,9 +23,9 @@
           to="/sobre"
           width="7vw"
           height="5vh"
-          class="ma-5 bg-red-darken-4"
+          class="ma-5 bg-red-accent-3"
           color="white"
-          rounded="sm"
+          rounded="shaped"
           :elevation="2"
           icon
         >
@@ -37,9 +37,9 @@
           to="/perfil"
           width="7vw"
           height="5vh"
-          class="ma-5 bg-red-darken-4"
+          class="ma-5 bg-red-accent-3"
           color="white"
-          rounded="sm"
+          rounded="shaped"
           :elevation="2"
           icon
         >
@@ -50,16 +50,27 @@
 
     <v-col v-else class="text-right">
       <v-btn
-        width="7vw"
+        width="15%"
         height="5vh"
-        class="ma-5 bg-white text-body-1"
-        color="red-darken-4"
-        rounded="sm"
+        class="ma-5 bg-white font-weight-bold"
+        color="red-accent-3"
+        rounded="shaped"
         :elevation="1"
-        to="/login-cadastro"
+        to="/login"
       >
-        <v-icon class="mr-2">mdi-login</v-icon>
         Entrar
+      </v-btn>
+
+      <v-btn
+        width="15%"
+        height="5vh"
+        class="ma-5 bg-white font-weight-bold"
+        color="red-accent-3"
+        rounded="shaped"
+        :elevation="1"
+        to="/cadastro"
+      >
+        Cadastrar
       </v-btn>
 
     </v-col>
@@ -68,4 +79,3 @@
 
 <script>
 </script>
-
