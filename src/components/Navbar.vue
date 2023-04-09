@@ -1,9 +1,9 @@
 <template>
   <v-app-bar color="brown-darken-2 pa-2" :elevation="5">
 
-    <v-img src="../../public/img/Logo_Rang-On.png" class="v-image__image--blur"></v-img>
+    <router-link to="/"><v-img src="../../public/img/Logo_Rang-On.png" class="v-image__image--blur"></v-img></router-link>
 
-    <v-col v-if="false" class="text-right">
+    <v-col v-if="true" class="text-right">
       
         <v-btn
           to="/pedidos"
