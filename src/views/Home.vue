@@ -40,7 +40,7 @@
 
     <v-col cols="9" class="mt-12 pt-12 pa-12" rounded="xl">
       <v-row>
-        <v-col v-for="n in totalProdutos.length" :key="n" cols="3" :name="n">
+        <v-col v-for="n in 35" :key="n" cols="3" :name="n">
 
           <v-card class="bg-brown-lighten-1 pa-3">
             <v-img src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-img>
