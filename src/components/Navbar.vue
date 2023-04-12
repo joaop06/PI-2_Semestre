@@ -3,7 +3,7 @@
 
     <router-link to="/"><v-img src="../../public/img/Logo_Rang-On.png" class="v-image__image--blur"></v-img></router-link>
 
-    <v-col v-if="false" class="text-right">
+    <v-col v-if="true" class="text-right">
       
         <v-btn
           to="/pedidos"
@@ -68,7 +68,7 @@
         color="red-accent-3"
         rounded="shaped"
         :elevation="1"
-        to="/testejoao"
+        to="/cadastro"
       >
         Cadastrar
       </v-btn>
