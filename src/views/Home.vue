@@ -5,7 +5,7 @@
     <!-- SACOLA DE PRODUTOS -->
     <v-col cols="2" class="mt-4 ml-5">
 
-      <v-sheet width="25vw" height="70vh" class="pa-2" rounded="lg">
+      <v-sheet width="25vw" height="70vh" class="pa-2 bg-brown-lighten-1" rounded="lg" :elevation="8">
 
         <v-list-item-title class="text-center">
           <span class="" color="red">Sacola de Pedidos</span>
@@ -14,7 +14,7 @@
 
         <v-row v-if="total_produtos_sacola !== 0">
           <v-sheet v-for="i in total_produtos_sacola" :key="i" cols="12"
-            class="d-flex mt-3 text-body-2 bg-rgb(93, 64, 55, 0.8)" width="100%" :style="{ 'justify-content': 'center' }"
+            class="d-flex mt-3 text-body-2" width="100%" :style="{ 'justify-content': 'center' }"
             :elevation="3" :title="`Produto ${i}`">
 
             <v-list-item-title>
@@ -49,7 +49,6 @@
         <v-col v-for="n in totalProdutos.length" :key="n" cols="4">
 
           <v-card class="bg-brown-lighten-1 pa-5 ma-5" :id="`${n}`" v-model="id_produto">
-            <v-text-field v-model="testetotalProdutos['nome']"></v-text-field>
             <v-img src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"></v-img>
 
             <v-card id="produto1" class="bg-brown-lighten-1" height="50%" :elevation="0" :title="`${totalProdutos[n - 1]}`"
