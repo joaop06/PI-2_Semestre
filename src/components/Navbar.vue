@@ -1,7 +1,8 @@
 <template>
   <v-app-bar color="brown-darken-2 pa-2" :elevation="5">
 
-    <router-link to="/"><v-img src="../../public/img/Logo_Rang-On.png" class="v-image__image--blur"></v-img></router-link>
+    <router-link to="/" tag="div"><v-img src="../../public/img/Logo_Rang-On.png" width="80" height="80"></v-img></router-link>
+
 
     <v-col v-if="true" class="text-right">
       
