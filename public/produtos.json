@@ -1,0 +1,8 @@
+[
+    {
+        "id": 1,
+        "nome_produto": "Pizza",
+        "preco_produto": 35.90,
+        "descricao_produto": "Teste de descrição do produto para teste e teste teste"
+    }
+]

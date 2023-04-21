@@ -5,23 +5,29 @@
 
       <!-- SACOLA DE PRODUTOS -->
       <v-col cols="3">
-        <v-sheet height="70vh" class="pa-2 bg-brown-lighten-1" rounded="lg" :elevation="8">
+        <v-sheet height="70vh" class="pa-8 bg-brown-lighten-1" rounded="lg" :elevation="8">
           <v-list-item-title class="text-center">
             <span class="text-h5" color="red">Sacola de Pedidos</span>
           </v-list-item-title>
 
-          <v-row v-if="total_produtos_sacola !== 0">
-            <v-sheet v-for="i in total_produtos_sacola" :key="i" cols="12" class="d-flex mt-3 text-body-2" width="100%"
-              :style="{ 'justify-content': 'center' }" :elevation="3" :title="`Produto ${i}`">
+          <v-row v-if="total_produtos_sacola !== 0" class="pa-1 mt-5" :style="{'max-height': '90%' , 'overflow-y': 'auto'}"
+          height="70vh">
 
-              <v-list-item-title>
-                <span v-bind:title="totalProdutos"></span>
-              </v-list-item-title>
+            <v-sheet v-for="i in total_produtos_sacola" :key="i"
+            class="d-flex mt-3 justify-space-between align-center pa-2"
+            rounded="shaped"
+            width="18vw"
+            :elevation="4">
 
-              <v-list-item-subtitle>
-                <span>R$ 45,49</span>
-              </v-list-item-subtitle>
-              <v-btn icon="mdi-delete" class="bg-red" :elevation="0"></v-btn>
+              <div class="d-flex flex-column">
+                <p>{{testetitulo}}</p>
+
+                <v-list-item-subtitle class="mt-2">
+                  <span>R$ 45,49</span>
+                </v-list-item-subtitle>
+              </div>
+
+              <v-btn icon="mdi-delete" size="40" class="bg-red" :elevation="0" @click="remove_Sacola"></v-btn>
             </v-sheet>
 
           </v-row>
@@ -74,9 +80,12 @@
 
 
 <script>
+//const produtos = require('../../public/produtos.json');
+
 export default {
   data() {
     return {
+      testetitulo: "Pizza 4 Queijos",
       testetotalProdutos: { 'nome_produto': 'Pizza Teste João', 'id': '1' },
       totalProdutos: ['Pizza 4 Queijos', 'Lanche X-Tudo', 'Porção de Batata Frita', 'Lanche À Moda', 'Produto 11', 'Produto 12', 'Produto 13', 'Produto 14', 'Produto 15'],
       total_produtos_sacola: 0,
@@ -87,6 +96,9 @@ export default {
   methods: {
     add_Sacola: function () {
       this.total_produtos_sacola += 1
+    },
+    remove_Sacola: function (){
+      this.total_produtos_sacola -= 1
     }
   },
 }
