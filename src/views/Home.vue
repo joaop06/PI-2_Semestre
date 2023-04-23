@@ -199,8 +199,6 @@ export default {
       cont: 0,
 
 
-
-
       allData: '',
       query: '',
       sem_produtos: false
