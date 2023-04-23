@@ -74,7 +74,7 @@ export default {
 <style>
 div.v-application__wrap {
     background-color: #BCAAA4;
-    background-image: url(../../public/img/Logo_Rang-On.png);
+    background-image: url(https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Logo_Rang-On.png?raw=true);
     background-size: contain;
     background-position: center;
 }
