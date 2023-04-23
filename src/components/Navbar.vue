@@ -1,7 +1,7 @@
 <template>
   <v-app-bar color="brown-darken-2 pa-2" :elevation="5">
 
-    <router-link to="/" tag="div"><v-img src="../../public/img/Logo_Rang-On.png" width="80" height="80"></v-img></router-link>
+    <router-link to="/" tag="div"><v-img src="https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Logo_Rang-On.png?raw=true" width="80" height="80"></v-img></router-link>
 
 
     <v-col v-if="true" class="text-right">
