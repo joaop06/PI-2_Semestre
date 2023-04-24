@@ -1,7 +1,7 @@
 <template>
     <main>
         <v-container class="d-flex justify-center mt-12">
-            <v-card class="bg-blue-darken-4 pa-7" title="Login Admin" height="60vh" width="65%" rounded="xl" :elevation="10"
+            <v-card class="bg-white pa-7" title="Login Admin" height="60vh" width="65%" rounded="xl" :elevation="10"
                 variant="outlined">
                 <v-text-field label="Login" hint="Digite seu login de administrador"></v-text-field>
                 <v-text-field class="mt-5" name="senha" color="white" v-model="password"

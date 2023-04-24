@@ -8,14 +8,17 @@
         <popup v-if="popupTriggers.buttonTrigger" :TogglePopup="() => TogglePopup('buttonTrigger')">
           <h2>Novo Item</h2>
           <h3>Nome</h3>
-          <v-text-field></v-text-field>
+          <v-text-field class="my-custom-text-field"></v-text-field>
           <h3>Descrição</h3>
           <v-text-field></v-text-field>
-          <h3>Ingredientes</h3>
-          <v-text-field></v-text-field>
+          <h3>Tipo</h3>
+          <v-select          
+            chips
+            :items="['Lanche', 'Pizza']"
+          ></v-select>
           <h3>Preço</h3>
           <v-text-field></v-text-field>
-          <v-btn class="popup-close" @click="TogglePopup()">
+          <v-btn class="popup-close bg-orange" @click="TogglePopup()">
             Inserir Item
           </v-btn>
         </popup>
@@ -84,9 +87,6 @@
             </v-img>
           </v-card>
         </v-col>
-
-
-
       </v-row>
     </v-col>
   </main>
@@ -132,8 +132,14 @@ export default {
   left: 1;
   right: 0;
   bottom: 1;
-  background-color: rgb(255, 255, 255);
-  padding: 80px;
+  background-color: white;
+  padding: 15px;
+  margin: 70px 5px 70px 0px;
+}
+
+.my-custom-text-field {
+  height: 60px;
+  width: 280px;
 }
 
 main{
