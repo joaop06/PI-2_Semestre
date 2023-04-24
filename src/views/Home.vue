@@ -1,18 +1,12 @@
 <template>
-  <v-container
-  fluid>
-    <v-row class="mt-3 pa-5"
-    justify="space-between">
+  <v-container fluid>
+    <v-row class="mt-3 pa-5" justify="space-between">
 
 
       <!-- SACOLA DE PRODUTOS -->
       <v-col cols="3">
-        <v-sheet class="pa-3 justify-center text-center"
-        color="rgb(255,255,255,0.5)"
-        height="75vh"
-        width="100%"
-        rounded="xl"
-        :elevation="8">
+        <v-sheet class="pa-3 justify-center text-center" color="rgb(255,255,255,0.5)" height="75vh" width="100%"
+          rounded="xl" :elevation="8">
           <v-list-item-title class="text-center">
             <span class="text-h6">
               Sacola de Produtos
@@ -20,42 +14,35 @@
           </v-list-item-title>
 
           <div class="shadow-invertida pa-1 mt-5 scrollbar-estilo"
-          :style="{'height' : '75%', 'max-height': '75%' , 'overflow-y': 'auto', 'border-radius': '8px'}">
+            :style="{ 'height': '75%', 'max-height': '75%', 'overflow-y': 'auto', 'border-radius': '8px' }">
 
             <!-- Itens Adicionados a Sacola-->
-            <v-row v-if="quant_total_sacola.length !== 0" class="pa-3"
-            justify="center"
-            :style="{'width': '99%'}">
+            <v-row v-if="quant_total_sacola.length !== 0" class="pa-3" justify="center" :style="{ 'width': '99%' }">
 
               <!-- Card do Produto na Sacola -->
-              <v-sheet v-for="(produto, index) in quant_total_sacola" class="d-flex mt-3 pa-3 justify-space-between align-center"
-              :style="{'background-color': '#f1f1f1', 'border': '#FF1744 1px solid'}"
-              :key="index"
-              rounded="shaped"
-              width="90%"
-              :elevation="4">
+              <v-sheet v-for="(produto, index) in quant_total_sacola"
+                class="d-flex mt-3 pa-3 justify-space-between align-center"
+                :style="{ 'background-color': '#f1f1f1', 'border': '#FF1744 1px solid' }" :key="index" rounded="shaped"
+                width="90%" :elevation="4">
 
                 <div class="d-flex flex-column">
 
-                  <p>{{produto.nome}}</p>
+                  <p>{{ produto.nome }}</p>
+                  <p>{{ produto.id }}</p>
 
                   <v-list-item-subtitle class="mt-2">
                     <span>{{ produto.preco }}</span>
                   </v-list-item-subtitle>
                 </div>
 
-                <v-btn class="bg-red-accent-3"
-                icon="mdi-delete"
-                size="40"
-                :elevation="0"
-                @click="remove_Sacola(quant_total_sacola, produto)"></v-btn>
+                <v-btn class="bg-red-accent-3" icon="mdi-delete" size="40" :elevation="0"
+                  @click="remove_Sacola(index)"></v-btn>
               </v-sheet>
             </v-row>
 
             <!-- Mensagem de Sacola Vazia-->
             <v-sheet v-else class="d-flex justify-center align-center text-body-1"
-            :style="{'background-color': '#ded5d2'}"
-            height="100%">
+              :style="{ 'background-color': '#ded5d2' }" height="100%">
               <p>Sua sacola está vazia!</p>
             </v-sheet>
           </div>
@@ -63,69 +50,54 @@
 
 
           <!-- Rodapé da Sacola (Total e Botão de Finalizar Pedido)-->
-          <v-card class="mt-8 text-start"
-          :elevation="0"
-          color="rgb(0, 0, 0, 0)"
-          width="90%"
-          height="3vh">
-            <span>Total: R$ <span v-if="quant_total_sacola !== 0">{{totalSacola}}</span></span>
+          <v-card class="mt-8 text-start" :elevation="0" color="rgb(0, 0, 0, 0)" width="90%" height="3vh">
+            <span>Total: R$ <span v-if="quant_total_sacola !== 0">{{ totalSacola }}</span></span>
           </v-card>
 
 
           <!-- Botão p/ Finalizar Pedido-->
-          <v-btn v-if="quant_total_sacola !== 0" class="mt-5 bg-red-accent-3"
-          justify="center"
-            width="90%"
-            rounded="lg">
-              Finalizar Pedido
+          <v-btn v-if="quant_total_sacola !== 0" class="mt-5 bg-red-accent-3" justify="center" width="90%" rounded="lg">
+            Finalizar Pedido
           </v-btn>
 
         </v-sheet>
       </v-col>
 
 
-      
+
       <!-- LISTA DE PRODUTOS (CARDÁPIO) -->
-      <v-col class="ma-auto"
-      cols="9"
-      rounded="xl">
-        <v-row
-        justify="start">
-          <v-col v-for="(produto, index) in cardapio" class="d-flex justify-space-around aligin-center"
-          :key="index"
-          cols="4">
+      <v-col class="ma-auto" cols="9" rounded="xl">
+        <v-row justify="start">
+          <v-col v-for="(produto, index) in cardapio" class="d-flex justify-space-around aligin-center" :key="index"
+            cols="4">
 
-            <v-card color="rgb(0, 0, 0, 0)"
-            rounded="lg"
-            max-width="600px"
-            max-height="400px">
+            <v-card color="rgb(0, 0, 0, 0)" rounded="lg" width="25vw" height="30vh" min-height="200px">
 
-              <v-img class="image justify-space-between align-end d-flex"
-              :src="produto.imagem"
-              cover>
-
-                <v-card class="d-flex flex-column pa-1"
-                color="rgb(0, 0, 0, 0.6)"
-                :elevation="0"
-                :style="{'justify-content': 'space-around', 'align-content':'flex-end', 'color':'white'}">
-                  <span class="text-body-1" :style="{'font-weight': 'bold'}">{{ produto.nome }}</span>
+              <v-img class="image justify-space-between align-end d-flex" :src="produto.imagem" :lazy-src="produto.imagem" cover min-height="200px">
+                <template v-slot:placeholder>
+                  <div class="d-flex align-center justify-center fill-height">
+                    <v-progress-circular
+                      color="grey-lighten-4"
+                      indeterminate
+                    ></v-progress-circular>
+                  </div>
+                </template>
+            
+                <v-card class="d-flex flex-column pa-1" color="rgb(0, 0, 0, 0.6)" :elevation="0"
+                  :style="{ 'justify-content': 'space-around', 'align-content': 'flex-end', 'color': 'white' }">
+                  <span class="text-body-1" :style="{ 'font-weight': 'bold' }">{{ produto.nome }}</span>
                   <span class="text-body-2">{{ produto.descricao }}</span>
                 </v-card>
 
 
-                <v-card class="d-flex justify-center align-center"
-                color="rgb(0, 0, 0, 0.6)"
-                :elevation="0">
+                <v-card class="d-flex justify-center align-center" color="rgb(0, 0, 0, 0.6)" :elevation="0">
 
-                  <v-card class="font-weight-black d-flex justify-center ma-5 pa-1"
-                  color="rgb(255, 255, 255, 0)"
-                  :elevation="0">
-                    <span :style="{ 'color': 'white', 'font-weight': 'bold'}">{{ produto.preco }}</span>
+                  <v-card class="font-weight-black d-flex justify-center ma-5 pa-1" color="rgb(255, 255, 255, 0)"
+                    :elevation="0">
+                    <span :style="{ 'color': 'white', 'font-weight': 'bold' }">{{ produto.preco }}</span>
                   </v-card>
 
-                  <v-btn class="ma-4 bg-red-accent-3"
-                  rounded="lg"
-                  @click="add_Sacola(produto)">
+                  <v-btn class="ma-4 bg-red-accent-3" rounded="lg" @click="add_Sacola(produto)">
                     <v-icon class="mr-2">
                       mdi-shopping-outline
                     </v-icon>
@@ -152,7 +124,7 @@ export default ({
   data() {
     return {
       cardapio: produtos,
-    
+
       quant_total_sacola: [],
       totalSacola: 0,
 
@@ -161,19 +133,13 @@ export default ({
   methods: {
     // Adiciona o produto desejado na Sacola de Produtos
     add_Sacola: function (produto) {
-      this.quant_total_sacola.push(produto)
+      this.quant_total_sacola.splice(0, 0, produto)
       this.totalSacola += produto.preco
     },
 
     // Remove o item selecionado da Sacola de Produtos
-    remove_Sacola: function (lista_sacola, produto){
-      const {id} = produto.id;
-
-      let produto_sacola = lista_sacola.findIndex(item => item.id == id)
-
-      if(produto_sacola == (id-1)){
-        lista_sacola.splice(produto_sacola, 1)
-      }
+    remove_Sacola: function (index) {
+      this.quant_total_sacola.splice(index, 1)
     },
   },
 })
@@ -186,7 +152,7 @@ main {
 }
 
 .shadow-invertida {
-  box-shadow: inset 0px 0px 12px rgba(0,0,0,0.6);
+  box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.6);
 }
 
 .scrollbar-estilo::-webkit-scrollbar {

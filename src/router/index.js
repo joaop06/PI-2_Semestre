@@ -25,11 +25,6 @@ const routes = [
     component: () => import('@/views/Perfil.vue'),
   },
   {
-    path: '/login-cadastro',
-    name: 'Login-Cadastro',
-    component: () => import('@/views/Login-Cadastro.vue'),
-  },
-  {
     path: '/login',
     name: 'Login',
     component: () => import('@/views/Login.vue'),
