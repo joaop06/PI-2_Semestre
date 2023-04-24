@@ -28,7 +28,6 @@
                 <div class="d-flex flex-column">
 
                   <p>{{ produto.nome }}</p>
-                  <p>{{ produto.id }}</p>
 
                   <v-list-item-subtitle class="mt-2">
                     <span>{{ produto.preco }}</span>
@@ -73,38 +72,44 @@
 
             <v-card color="rgb(0, 0, 0, 0)" rounded="lg" width="25vw" height="30vh" min-height="200px">
 
-              <v-img class="image justify-space-between align-end d-flex" :src="produto.imagem" :lazy-src="produto.imagem" cover min-height="200px">
+              <v-img class="image justify-space-between align-end d-flex"
+                gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,0.6), rgba(0,0,0,1)" :src="produto.imagem"
+                :lazy-src="produto.imagem" cover min-height="200px">
                 <template v-slot:placeholder>
                   <div class="d-flex align-center justify-center fill-height">
-                    <v-progress-circular
-                      color="grey-lighten-4"
-                      indeterminate
-                    ></v-progress-circular>
+                    <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
                   </div>
                 </template>
-            
-                <v-card class="d-flex flex-column pa-1" color="rgb(0, 0, 0, 0.6)" :elevation="0"
-                  :style="{ 'justify-content': 'space-around', 'align-content': 'flex-end', 'color': 'white' }">
-                  <span class="text-body-1" :style="{ 'font-weight': 'bold' }">{{ produto.nome }}</span>
-                  <span class="text-body-2">{{ produto.descricao }}</span>
+
+                <v-card color="transparent" :elevation="0">
+
+                  <v-card-title>
+                    <span class="text-h6 text-white text-bold">{{ produto.nome }}</span>
+                  </v-card-title>
+                  <v-card-subtitle class="mt-n3">
+                    <span class="text-white">{{ produto.descricao }}</span>
+                  </v-card-subtitle>
+
+                  <v-card-text class="my-n4">
+                    <v-row justify="space-between" no-gutters>
+                      <v-card class="font-weight-black d-flex justify-center ma-5 pa-1" color="rgb(255, 255, 255, 0)"
+                        :elevation="0">
+                        <span :style="{ 'color': 'white', 'font-weight': 'bold' }">{{ produto.preco }}</span>
+                      </v-card>
+
+                      <v-btn class="ma-4 bg-red-accent-3" rounded="lg" @click="add_Sacola(produto)">
+                        <v-icon class="mr-2">
+                          mdi-shopping-outline
+                        </v-icon>
+                        Pedir
+                      </v-btn>
+                    </v-row>
+                  </v-card-text>
+
+
+
+
                 </v-card>
-
-
-                <v-card class="d-flex justify-center align-center" color="rgb(0, 0, 0, 0.6)" :elevation="0">
-
-                  <v-card class="font-weight-black d-flex justify-center ma-5 pa-1" color="rgb(255, 255, 255, 0)"
-                    :elevation="0">
-                    <span :style="{ 'color': 'white', 'font-weight': 'bold' }">{{ produto.preco }}</span>
-                  </v-card>
-
-                  <v-btn class="ma-4 bg-red-accent-3" rounded="lg" @click="add_Sacola(produto)">
-                    <v-icon class="mr-2">
-                      mdi-shopping-outline
-                    </v-icon>
-                    Pedir
-                  </v-btn>
-                </v-card>
-
               </v-img>
             </v-card>
 
