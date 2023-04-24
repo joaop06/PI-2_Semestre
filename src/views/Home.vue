@@ -151,6 +151,7 @@ main {
   background-color: #BCAAA4;
 }
 
+
 .shadow-invertida {
   box-shadow: inset 0px 0px 12px rgba(0, 0, 0, 0.6);
 }
