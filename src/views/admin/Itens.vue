@@ -33,7 +33,7 @@
 
               <v-card class="d-flex flex-column pa-1" color="rgb(0, 0, 0, 0.6)" :elevation="0"
                 :style="{ 'justify-content': 'space-around', 'align-content': 'flex-end', 'color': 'white' }" text="">
-                <samp class="text-body-1" :style="{ 'font-weight': 'bold' }">{{ totalProdutos[n - 1] }}</samp>
+                <span class="text-body-1" :style="{ 'font-weight': 'bold' }">{{ totalProdutos[n - 1] }}</span>
                 <span class="text-body-2">Hamburguer, Ovo, Tomate, Alface, Cheddar, Presuto...</span>
               </v-card>
 
@@ -60,7 +60,7 @@
 
               <v-card class="d-flex flex-column pa-1" color="rgb(0, 0, 0, 0.6)" :elevation="0"
                 :style="{ 'justify-content': 'space-around', 'align-content': 'flex-end', 'color': 'white' }" text="">
-                <samp class="text-body-1" :style="{ 'font-weight': 'bold' }">{{ totalProdutos[n - 1] }}</samp>
+                <span class="text-body-1" :style="{ 'font-weight': 'bold' }">{{ totalProdutos[n - 1] }}</span>
                 <span class="text-body-2">Hamburguer, Ovo, Tomate, Alface, Cheddar, Presuto...</span>
               </v-card>
 

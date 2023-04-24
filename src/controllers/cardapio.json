@@ -1,0 +1,86 @@
+[
+        {
+            "id": 1,
+            "nome": "Produto 1",
+            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "preco": 27.75
+        },
+        {
+            "id": 2,
+            "nome": "Produto 2",
+            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "preco": 39.90
+        },
+        {
+            "id": 3,
+            "nome": "Produto 3",
+            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+            "preco": 27.43
+        },
+        {
+            "id": 4,
+            "nome": "X-Tudo Malandro",
+            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "preco": 18.99
+        },
+        {
+            "id": 5,
+            "nome": "Produto 5",
+            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+            "preco": 25.49
+        },
+        {
+            "id": 6,
+            "nome": "Produto 6",
+            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "preco": 42.37
+        },
+        {
+            "id": 7,
+            "nome": "Produto 7",
+            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+            "preco": 37.52
+        },
+        {
+            "id": 8,
+            "nome": "Produto 8",
+            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+            "preco": 12.27
+        },
+        {
+            "id": 9,
+            "nome": "Produto 9",
+            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "preco": 69.40
+        },
+        {
+            "id": 10,
+            "nome": "Produto 10",
+            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+            "preco": 26.34
+        },
+        {
+            "id": 11,
+            "nome": "Produto 11",
+            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+            "preco": 125.90
+        },
+        {
+            "id": 12,
+            "nome": "Produto 12",
+            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "preco": 11.90
+        }
+    ]
