@@ -1,11 +1,11 @@
 <template>
   <main>
-    <v-col cols="3">
+    <v-row class="d-flex pa-7" justify="space-between">
       <v-btn @click="eventActiveNewProducts" class="bg-orange color-white" :style="{ 'justify-content': 'end' }">
         Cadastrar Novo Produto
       </v-btn>
-
-    </v-col>
+      <v-btn to="/admin">Sair</v-btn>
+    </v-row>
 
 
 
@@ -44,9 +44,9 @@
 
                     <v-btn class="ma-4 bg-red-accent-3" rounded="lg" @click="add_Sacola(produto)">
                       <v-icon class="mr-2">
-                        mdi-shopping-outline
+                        mdi-pencil
                       </v-icon>
-                      Pedir
+                      Alterar  
                     </v-btn>
                   </v-row>
                 </v-card-text>
