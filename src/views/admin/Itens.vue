@@ -1,113 +1,102 @@
 <template>
   <main>
     <v-col cols="3">
-      <v-btn @click="() => TogglePopup('buttonTrigger')" class="bg-orange color-white">
+      <v-btn @click="eventActiveNewProducts" class="bg-orange color-white" :style="{ 'justify-content': 'end' }">
         Cadastrar Novo Produto
       </v-btn>
-      <div class="popup">
-        <popup v-if="popupTriggers.buttonTrigger" :TogglePopup="() => TogglePopup('buttonTrigger')">
-          <h2 class="pl-3 pr-3 pa-2">Novo Item</h2>
-          <h3 class="pl-3 pr-3">Nome</h3>
-          <v-text-field class="my-custom-text-field pl-3 pr-3 "></v-text-field>
-          <h3 class="pl-3 pr-3 pt-4S">Descrição</h3>
-          <v-text-field class="pl-3 pr-3"></v-text-field>
-          <h3 class="pl-3 pr-3">Tipo</h3>
-          <v-select class="pl-3 pr-3" chips :items="['Lanche', 'Pizza']"></v-select>
-          <h3 class="pl-3 pr-3">Preço</h3>
-          <v-text-field class="pl-3 pr-3"></v-text-field>
-          <div class="pl-3 pr-3 pb-4">
-            <v-btn class="popup-close bg-orange" @click="TogglePopup()">
-              Inserir Item
-            </v-btn>
-          </div>
-        </popup>
-      </div>
+
     </v-col>
+
+
+
     <v-col cols="9" rounded="xl">
-      <v-row justify="space-between">
+      <v-row justify="start">
+        <v-col>
+
+        </v-col>
 
         <v-col v-for="(produto, index) in cardapio" class="d-flex justify-space-around aligin-center" :key="index"
           cols="4">
 
-          <v-card color="rgb(0, 0, 0, 0)" rounded="lg" max-width="600px" max-height="400px">
+          <v-card color="rgb(0, 0, 0, 0)" rounded="lg" width="25vw" height="30vh" min-height="200px">
 
-            <v-img class="image justify-space-between align-end d-flex" :src="produto.imagem" cover>
+            <v-img class="image justify-space-between align-end d-flex"
+              gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,0.6), rgba(0,0,0,1)" :src="produto.imagem"
+              :lazy-src="produto.imagem" cover min-height="200px">
+              <template v-slot:placeholder>
+                <div class="d-flex align-center justify-center fill-height">
+                  <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                </div>
+              </template>
 
-              <v-card class="d-flex flex-column pa-1" color="rgb(0, 0, 0, 0.6)" :elevation="0"
-                :style="{ 'justify-content': 'space-around', 'align-content': 'flex-end', 'color': 'white' }">
-                <span class="text-body-1" :style="{ 'font-weight': 'bold' }">{{ produto.nome }}</span>
-                <span class="text-body-2">{{ produto.descricao }}</span>
+              <v-card color="transparent" :elevation="0">
+
+                <v-card-title>
+                  <span class="text-h6 text-white text-bold">{{ produto.nome }}</span>
+                </v-card-title>
+                <v-card-subtitle class="mt-n3">
+                  <span class="text-white">{{ produto.descricao }}</span>
+                </v-card-subtitle>
+
+                <v-card-text class="my-n4">
+                  <v-row justify="space-between" no-gutters>
+                    <v-card class="font-weight-black d-flex justify-center ma-5 pa-1" color="rgb(255, 255, 255, 0)"
+                      :elevation="0">
+                      <span :style="{ 'color': 'white', 'font-weight': 'bold' }">{{ produto.preco }}</span>
+                    </v-card>
+
+                    <v-btn class="ma-4 bg-red-accent-3" rounded="lg" @click="add_Sacola(produto)">
+                      <v-icon class="mr-2">
+                        mdi-shopping-outline
+                      </v-icon>
+                      Pedir
+                    </v-btn>
+                  </v-row>
+                </v-card-text>
+
+
+
+
               </v-card>
-
-
-              <v-card class="d-flex justify-center align-center" color="rgb(0, 0, 0, 0.6)" :elevation="0">
-
-                <v-card class="font-weight-black d-flex justify-center ma-5 pa-1" color="rgb(255, 255, 255, 0)"
-                  :elevation="0">
-                  <span :style="{ 'color': 'white', 'font-weight': 'bold' }">{{ produto.preco }}</span>
-                </v-card>
-
-                <v-btn class="ma-4 bg-red-accent-3" rounded="lg" @click="add_Sacola(produto)">
-                  <v-icon class="mr-2">
-                    mdi-pencil
-                  </v-icon>
-                  Alterar
-                </v-btn>
-              </v-card>
-
             </v-img>
           </v-card>
 
         </v-col>
       </v-row>
     </v-col>
+
+    <NewProducts ref="NewProducts" @insert="teste($event)" />
   </main>
 </template>
 
 <script>
 import { ref } from 'vue';
-import Popup from '../../components/Popup.vue';
+
 import { trigger } from '@vue/reactivity';
 import produtos from '@/controllers/cardapio.json';
-
+import NewProducts from '@/components/New_product.vue'
 export default {
+  components: {
+    NewProducts
+  },
   data() {
     return {
       cardapio: produtos,
     }
   },
-
-  props: ['TogglePopup'],
-
-  setup() {
-    const popupTriggers = ref({
-      buttonTrigger: false
-    })
-
-    const TogglePopup = (trigger) => {
-      popupTriggers.value[trigger] = !popupTriggers.value[trigger]
-    }
-
-    return {
-      Popup,
-      popupTriggers,
-      TogglePopup
+  methods: {
+    eventActiveNewProducts() {
+      this.$refs.NewProducts.dialog = true;
+    },
+    teste(valor){
+      console.log(valor)
     }
   }
 }
 
+
 </script>
 <style lang="scss" scoped>
-.popup {
-  position: fixed;
-  top: 0;
-  left: 1;
-  right: 0;
-  bottom: 1;
-  background-color: white;
-  margin: 70px 20px 70px 0px;
-}
-
 .my-custom-text-field {
   height: 60px;
   width: 280px;

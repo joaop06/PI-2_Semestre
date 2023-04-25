@@ -1,86 +1,92 @@
 [
-        {
-            "id": 1,
-            "nome": "Produto 1",
-            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
-            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
-            "preco": 27.75
-        },
-        {
-            "id": 2,
-            "nome": "Produto 2",
-            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
-            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
-            "preco": 39.90
-        },
-        {
-            "id": 3,
-            "nome": "Produto 3",
-            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
-            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
-            "preco": 27.43
-        },
-        {
-            "id": 4,
-            "nome": "X-Tudo Malandro",
-            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
-            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
-            "preco": 18.99
-        },
-        {
-            "id": 5,
-            "nome": "Produto 5",
-            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
-            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
-            "preco": 25.49
-        },
-        {
-            "id": 6,
-            "nome": "Produto 6",
-            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
-            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
-            "preco": 42.37
-        },
-        {
-            "id": 7,
-            "nome": "Produto 7",
-            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
-            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
-            "preco": 37.52
-        },
-        {
-            "id": 8,
-            "nome": "Produto 8",
-            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
-            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
-            "preco": 12.27
-        },
-        {
-            "id": 9,
-            "nome": "Produto 9",
-            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
-            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
-            "preco": 69.40
-        },
-        {
-            "id": 10,
-            "nome": "Produto 10",
-            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
-            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
-            "preco": 26.34
-        },
-        {
-            "id": 11,
-            "nome": "Produto 11",
-            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
-            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
-            "preco": 125.90
-        },
-        {
-            "id": 12,
-            "nome": "Produto 12",
-            "descricao": "TEste jlsdkfjlsadj fklsadjl jls kfjsdlkfjslkdajflsdkfj",
-            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
-            "preco": 11.90
-        }
-    ]
+
+    {
+        "id": 1,
+        "nome": "Pizza de Calabresa",
+        "descricao": "Mussarela, calabresa, cebola e azeitonas",
+        "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+        "tipo": "P",
+        "preco": 38.90
+    },
+    {
+        "id": 2,
+        "nome": "X-Salada",
+        "descricao": "Pão de hambúrguer, hambúrguer, alface, tomate, queijo e maionese",
+        "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+        "tipo": "L",
+        "preco": 18.50
+    },
+    {
+        "id": 3,
+        "nome": "Porção de Bolinhos de Bacalhau",
+        "descricao": "Bolinhos de bacalhau com temperos especiais, fritos e servidos com molho tártaro",
+        "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+        "tipo": "B",
+        "preco": 28.90
+    },
+    {
+        "id": 4,
+        "nome": "Pizza de Marguerita",
+        "descricao": "Mussarela, tomate, manjericão e parmesão",
+        "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+        "tipo": "P",
+        "preco": 36.90
+    },
+    {
+        "id": 5,
+        "nome": "X-Bacon",
+        "descricao": "Pão de hambúrguer, hambúrguer, bacon, queijo, alface, tomate e maionese",
+        "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+        "tipo": "L",
+        "preco": 21.50
+    },
+    {
+        "id": 6,
+        "nome": "Porção de Bolinhos de Queijo",
+        "descricao": "Bolinhos de queijo empanados e fritos, acompanhados de molho barbecue",
+        "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+        "tipo": "B",
+        "preco": 22.90
+    },
+    {
+        "id": 7,
+        "nome": "Pizza de Frango com Catupiry",
+        "descricao": "Mussarela, frango desfiado e catupiry",
+        "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+        "tipo": "P",
+        "preco": 42.90
+    },
+    {
+        "id": 8,
+        "nome": "X-Egg",
+        "descricao": "Pão de hambúrguer, hambúrguer, ovo, queijo, alface, tomate e maionese",
+        "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+        "tipo": "L",
+        "preco": 19.50
+    },
+    {
+        "id": 9,
+        "nome": "Porção de Bolinhos de Carne",
+        "descricao": "Bolinhos de carne moída temperados com ervas finas, fritos e acompanhados de molho de mostarda",
+        "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+        "tipo": "B",
+        "preco": 24.90
+    },
+    {
+        "id": 10,
+        "nome": "Pizza de Muçarela",
+        "descricao": "Mussarela derretida com orégano",
+        "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+        "tipo": "P",
+        "preco": 34.90
+    },
+    {
+        "id": 11,
+        "nome": "X-Frango",
+        "descricao": "Pão de hambúrguer, filé de frango grelhado, queijo, alface, tomate e maionese",
+        "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+        "tipo": "L",
+        "preco": 12.90
+    }
+]
+    
