@@ -9,11 +9,8 @@
 
 
 
-    <v-col cols="9" rounded="xl">
+    <v-col cols="12" rounded="xl">
       <v-row justify="start">
-        <v-col>
-
-        </v-col>
 
         <v-col v-for="(produto, index) in cardapio" class="d-flex justify-space-around aligin-center" :key="index"
           cols="4">

@@ -1,6 +1,6 @@
 <template>
     <v-dialog v-model="dialog" width="80vw" scrim="black">
-        <v-card rounded="xl">
+        <v-card rounded="xl" class="pa-8">
             <v-row no-gutters justify="space-between">
                 <h2 class="pl-3 pr-3 pa-2">Novo Item</h2>
 
