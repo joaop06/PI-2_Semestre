@@ -62,7 +62,6 @@
       </v-col>
 
 
-
       <!-- LISTA DE PRODUTOS (CARDÁPIO) -->
       <v-col class="ma-auto" cols="9" rounded="xl">
         <v-row justify="start">
