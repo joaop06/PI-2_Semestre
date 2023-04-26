@@ -46,7 +46,7 @@
                       <v-icon class="mr-2">
                         mdi-pencil
                       </v-icon>
-                      Alterar  
+                      Alterar
                     </v-btn>
                   </v-row>
                 </v-card-text>
@@ -66,12 +66,13 @@
   </main>
 </template>
 
+
 <script>
 import { ref } from 'vue';
-
 import { trigger } from '@vue/reactivity';
-import produtos from '@/controllers/cardapio.json';
+import produtos from '@/data/cardapio.json';
 import NewProducts from '@/components/New_product.vue'
+
 export default {
   components: {
     NewProducts
@@ -85,7 +86,7 @@ export default {
     eventActiveNewProducts() {
       this.$refs.NewProducts.dialog = true;
     },
-    teste(valor){
+    teste(valor) {
       console.log(valor)
     }
   }

@@ -35,7 +35,7 @@
                 </div>
 
                 <v-btn class="bg-red-accent-3" icon="mdi-delete" size="40" :elevation="0"
-                  @click="remove_Sacola(index)"></v-btn>
+                  @click="remove_Sacola(index, prdouto)"></v-btn>
               </v-sheet>
             </v-row>
 
@@ -47,10 +47,9 @@
           </div>
 
 
-
           <!-- Rodapé da Sacola (Total e Botão de Finalizar Pedido)-->
           <v-card class="mt-8 text-start" :elevation="0" color="rgb(0, 0, 0, 0)" width="90%" height="3vh">
-            <span>Total: R$ <span v-if="quant_total_sacola !== 0">{{ totalSacola }}</span></span>
+            <span>Total: R$ <span v-if="quant_total_sacola !== 0">{{ total_ValorSacola }}</span></span>
           </v-card>
 
 
@@ -122,7 +121,7 @@
 
 
 <script>
-import produtos from '@/controllers/cardapio.json'
+import produtos from '@/data/cardapio.json'
 
 
 export default ({
@@ -131,7 +130,7 @@ export default ({
       cardapio: produtos,
 
       quant_total_sacola: [],
-      totalSacola: 0,
+      total_ValorSacola: 0,
 
     }
   },
@@ -139,12 +138,13 @@ export default ({
     // Adiciona o produto desejado na Sacola de Produtos
     add_Sacola: function (produto) {
       this.quant_total_sacola.splice(0, 0, produto)
-      this.totalSacola += produto.preco
+      this.total_ValorSacola += produto.preco
     },
 
     // Remove o item selecionado da Sacola de Produtos
-    remove_Sacola: function (index) {
+    remove_Sacola: function (index, prdouto) {
       this.quant_total_sacola.splice(index, 1)
+
     },
   },
 })

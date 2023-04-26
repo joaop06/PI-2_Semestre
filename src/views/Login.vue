@@ -43,7 +43,7 @@
             </div>
 
             <v-row no-gutters justify="center" class="mt-6 d-flex flex-column">
-                <v-btn to="/" color="red-accent-3" size="large" class="ma-auto" max-width="25%">
+                <v-btn @click="activeNavbar" to="/" color="red-accent-3" size="large" class="ma-auto" max-width="25%">
                     Login
                 </v-btn>
 
@@ -57,15 +57,28 @@
             </v-row>
 
         </v-sheet>
+
+
+        <Navbar ref="Navbar" v-if="false" />
     </v-container>
 </template>
 
 <script>
+import Navbar from '@/components/Navbar.vue'
+
 export default {
+    components: {
+        Navbar,
+    },
     data() {
         return {
             password: '',
             showPassword: false,
+        }
+    },
+    methods: {
+        activeNavbar() {
+            this.$refs.Navbar.logado = true;
         }
     }
 }
