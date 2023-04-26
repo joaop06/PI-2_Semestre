@@ -17,7 +17,6 @@ const app = createApp(App)
 
 registerPlugins(app)
 
-app.config.globalProperties.$sessao_usuario = false;
 
 
 app.mount('#app')

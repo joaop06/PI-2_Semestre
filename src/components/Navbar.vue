@@ -5,9 +5,6 @@
         src="https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Logo_Rang-On.png?raw=true" width="80"
         height="80"></v-img></router-link>
 
-        <v-btn @click="testefuncaoLogin()">
-          Teste Login
-        </v-btn>
 
     <v-col v-if="logado" class="text-right">
 
@@ -55,9 +52,7 @@ export default {
     }
   },
   methods:{
-    testefuncaoLogin(){
-      this.logado = true;
-    }
+
   }
 }
 </script>
