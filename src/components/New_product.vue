@@ -38,10 +38,7 @@ export default {
     },
     methods: {
         insert(){
-<<<<<<< HEAD
             this.$emit('insert',10),
-=======
->>>>>>> a22b0db94fac3bcbb53fa55adac323538ff4b1ee
             this.dialog = false
         },
         close(){

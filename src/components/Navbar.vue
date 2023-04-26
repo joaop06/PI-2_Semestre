@@ -5,6 +5,9 @@
         src="https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Logo_Rang-On.png?raw=true" width="80"
         height="80"></v-img></router-link>
 
+        <v-btn @click="testefuncaoLogin()">
+          Teste Login
+        </v-btn>
 
     <v-col v-if="logado" class="text-right">
 
@@ -27,7 +30,7 @@
       </v-btn>
     </v-col>
 
-    <v-col v-if="deslogado" class="text-right">
+    <v-col v-else class="text-right">
       <v-btn width="15%" height="5vh" class="ma-5 bg-white font-weight-bold" color="red-accent-3" rounded="shaped"
         :elevation="1" to="/login">
         Entrar
@@ -46,14 +49,12 @@
 export default {
   data() {
     return {
-      logado: true,
-      deslogado: false
+      logado: this.$sessao_usuario,
     }
   },
-  methods: {
-    logar() {
-        this.logado = !this.logado
-        this.deslogado = !this.deslogado
+  methods:{
+    testefuncaoLogin(){
+      this.$sessao_usuario = true;
     }
   }
 }

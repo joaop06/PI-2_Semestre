@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-main>
-      <Navbar v-if="!$route.path.includes('admin') && !$route.path.includes('login') && !$route.path.includes('cadastro')"/>
+      <Navbar ref="Navbar" v-if="!$route.path.includes('admin') && !$route.path.includes('login') && !$route.path.includes('cadastro')"/>
       <router-view />
     </v-main>
   </v-app>
@@ -12,6 +12,11 @@ import Navbar from '@/components/Navbar.vue'
 export default {
   components: {
     Navbar
+  },
+  data(){
+    return{
+      logado: false
+    }
   },
   created() {
     // Importa o objeto $route do Vue Router

@@ -1,0 +1,114 @@
+{
+    "produtos":[
+        {
+            "id": 1,
+            "nome": "Pizza de Calabresa",
+            "descricao": "Mussarela, calabresa, cebola e azeitonas",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+            "tipo": "P",
+            "preco": 38.90
+        },
+        {
+            "id": 2,
+            "nome": "X-Salada",
+            "descricao": "Pão de hambúrguer, hambúrguer, alface, tomate, queijo e maionese",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "tipo": "L",
+            "preco": 18.50
+        },
+        {
+            "id": 3,
+            "nome": "Porção de Bolinhos de Bacalhau",
+            "descricao": "Bolinhos de bacalhau com temperos especiais, fritos e servidos com molho tártaro",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+            "tipo": "B",
+            "preco": 28.90
+        },
+        {
+            "id": 4,
+            "nome": "Pizza de Marguerita",
+            "descricao": "Mussarela, tomate, manjericão e parmesão",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+            "tipo": "P",
+            "preco": 36.90
+        },
+        {
+            "id": 5,
+            "nome": "X-Bacon",
+            "descricao": "Pão de hambúrguer, hambúrguer, bacon, queijo, alface, tomate e maionese",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "tipo": "L",
+            "preco": 21.50
+        },
+        {
+            "id": 6,
+            "nome": "Porção de Bolinhos de Queijo",
+            "descricao": "Bolinhos de queijo empanados e fritos, acompanhados de molho barbecue",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "tipo": "B",
+            "preco": 22.90
+        },
+        {
+            "id": 7,
+            "nome": "Pizza de Frango com Catupiry",
+            "descricao": "Mussarela, frango desfiado e catupiry",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+            "tipo": "P",
+            "preco": 42.90
+        },
+        {
+            "id": 8,
+            "nome": "X-Egg",
+            "descricao": "Pão de hambúrguer, hambúrguer, ovo, queijo, alface, tomate e maionese",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "tipo": "L",
+            "preco": 19.50
+        },
+        {
+            "id": 9,
+            "nome": "Porção de Bolinhos de Carne",
+            "descricao": "Bolinhos de carne moída temperados com ervas finas, fritos e acompanhados de molho de mostarda",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "tipo": "B",
+            "preco": 24.90
+        },
+        {
+            "id": 10,
+            "nome": "Pizza de Muçarela",
+            "descricao": "Mussarela derretida com orégano",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/pizza2.jpg?raw=true",
+            "tipo": "P",
+            "preco": 34.90
+        },
+        {
+            "id": 11,
+            "nome": "X-Frango",
+            "descricao": "Pão de hambúrguer, filé de frango grelhado, queijo, alface, tomate e maionese",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "tipo": "L",
+            "preco": 12.90
+        }
+    ],
+
+
+    "clientes":[
+        {
+            "id": 1,
+            "nome": "João Pedro",
+            "email": "joao@teste.com",
+            "senha": "jp1234"
+        }
+    ],
+
+
+    "pedidos":[
+        {
+            "num_pedido": 1001,
+            "cliente_id": 1,
+            "produtos_id": [4, 6],
+            "preco_pedido": 42.25
+
+        }
+    ]
+}
+
