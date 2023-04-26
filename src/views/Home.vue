@@ -120,14 +120,13 @@
 
 
 <script>
-import produtos from '@/data/cardapio.json'
+import bd_rangon from '@/data/bd_rangon.json'
 
 
 export default ({
   data() {
     return {
-      cardapio: produtos,
-
+      cardapio: bd_rangon.produtos,
       quant_total_sacola: [],
       total_ValorSacola: 0,
 
