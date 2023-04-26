@@ -2,9 +2,9 @@
     <v-dialog v-model="dialog" width="70vw" scrim="black">
         <v-card rounded="xl" class="pa-8">
             <v-row no-gutters justify="space-between">
-                <h2 class="pl-3 pr-3 pa-2">Novo Item</h2>
+                <h2 class="pl-3 pr-3 pa-2">Alterar Item</h2>
 
-                <v-btn icon="mdi-close" variant="icon" @click="close">
+                <v-btn icon="mdi-close" variant="icon"  @click="close">
                 </v-btn>
             </v-row>
             
@@ -18,13 +18,12 @@
             <v-text-field class="pl-3 pr-3"></v-text-field>
             <div class="pl-3 pr-3 pb-4">
                 <v-btn class="popup-close bg-orange" @click="insert()">
-                    Inserir Item
+                    Editar Item
                 </v-btn>
             </div>
         </v-card>
     </v-dialog>
 </template>
-
 
 <script>
 export default {
@@ -38,10 +37,6 @@ export default {
     },
     methods: {
         insert(){
-<<<<<<< HEAD
-            this.$emit('insert',10),
-=======
->>>>>>> a22b0db94fac3bcbb53fa55adac323538ff4b1ee
             this.dialog = false
         },
         close(){
