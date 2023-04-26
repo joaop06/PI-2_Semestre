@@ -46,15 +46,17 @@
 </template>
 
 <script>
+import bd_rangon from '@/data/bd_rangon.json'
+
 export default {
   data() {
     return {
-      logado: this.$sessao_usuario,
+      logado: bd_rangon.clientes[0].status_logado,
     }
   },
   methods:{
     testefuncaoLogin(){
-      this.$sessao_usuario = true;
+      this.logado = true;
     }
   }
 }

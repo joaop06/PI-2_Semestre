@@ -26,14 +26,16 @@
                 <v-card color="rgb(0,0,0,0)" elevation="0" max-width="25vw">
 
                     <v-row class="ma-auto">
-                        <v-text-field :style="{ 'color': 'white' }" name="email_login" bg-color="rgb(255, 255, 255, 0.5)"
+                        <v-text-field v-model="email"
+                        :style="{ 'color': 'white' }" name="email_login" bg-color="rgb(255, 255, 255, 0.5)"
                             type="email" label="E-mail" placeholder="E-mail"></v-text-field>
 
 
                     </v-row>
 
                     <v-row class="ma-auto">
-                        <v-text-field :style="{ 'color': 'white' }" name="senha_login" bg-color="rgb(255, 255, 255, 0.5)"
+                        <v-text-field v-model="senha"
+                        :style="{ 'color': 'white' }" name="senha_login" bg-color="rgb(255, 255, 255, 0.5)"
                             :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                             @click:append-inner="showPassword = !showPassword" :type="showPassword ? 'text' : 'password'"
                             label="Senha" placeholder="Senha" hint="Digite sua senha para acessar"></v-text-field>
@@ -43,7 +45,7 @@
             </div>
 
             <v-row no-gutters justify="center" class="mt-6 d-flex flex-column">
-                <v-btn @click="activeNavbar" color="red-accent-3" size="large" class="ma-auto" max-width="25%">
+                <v-btn @click="activeNavbar" to="/" color="red-accent-3" size="large" class="ma-auto" max-width="25%">
                     Login
                 </v-btn>
 
@@ -60,30 +62,39 @@
 
     </v-container>
 
-    <Navbar ref="Navbar" v-if="true" />
+    <Navbar ref="Navbar" v-if="false" />
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue'
+import bd_rangon from '@/data/bd_rangon.json'
 
 export default {
     components: {
         Navbar,
-
     },
     data() {
         return {
             password: '',
             showPassword: false,
+            sessao_login: bd_rangon.clientes[0].status_logado,
+            email: '',
+            senha: ''
         }
     },
     methods: {
+        fazerlogin() {
+
+            activeNavbar()
+        },
         activeNavbar() {
-            this.$sessao_usuario = true;
+            const user_logado = bd_rangon.clientes[0]
+            user_logado.status_logado = true
         }
     }
 }
 </script>
+
 
 <style>
 div.v-application__wrap {
