@@ -1,68 +1,84 @@
 <template>
   <main>
-    <v-row class="d-flex pa-7" justify="space-between">
-      <v-btn @click="eventActiveNewProducts" class="bg-orange color-white" :style="{ 'justify-content': 'end' }">
-        Cadastrar Novo Produto
-      </v-btn>
-      <v-btn to="/admin">Sair</v-btn>
-    </v-row>
+    <v-card>
+      <v-layout>
+        <v-navigation-drawer rail permanent style="width: 4vw;">
+
+          <v-list density="compact" nav>
+            <v-btn icon="mdi-view-dashboard"></v-btn>
+
+            <v-btn icon="mdi-forum" class="ml-0"></v-btn>
+          </v-list>
+
+        </v-navigation-drawer>
 
 
+        <v-main>
+          <div>
+            <v-row class="d-flex pa-7" justify="space-between">
+              <v-btn @click="eventActiveNewProducts" class="bg-orange color-white" :style="{ 'justify-content': 'end' }">
+                Cadastrar Novo Produto
+              </v-btn>
+              <v-btn to="/admin">Sair</v-btn>
+            </v-row>
 
-    <v-col cols="12" rounded="xl">
-      <v-row justify="start">
+            <v-col cols="12" rounded="xl">
+              <v-row justify="start">
 
-        <v-col v-for="(produto, index) in cardapio" class="d-flex justify-space-around aligin-center" :key="index"
-          cols="4">
+                <v-col v-for="(produto, index) in cardapio" class="d-flex justify-space-around aligin-center" :key="index"
+                  cols="4">
 
-          <v-card color="rgb(0, 0, 0, 0)" rounded="lg" width="25vw" height="30vh" min-height="200px">
+                  <v-card color="rgb(0, 0, 0, 0)" rounded="lg" width="25vw" height="30vh" min-height="200px">
 
-            <v-img class="image justify-space-between align-end d-flex"
-              gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,0.6), rgba(0,0,0,1)" :src="produto.imagem"
-              :lazy-src="produto.imagem" cover min-height="200px">
-              <template v-slot:placeholder>
-                <div class="d-flex align-center justify-center fill-height">
-                  <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
-                </div>
-              </template>
+                    <v-img class="image justify-space-between align-end d-flex"
+                      gradient="to bottom, rgba(0,0,0,0), rgba(0,0,0,0.6), rgba(0,0,0,1)" :src="produto.imagem"
+                      :lazy-src="produto.imagem" cover min-height="200px">
+                      <template v-slot:placeholder>
+                        <div class="d-flex align-center justify-center fill-height">
+                          <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
+                        </div>
+                      </template>
 
-              <v-card color="transparent" :elevation="0">
+                      <v-card color="transparent" :elevation="0">
 
-                <v-card-title>
-                  <span class="text-h6 text-white text-bold">{{ produto.nome }}</span>
-                </v-card-title>
-                <v-card-subtitle class="mt-n3">
-                  <span class="text-white">{{ produto.descricao }}</span>
-                </v-card-subtitle>
+                        <v-card-title>
+                          <span class="text-h6 text-white text-bold">{{ produto.nome }}</span>
+                        </v-card-title>
+                        <v-card-subtitle class="mt-n3">
+                          <span class="text-white">{{ produto.descricao }}</span>
+                        </v-card-subtitle>
 
-                <v-card-text class="my-n4">
-                  <v-row justify="space-between" no-gutters>
-                    <v-card class="font-weight-black d-flex justify-center ma-5 pa-1" color="rgb(255, 255, 255, 0)"
-                      :elevation="0">
-                      <span :style="{ 'color': 'white', 'font-weight': 'bold' }">{{ produto.preco }}</span>
-                    </v-card>
+                        <v-card-text class="my-n4">
+                          <v-row justify="space-between" no-gutters>
+                            <v-card class="font-weight-black d-flex justify-center ma-5 pa-1"
+                              color="rgb(255, 255, 255, 0)" :elevation="0">
+                              <span :style="{ 'color': 'white', 'font-weight': 'bold' }">{{ produto.preco }}</span>
+                            </v-card>
 
-                    <v-btn class="ma-4 bg-red-accent-3" rounded="lg" @click="add_Sacola(produto)">
-                      <v-icon class="mr-2">
-                        mdi-pencil
-                      </v-icon>
-                      Alterar  
-                    </v-btn>
-                  </v-row>
-                </v-card-text>
+                            <v-btn @click="eventActiveUpdtProducts" class="ma-4 bg-red-accent-3" rounded="lg">
+                              <v-icon class="mr-2">
+                                mdi-pencil
+                              </v-icon>
+                              Alterar
+                            </v-btn>
+                          </v-row>
+                        </v-card-text>
+                      </v-card>
+                    </v-img>
+                  </v-card>
+
+                </v-col>
+              </v-row>
+            </v-col>
+          </div>
+        </v-main>
+      </v-layout>
+    </v-card>
 
 
+    <NewProducts ref="NewProducts" />
+    <UpdtProducts ref="UpdtProducts" />
 
-
-              </v-card>
-            </v-img>
-          </v-card>
-
-        </v-col>
-      </v-row>
-    </v-col>
-
-    <NewProducts ref="NewProducts" @insert="teste($event)" />
   </main>
 </template>
 
@@ -71,10 +87,15 @@ import { ref } from 'vue';
 
 import { trigger } from '@vue/reactivity';
 import produtos from '@/controllers/cardapio.json';
-import NewProducts from '@/components/New_product.vue'
+import NewProducts from '@/components/New_product.vue';
+import UpdtProducts from '@/components/Updt_product.vue'
+
 export default {
   components: {
     NewProducts
+  },
+  components: {
+    UpdtProducts
   },
   data() {
     return {
@@ -85,8 +106,8 @@ export default {
     eventActiveNewProducts() {
       this.$refs.NewProducts.dialog = true;
     },
-    teste(valor){
-      console.log(valor)
+    eventActiveUpdtProducts() {
+      this.$refs.UpdtProducts.dialog = true;
     }
   }
 }
