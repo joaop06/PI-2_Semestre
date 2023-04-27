@@ -13,6 +13,8 @@
             </span>
           </v-list-item-title>
 
+          <v-divider></v-divider>
+
           <div class="shadow-invertida pa-1 mt-5 scrollbar-estilo"
             :style="{ 'height': '75%', 'max-height': '75%', 'overflow-y': 'auto', 'border-radius': '8px' }">
 
@@ -61,6 +63,7 @@
         </v-sheet>
       </v-col>
 
+      
 
       <!-- LISTA DE PRODUTOS (CARDÁPIO) -->
       <v-col class="ma-auto" cols="9" rounded="xl">

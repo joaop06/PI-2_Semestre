@@ -1,6 +1,7 @@
 <template>
     <v-container class="d-flex mt-12">
-
+        <v-btn @click="testestatus">Teste status:</v-btn>
+        <p> {{ teste }}</p>
         <!--CARD DE CADASTRO-->
         <v-sheet id="login" class="ma-auto mt-12 pa-12" color="rgb(93, 64, 55, 0.8)" width="25vw" rounded="xl"
             :elevation="7">
@@ -46,7 +47,7 @@
             </div>
 
             <v-card class="justify-center ma-auto" width="100%" :elevation="0" color="rgb(0,0,0,0)">
-                <p v-if="true" class="text-red">Dados incorretos ou não encontrados</p>
+                <p v-if="erro_login" class="text-red">Dados incorretos ou não encontrados</p>
             </v-card>
 
 
@@ -75,6 +76,7 @@
 import Navbar from '@/components/Navbar.vue'
 import bd_rangon from '@/data/bd_rangon.json'
 
+
 export default {
     components: {
         Navbar,
@@ -83,25 +85,42 @@ export default {
         return {
             password: '',
             showPassword: false,
-            sessao_login: bd_rangon.clientes[0].status_logado,
             erro_login: false,
             email: '',
-            senha: ''
+            senha: '',
+            teste: false
         }
     },
     methods: {
+        testestatus() {
+            this.teste = bd_rangon.clientes[0].status_logado;
+            bd_rangon.clientes[0].status_logado = !bd_rangon.clientes[0].status_logado;
+        },
         fazerlogin() {
             const user = bd_rangon.clientes.find(item => item.email == this.email && item.senha == this.senha)
+            console.log(user);
+
             if (user) {
                 this.$router.push('/');
                 const user_logado = bd_rangon.clientes[0];
                 user_logado.status_logado = true;
-
             } else {
                 this.erro_login = true;
             }
 
         },
+        /*fazerloginTestes() {
+            const user = bd_rangon.clientes.find(item => item.email == this.email && item.senha == this.senha)
+            console.log(user);
+
+            if (user) {
+                this.$router.push('/');
+                router.put(`'/login/${user.id}'`, this.rangonController.updateLogin());
+            } else {
+                this.erro_login = true;
+            }
+
+        },*/
     }
 }
 </script>
