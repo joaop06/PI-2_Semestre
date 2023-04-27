@@ -41,9 +41,14 @@
                     </v-row>
                 </v-card>
 
-                <span v-if="true">Dados incorretos ou não encontrados</span>
+
 
             </div>
+
+            <v-card class="justify-center ma-auto" width="100%" :elevation="0" color="rgb(0,0,0,0)">
+                <p v-if="true" class="text-red">Dados incorretos ou não encontrados</p>
+            </v-card>
+
 
             <v-row no-gutters justify="center" class="mt-6 d-flex flex-column">
                 <v-btn @click="fazerlogin" color="red-accent-3" size="large" class="ma-auto" max-width="25%">
