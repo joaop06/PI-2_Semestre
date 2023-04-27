@@ -9,7 +9,7 @@
             </v-row>
             
             <h3 class="pl-3 pr-3">Nome</h3>
-            <v-text-field class="my-custom-text-field pl-3 pr-3 "></v-text-field>
+            <v-text-field v-model="newname" class="my-custom-text-field pl-3 pr-3 "></v-text-field>
             <h3 class="pl-3 pr-3 pt-4S">Descrição</h3>
             <v-text-field class="pl-3 pr-3"></v-text-field>
             <h3 class="pl-3 pr-3">Tipo</h3>
@@ -26,6 +26,8 @@
 </template>
 
 <script>
+import bd_rangon from '@/data/bd_rangon.json';
+
 export default {
     props:{
 
@@ -33,6 +35,8 @@ export default {
     data(){
         return{
             dialog: false,
+            produto: {},
+            newname: ''
         }
     },
     methods: {
