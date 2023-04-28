@@ -6,7 +6,7 @@
         height="80"></v-img></router-link>
 
 
-    <v-col v-if="sessao_login.status_logado" class="text-right">
+    <v-col v-if="sessao_user.status_logado" class="text-right">
 
       <v-btn to="/pedidos" width="7vw" height="5vh" class="ma-5 bg-red-accent-3" color="white" rounded="shaped"
         :elevation="2" icon>
@@ -20,24 +20,13 @@
         Sobre
       </v-btn>
 
+      <v-btn to="/perfil" width="7vw" height="5vh" class="ma-5 bg-red-accent-3" color="white" rounded="shaped"
+        :elevation="2" icon>
+        <v-icon class="mr-2">mdi-profile</v-icon>
+        Perfil
+      </v-btn>
 
 
-      <v-menu>
-        <template v-slot:activator="{ props }">
-          <v-btn width="7vw" height="5vh" class="ma-5 bg-red-accent-3" color="white" rounded="shaped" :elevation="2" icon>
-
-            Olá, {{ sessao_login.nome }}!
-          </v-btn>
-        </template>
-        <v-list>
-          <v-list-item v-for="(botao, index) in bot_perfil" :key="index" :value="index">
-            <v-list-item-title>
-              <v-icon class="mr-2">mdi-account-box</v-icon>
-              {{ botao.titulo }}
-            </v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
 
 
     </v-col>
@@ -58,10 +47,12 @@
 </template>
 
 <script>
+import bd_rangon from '@/data/bd_rangon.json'
+
 export default {
   data() {
     return {
-      sessao_login: [],
+      sessao_user: {},
       bot_perfil: [
         { "titulo": "Perfil" },
         { "titulo": "Sair" }
