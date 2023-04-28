@@ -6,7 +6,7 @@
         height="80"></v-img></router-link>
 
 
-    <v-col v-if="sessao_user.status_logado" class="text-right">
+    <v-col v-if="sessao_user" class="text-right">
 
       <v-btn to="/pedidos" width="7vw" height="5vh" class="ma-5 bg-red-accent-3" color="white" rounded="shaped"
         :elevation="2" icon>
@@ -52,11 +52,7 @@ import bd_rangon from '@/data/bd_rangon.json'
 export default {
   data() {
     return {
-      sessao_user: {},
-      bot_perfil: [
-        { "titulo": "Perfil" },
-        { "titulo": "Sair" }
-      ],
+      sessao_user: false,
     }
   },
   methods: {

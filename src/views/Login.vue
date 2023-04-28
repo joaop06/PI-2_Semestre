@@ -78,7 +78,7 @@ import bd_rangon from '@/data/bd_rangon.json'
 
 export default{
     components: {
-        Navbar,
+        Navbar
     },
     data() {
         return {
@@ -93,16 +93,18 @@ export default{
     methods: {
         fazerlogin() {
             const user = bd_rangon.clientes.find(item => item.email == this.email && item.senha == this.senha);
-            console.log(user.id);
+            user.status_logado = true;
+            this.$refs.Navbar.sessao_user = user.status_logado;
 
-            if (user) {
+            /*if (user) {
                 this.$router.push('/');
-                this.$refs.Navbar.sessao_user = user.id;
                 user.status_logado = true;
+                this.$refs.Navbar.sessao_user = user.status_logado;
+                console.log(user);
 
             } else {
                 this.erro_login = true;
-            }
+            }*/
 
         },
     }
