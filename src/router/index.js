@@ -42,9 +42,9 @@ const routes = [
     component: () => import('@/views/admin/Login.vue'),
   },
   {
-    path: '/admin/Home',
-    name: 'Admin_Home',
-    component: () => import('@/views/admin/Home.vue')
+    path: '/admin/Pedidos',
+    name: 'Admin_Pedidos',
+    component: () => import('@/views/admin/PedidosGerais.vue')
   },
   {
     path: '/admin/Itens',

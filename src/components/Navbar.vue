@@ -27,6 +27,43 @@
       </v-btn>
 
 
+      <div>
+        <v-menu>
+          <template v-slot:activator="{ props }">
+            <v-btn color="primary" v-bind="props">
+              Activator slot
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item v-for="(item, index) in items" :key="index" :value="index">
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
+        <v-menu location="bottom">
+          <template v-slot:activator="{ props }">
+            <v-btn
+              color="primary"
+              dark
+              v-bind="props"
+            >
+              Dropdown
+            </v-btn>
+          </template>
+    
+          <v-list>
+            <v-list-item
+              v-for="(item, index) in items"
+              :key="index"
+            >
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+    
+
+
 
 
     </v-col>
@@ -48,15 +85,23 @@
 
 <script>
 import bd_rangon from '@/data/bd_rangon.json'
+import variablesLogin from '@/controllers/globalVariables';
 
 export default {
   data() {
-    return {
-      sessao_user: false,
+    props: {
+      items: [
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me' },
+        { title: 'Click Me 2' },
+      ]
     }
-  },
-  methods: {
 
+    return {
+      id_user: 0,
+      sessao_user: variablesLogin.sessao_login
+    }
   }
 }
 </script>

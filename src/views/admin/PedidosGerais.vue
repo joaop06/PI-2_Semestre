@@ -1,5 +1,5 @@
 <template>
-    <h1>HOME EMPRESA</h1>
+    <h1>PEDIDOS GERAIS</h1>
 
     
 </template>

@@ -1,4 +1,5 @@
 <template>
+    
     <v-container class="d-flex mt-12">
 
         <!--CARD DE CADASTRO-->
@@ -45,13 +46,13 @@
 
             </div>
 
-            <v-card class="justify-center ma-auto" width="100%" :elevation="0" color="rgb(0,0,0,0)">
-                <p v-if="erro_login" class="text-red">Dados incorretos ou não encontrados</p>
+            <v-card align="center" width="100%" height="3vh" :elevation="0" color="rgb(0,0,0,0)">
+                <p v-if="erro_login" class="text-red text-h6">Dados incorretos ou não encontrados</p>
             </v-card>
 
 
             <v-row no-gutters justify="center" class="mt-6 d-flex flex-column">
-                <v-btn @click="fazerlogin" color="red-accent-3" size="large" class="ma-auto" max-width="25%">
+                <v-btn @click="fazerlogin()" color="red-accent-3" size="large" class="ma-auto" max-width="25%">
                     Login
                 </v-btn>
 
@@ -65,7 +66,6 @@
             </v-row>
 
         </v-sheet>
-
     </v-container>
 
     <Navbar ref="Navbar" v-if="false" />
@@ -74,9 +74,9 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import bd_rangon from '@/data/bd_rangon.json'
+import variablesLogin from '@/controllers/globalVariables';
 
-
-export default{
+export default({
     components: {
         Navbar
     },
@@ -84,39 +84,29 @@ export default{
         return {
             password: '',
             showPassword: false,
-            erro_login: false,
             email: '',
             senha: '',
-            teste: false
+            erro_login: false,
         }
     },
     methods: {
         fazerlogin() {
             const user = bd_rangon.clientes.find(item => item.email == this.email && item.senha == this.senha);
-            user.status_logado = true;
-            this.$refs.Navbar.sessao_user = user.status_logado;
 
-            /*if (user) {
+            if (user) {
+                variablesLogin.sessao_login = !variablesLogin.sessao_login
                 this.$router.push('/');
-                user.status_logado = true;
-                this.$refs.Navbar.sessao_user = user.status_logado;
-                console.log(user);
-
+                
             } else {
                 this.erro_login = true;
-            }*/
+            }
 
         },
-    }
-}
+    },
+
+})
+
+
 </script>
 
 
-<style>
-div.v-application__wrap {
-    background-color: #BCAAA4;
-    background-image: url(https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Logo_Rang-On.png?raw=true);
-    background-size: contain;
-    background-position: center;
-}
-</style>
