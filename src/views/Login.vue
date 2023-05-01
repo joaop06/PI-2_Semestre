@@ -1,6 +1,12 @@
 <template>
-    
     <v-container class="d-flex mt-12">
+
+        <div class="text-center">
+            <v-snackbar v-model="snackbar" :timeout="tempo">
+                {{  }}
+            </v-snackbar>
+        </div>
+
 
         <!--CARD DE CADASTRO-->
         <v-sheet id="login" class="ma-auto mt-12 pa-12" color="rgb(93, 64, 55, 0.8)" width="25vw" rounded="xl"
@@ -27,15 +33,16 @@
                 <v-card color="rgb(0,0,0,0)" elevation="0" max-width="25vw">
 
                     <v-row class="ma-auto">
-                        <v-text-field v-model="email" :style="{ 'color': 'white' }" name="email"
-                            bg-color="rgb(255, 255, 255, 0.5)" type="email" label="E-mail"
-                            placeholder="E-mail"></v-text-field>
+                        <v-text-field v-model="email" :rules="[required, validEmail]" :style="{ 'color': 'white' }"
+                            name="email" bg-color="rgb(255, 255, 255, 0.5)" type="email" label="E-mail"
+                            placeholder="E-mail">
+                        </v-text-field>
 
 
                     </v-row>
 
                     <v-row class="ma-auto">
-                        <v-text-field v-model="senha" :style="{ 'color': 'white' }" name="senha"
+                        <v-text-field v-model="senha" :rules="[required]" :style="{ 'color': 'white' }" name="senha"
                             bg-color="rgb(255, 255, 255, 0.5)" :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                             @click:append-inner="showPassword = !showPassword" :type="showPassword ? 'text' : 'password'"
                             label="Senha" placeholder="Senha" hint="Digite sua senha"></v-text-field>
@@ -47,7 +54,7 @@
             </div>
 
             <v-card align="center" width="100%" height="3vh" :elevation="0" color="rgb(0,0,0,0)">
-                <p v-if="erro_login" class="text-red text-h6">Dados incorretos ou não encontrados</p>
+                <p v-if="erro_login" class="text-red-darken-4 text-h6">Dados incorretos ou não encontrados</p>
             </v-card>
 
 
@@ -76,7 +83,7 @@ import Navbar from '@/components/Navbar.vue'
 import bd_rangon from '@/data/bd_rangon.json'
 import variablesLogin from '@/controllers/globalVariables';
 
-export default({
+export default ({
     components: {
         Navbar
     },
@@ -96,17 +103,32 @@ export default({
             if (user) {
                 variablesLogin.sessao_login = !variablesLogin.sessao_login
                 this.$router.push('/');
-                
+                console.log(variablesLogin.sessao_login)
             } else {
                 this.erro_login = true;
             }
 
         },
-    },
+        required(value) {
+            return !!value || 'Este campo é obrigatório'
+        },
+        validEmail(value) {
+            const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            return pattern.test(value) || 'Endereço de e-mail inválido'
+        }
 
+    },
 })
 
 
 </script>
 
 
+<style>
+div.v-application__wrap {
+    background-color: #BCAAA4;
+    background-image: url(https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Logo_Rang-On.png?raw=true);
+    background-size: contain;
+    background-position: center;
+}
+</style>

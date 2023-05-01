@@ -63,7 +63,7 @@
         </v-sheet>
       </v-col>
 
-      
+
 
       <!-- LISTA DE PRODUTOS (CARDÁPIO) -->
       <v-col class="ma-auto" cols="9" rounded="xl">
@@ -102,7 +102,7 @@
                         <v-icon class="mr-2">
                           mdi-shopping-outline
                         </v-icon>
-                        Pedir
+                        <p class="text-button">Pedir</p>
                       </v-btn>
                     </v-row>
                   </v-card-text>

@@ -87,6 +87,14 @@
             "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
             "tipo": "L",
             "preco": 12.90
+        },
+        {
+            "id": 12,
+            "nome": "Moda da Casa",
+            "descricao": "Pão de hambúrguer, filé de frango grelhado, queijo, alface, tomate e maionese",
+            "imagem": "https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/hamburguer2.jpg?raw=true",
+            "tipo": "L",
+            "preco": 35.90
         }
     ],
 
@@ -96,6 +104,13 @@
             "id": 1,
             "nome": "João Pedro",
             "email": "joao@teste.com",
+            "senha": "123",
+            "status_logado": false
+        },
+        {
+            "id": 2,
+            "nome": "teste",
+            "email": "aaa",
             "senha": "123",
             "status_logado": false
         }

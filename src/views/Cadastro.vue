@@ -42,39 +42,39 @@
                     <v-card color="rgb(0,0,0,0)" elevation="0" max-width="25vw">
 
                         <v-row class="ma-auto">
-                            <v-text-field :style="{ 'color': 'white', 'width': '50%' }" name="nome_completo"
+                            <v-text-field v-model="nome_completo" :style="{ 'color': 'white', 'width': '50%' }" name="nome_completo"
                                 bg-color="rgb(255, 255, 255, 0.5)" type="text" label="Nome Completo"
                                 placeholder="Ex: João Silva" class="mr-3"></v-text-field>
 
-                            <v-text-field :style="{ 'color': 'white', 'width': '40%' }" name="cpf"
+                            <v-text-field v-model="cpf" :style="{ 'color': 'white', 'width': '40%' }" name="cpf"
                                 bg-color="rgb(255, 255, 255, 0.5)" label="CPF" placeholder="___.___.___-__"></v-text-field>
                         </v-row>
 
                         <v-row class="ma-auto">
-                            <v-text-field :style="{ 'color': 'white', 'width': '50%' }" name="email_cadastro"
+                            <v-text-field v-model="email" :rules="[required, validEmail]" :style="{ 'color': 'white', 'width': '50%' }" name="email_cadastro"
                                 bg-color="rgb(255, 255, 255, 0.5)" type="email" label="E-mail"
                                 placeholder="Ex: joao_silva@gmail.com" class="mr-3"></v-text-field>
 
-                            <v-text-field :style="{ 'color': 'white', 'width': '40%' }" name="tel"
+                            <v-text-field v-model="celular" :style="{ 'color': 'white', 'width': '40%' }" name="tel"
                                 bg-color="rgb(255, 255, 255, 0.5)" label="Celular"
                                 placeholder="(__) _____-____"></v-text-field>
                         </v-row>
 
 
                         <v-row class="ma-auto">
-                            <v-text-field :style="{ 'color': 'white', 'width': '40%' }" name="senha_cadastro"
+                            <v-text-field v-model="senha" :style="{ 'color': 'white', 'width': '40%' }" name="senha_cadastro"
                                 bg-color="rgb(255, 255, 255, 0.5)"
                                 :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                                 @click:append-inner="showPassword = !showPassword"
                                 :type="showPassword ? 'text' : 'password'" label="Senha" hint="Crie sua senha"
                                 class="mr-3"></v-text-field>
 
-                            <v-text-field :style="{ 'color': 'white', 'width': '40%' }" name="senha_cadastro"
+                            <v-text-field v-model="confirma_senha" @blur="validar_senha" :style="{ 'color': 'white', 'width': '40%' }" name="senha_cadastro"
                                 bg-color="rgb(255, 255, 255, 0.5)"
                                 :append-inner-icon="showPassword_confirmar ? 'mdi-eye-off' : 'mdi-eye'"
                                 @click:append-inner="showPassword_confirmar = !showPassword_confirmar"
                                 :type="showPassword_confirmar ? 'text' : 'password'" label="Confirmar Senha"
-                                hint="Confirme sua Senha"></v-text-field>
+                                :hint="hint_verifica_senha" persistent-hint></v-text-field>
                         </v-row>
                     </v-card>
                 </div>
@@ -92,7 +92,7 @@
                                 bg-color="rgb(255, 255, 255, 0.5)" label="Cidade" class="mr-3"></v-text-field>
 
                             <v-select :style="{ 'color': 'white', 'width': '30%' }" name="estado_cadastro"
-                                bg-color="rgb(255, 255, 255, 0.5)" v-model="selecionar_UF" :items="UF" label="Estado"
+                                bg-color="rgb(255, 255, 255, 0.5)" v-model="estado_UF" :items="UF" label="Estado"
                                 width="10em" valu="SP"></v-select>
                         </v-row>
 
@@ -131,14 +131,41 @@
 export default {
     data() {
         return {
-            password: '',
+            hint_verifica_senha: '',
             showPassword: false,
             showPassword_confirmar: false,
             selecionar_UF: null,
             UF: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RR', 'RO', 'RJ', 'RN', 'RS', 'SC', 'SP', 'SE', 'TO'],
+            
+            /* Informações cadastro*/
+            nome_completo: '',
+            cpf: '',
+            email: '',
+            celular: '',
+            senha: '',
+            confirma_senha: '',
 
         }
+    },
+    methods:{
+        validar_senha(value){
+            if(this.senha !== '' && this.confirma_senha !== '' && this.senha !== this.confirma_senha){
+                this.hint_verifica_senha = 'As senhas não coincidem!'
+                return
+
+            } else if(this.senha !== '' && this.confirma_senha !== '' && this.senha == this.confirma_senha){
+                this.hint_verifica_senha = 'Senha confirmada!'
+            }
+        },
+        required(value) {
+            return !!value || 'Este campo é obrigatório'
+        },
+        validEmail(value) {
+            const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            return pattern.test(value) || 'Endereço de e-mail inválido'
+        }
     }
+
 }
 </script>
 
@@ -149,4 +176,5 @@ div.v-application__wrap {
     background-image: url(https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Logo_Rang-On.png?raw=true);
     background-size: contain;
     background-position: center;
-}</style>
+}
+</style>
