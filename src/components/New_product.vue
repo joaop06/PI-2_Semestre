@@ -13,7 +13,7 @@
             <h3 class="pl-3 pr-3 pt-4S">Descrição</h3>
             <v-text-field class="pl-3 pr-3"></v-text-field>
             <h3 class="pl-3 pr-3">Tipo</h3>
-            <v-select class="pl-3 pr-3" chips :items="['Lanche', 'Pizza']"></v-select>
+            <v-select class="pl-3 pr-3" chips :items="['Lanche', 'Pizza', 'Porção']"></v-select>
             <h3 class="pl-3 pr-3">Preço</h3>
             <v-text-field class="pl-3 pr-3"></v-text-field>
             <div class="pl-3 pr-3 pb-4">

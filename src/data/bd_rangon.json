@@ -125,6 +125,14 @@
             "preco_pedido": 42.25
 
         }
+    ],
+
+    "Admin":[
+        {
+            "nome": "Admin",
+            "email": "admin",
+            "senha": "1"
+        }
     ]
 }
 
