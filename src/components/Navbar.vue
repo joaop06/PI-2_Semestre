@@ -76,13 +76,13 @@
 
 <script>
 import bd_rangon from '@/data/bd_rangon.json'
-import variablesLogin from '@/controllers/globalVariables';
+import globalVariables from '@/controllers/globalVariables';
 
 export default {
   data() {
     return {
       id_user: 0,
-      sessao_user: variablesLogin.sessao_login,
+      sessao_user: globalVariables.sessao_login,
       nome: 'João',
       items: [
         { title: 'Perfil' },

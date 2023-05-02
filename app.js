@@ -17,14 +17,19 @@ const writeFile = (content) => {
 
 /* Produtos */
 /*************************************/
+
 router.get('/', (req, res) => {
     const content = readFile()
-    res.status(200).json({
-        data: {
-            content
-        }
-    })
+    res.json(content)
+    console.log(content)
 })
+
+
+
+
+
+
+
 
 router.post('/admin/Itens', (req, res) => { 
     const produtos = readFile()
@@ -71,6 +76,6 @@ router.post('/cadastro', (req, res) => {
 
 
 server.use(router)
-server.listen(4000, () => {
-    console.log("Servidor local ativo! Porta: 4000")
+server.listen(3000, () => {
+    console.log("Servidor local ativo! Porta: 3000")
 })

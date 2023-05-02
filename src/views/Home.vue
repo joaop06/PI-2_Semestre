@@ -114,10 +114,12 @@
               </v-img>
             </v-card>
 
+
           </v-col>
         </v-row>
       </v-col>
     </v-row>
+
   </v-container>
 </template>
 
@@ -132,6 +134,7 @@ export default ({
       cardapio: bd_rangon.produtos,
       quant_total_sacola: [],
       total_ValorSacola: 0,
+      teste: []
 
     }
   },
@@ -147,7 +150,21 @@ export default ({
       this.quant_total_sacola.splice(index, 1)
 
     },
+
+    getCardapio(){
+      fetch('/')
+        .then(response => response.json())
+        .then(data => {
+          this.teste = data;
+          console.log(teste);
+        })
+        .catch(error => console.error(error));
+    }
   },
+  mounted(){
+    this.getCardapio();
+  },
+  
 })
 </script>
 

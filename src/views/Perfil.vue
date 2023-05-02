@@ -1,9 +1,7 @@
 <template>
   <h1>PERFIL</h1>
 
-  <v-btn @click="sair">
-    Sair
-  </v-btn>
+
 </template>
 
 <script>
