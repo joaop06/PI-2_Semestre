@@ -25,3 +25,10 @@ export default {
   }
 }
 </script>
+
+
+<style>
+main{
+    background-color: #BCAAA4;
+}
+</style>

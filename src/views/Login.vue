@@ -81,7 +81,7 @@
 <script>
 import Navbar from '@/components/Navbar.vue'
 import bd_rangon from '@/data/bd_rangon.json'
-import variablesLogin from '@/controllers/globalVariables';
+import globalVariables from '@/controllers/globalVariables';
 
 export default ({
     components: {
@@ -101,9 +101,8 @@ export default ({
             const user = bd_rangon.clientes.find(item => item.email == this.email && item.senha == this.senha);
 
             if (user) {
-                variablesLogin.sessao_login = !variablesLogin.sessao_login
+                globalVariables.sessao_login = !globalVariables.sessao_login
                 this.$router.push('/');
-                console.log(variablesLogin.sessao_login)
             } else {
                 this.erro_login = true;
             }
