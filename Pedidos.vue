@@ -69,7 +69,7 @@ export default {
       sempedidos: "O histórico está zerado? Isso quer dizer que está na hora de enchermos ele, não é mesmo?!",
       qntdpedidos: 1,
       onboarding: 0,
-      length: 10,
+      length: 40,
     }
   },
 
