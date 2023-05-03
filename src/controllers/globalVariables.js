@@ -1,7 +1,7 @@
 const globalVariables = {
     sessao_login: false,
     id_user: null,
-    btnOptionPedidos: 1,
+    btnOptionPedidos: true,
 }
 
 export default globalVariables;

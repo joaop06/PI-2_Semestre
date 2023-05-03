@@ -6,7 +6,7 @@
 
     <v-row class="mt-12">
 
-      <v-col v-if="OptionPedidos == 1">
+      <v-col v-if="OptionPedidos == true">
 
         <v-card v-if="qntdpedidos > 0" width="95%" class="bg-brown-lighten-5 ma-auto">
 
@@ -43,7 +43,7 @@
       </v-col>
 
 
-      <v-col v-if="OptionPedidos == 2">
+      <v-col v-if="OptionPedidos == false">
         <h1>Histórico De Pedidos</h1>
       </v-col>
 
