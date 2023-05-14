@@ -79,7 +79,6 @@
 
 <script>
 import { ref } from 'vue';
-import bd_rangon from '@/data/bd_rangon.json';
 import NewProducts from '@/components/New_product.vue';
 import UpdtProducts from '@/components/Updt_product.vue'
 
@@ -90,7 +89,9 @@ export default {
   },
   data() {
     return {
-      cardapio: bd_rangon.produtos
+      bd_rangon: [],
+      cardapio: []
+      
     }
   },
   methods: {

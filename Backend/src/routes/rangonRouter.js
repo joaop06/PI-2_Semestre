@@ -4,9 +4,16 @@ const rangonController = require("../controllers/rangonController")
 this.rangonController = new rangonController()
 
 
-router.get('/', this.rangonController.productsAll)
-router.get('/teste', this.rangonController.productsAll)
 
+/* Cliente */
+    /* Home */
+    router.get('/', this.rangonController.productsAll)
+    router.get('/Home', this.rangonController.productsAll)
+
+
+
+    /* Cadastro */
+    router.post('/cadastro', this.rangonController.registrationUser)
 
 
 

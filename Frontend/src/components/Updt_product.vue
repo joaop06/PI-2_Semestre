@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import bd_rangon from '@/data/bd_rangon.json';
 
 export default {
     props:{

@@ -6,6 +6,11 @@ const routes = [
   // Rotas Cliente
   {
     path: '/',
+    redirect: '/Home',
+    component: () => import('@/views/Home.vue'),
+  },
+  {
+    path: '/Home',
     name: 'Home',
     component: () => import('@/views/Home.vue'),
   },

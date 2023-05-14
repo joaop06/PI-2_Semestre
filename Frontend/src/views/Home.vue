@@ -68,7 +68,7 @@
       <!-- LISTA DE PRODUTOS (CARDÁPIO) -->
       <v-col class="ma-auto" cols="9" rounded="xl">
         <v-row justify="start">
-          <v-col v-for="(produto, index) in cardapio" class="d-flex justify-space-around aligin-center" :key="index"
+          <v-col v-for="(produto, index) in produtos" class="d-flex justify-space-around aligin-center" :key="index"
             cols="4">
 
             <v-card color="rgb(0, 0, 0, 0)" rounded="lg" width="25vw" height="30vh" min-height="200px">
@@ -125,17 +125,16 @@
 
 
 <script>
-import bd_rangon from '@/data/bd_rangon.json'
+import apiURL from '@/services/apiURL.js'
+
 
 
 export default ({
   data() {
     return {
-      cardapio: bd_rangon.produtos,
+      produtos: [],
       quant_total_sacola: [],
       total_ValorSacola: 0,
-      teste: []
-
     }
   },
   methods: {
@@ -150,23 +149,19 @@ export default ({
       this.quant_total_sacola.splice(index, 1)
 
     },
-
-    getCardapio(){
-      fetch('/')
-        .then(response => response.json())
-        .then(data => {
-          this.teste = data;
-          console.log(teste);
-        })
-        .catch(error => console.error(error));
-    }
   },
   mounted(){
-    this.getCardapio();
-  },
-  
+    apiURL.get('/Home').then(response => {
+      this.produtos = response.data.rows;
+      console.log(response.data)
+    })
+  }
+
 })
 </script>
+
+
+
 
 
 <style>

@@ -75,7 +75,6 @@
 </template>
 
 <script>
-import bd_rangon from '@/data/bd_rangon.json'
 import globalVariables from '@/controllers/globalVariables';
 
 export default {

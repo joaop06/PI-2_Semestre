@@ -3,7 +3,7 @@
 
         <div class="text-center">
             <v-snackbar v-model="snackbar" :timeout="tempo">
-                {{  }}
+                {{ }}
             </v-snackbar>
         </div>
 
@@ -33,8 +33,8 @@
                 <v-card color="rgb(0,0,0,0)" elevation="0" max-width="25vw">
 
                     <v-row class="ma-auto">
-                        <v-text-field v-model="email" :rules="[required, validEmail]" :style="{ 'color': 'white' }"
-                            name="email" bg-color="rgb(255, 255, 255, 0.5)" type="email" label="E-mail"
+                        <v-text-field v-model="email" name="email" type="email" label="E-mail"
+                            :rules="[required, validEmail]" :style="{ 'color': 'white' }" bg-color="rgb(255, 255, 255, 0.5)"
                             placeholder="E-mail">
                         </v-text-field>
 
@@ -42,10 +42,12 @@
                     </v-row>
 
                     <v-row class="ma-auto">
-                        <v-text-field v-model="senha" :rules="[required]" :style="{ 'color': 'white' }" name="senha"
-                            bg-color="rgb(255, 255, 255, 0.5)" :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
+                        <v-text-field v-model="senha" name="senha" label="Senha" :rules="[required]"
+                            :style="{ 'color': 'white' }" bg-color="rgb(255, 255, 255, 0.5)"
+                            :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                             @click:append-inner="showPassword = !showPassword" :type="showPassword ? 'text' : 'password'"
-                            label="Senha" placeholder="Senha" hint="Digite sua senha"></v-text-field>
+                            placeholder="Senha" hint="Digite sua senha">
+                        </v-text-field>
                     </v-row>
                 </v-card>
 
@@ -74,19 +76,13 @@
 
         </v-sheet>
     </v-container>
-
-    <Navbar ref="Navbar" v-if="false" />
 </template>
 
 <script>
-import Navbar from '@/components/Navbar.vue'
-import bd_rangon from '@/data/bd_rangon.json'
 import globalVariables from '@/controllers/globalVariables';
 
 export default ({
-    components: {
-        Navbar
-    },
+
     data() {
         return {
             password: '',
@@ -94,6 +90,7 @@ export default ({
             email: '',
             senha: '',
             erro_login: false,
+            bd_rangon: []
         }
     },
     methods: {
@@ -124,7 +121,7 @@ export default ({
 
 
 <style>
-div.v-application__wrap {
+main {
     background-color: #BCAAA4;
     background-image: url(https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Logo_Rang-On.png?raw=true);
     background-size: contain;
