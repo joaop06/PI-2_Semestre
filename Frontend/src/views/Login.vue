@@ -79,7 +79,7 @@
 </template>
 
 <script>
-import globalVariables from '@/controllers/globalVariables';
+import apiURL from '@/services/apiURL';
 
 export default ({
 
@@ -95,6 +95,12 @@ export default ({
     },
     methods: {
         fazerlogin() {
+
+            apiURL.get('/login')
+
+
+
+
             const user = bd_rangon.clientes.find(item => item.email == this.email && item.senha == this.senha);
 
             if (user) {
