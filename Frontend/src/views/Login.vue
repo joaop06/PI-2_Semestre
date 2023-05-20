@@ -50,18 +50,11 @@
                         </v-text-field>
                     </v-row>
                 </v-card>
-
-
-
             </div>
-
-            <v-card align="center" width="100%" height="3vh" :elevation="0" color="rgb(0,0,0,0)">
-                <p v-if="erro_login" class="text-red-darken-4 text-h6">Dados incorretos ou não encontrados</p>
-            </v-card>
 
 
             <v-row no-gutters justify="center" class="mt-6 d-flex flex-column">
-                <v-btn @click="fazerlogin()" color="red-accent-3" size="large" class="ma-auto" max-width="25%">
+                <v-btn @click="login" color="red-accent-3" size="large" class="ma-auto" max-width="25%">
                     Login
                 </v-btn>
 
@@ -75,48 +68,92 @@
             </v-row>
 
         </v-sheet>
+
+        <v-snackbar v-model="snackbar" top>
+            {{ textsnackbar }}
+
+            <template v-slot:actions>
+                <v-btn color="pink" variant="text" @click="snackbar = false">
+                    Close
+                </v-btn>
+            </template>
+        </v-snackbar>
+
+
+
+        <Navbarteste ref="Navbar" v-if="false" />
     </v-container>
 </template>
 
 <script>
+import router from '@/router';
 import apiURL from '@/services/apiURL';
+import Navbarteste from '@/components/Navbar.vue'
+import axios from 'axios';
 
 export default ({
-
+    components: {
+        Navbarteste
+    },
     data() {
         return {
             password: '',
             showPassword: false,
             email: '',
             senha: '',
-            erro_login: false,
-            bd_rangon: []
+            bd_rangon: [],
+
+            snackbar: false,
+            textsnackbar: 'testanto'
         }
     },
     methods: {
-        fazerlogin() {
-
-            apiURL.get('/login')
-
-
-
-
-            const user = bd_rangon.clientes.find(item => item.email == this.email && item.senha == this.senha);
-
-            if (user) {
-                globalVariables.sessao_login = !globalVariables.sessao_login
-                this.$router.push('/');
-            } else {
-                this.erro_login = true;
-            }
-
-        },
         required(value) {
             return !!value || 'Este campo é obrigatório'
         },
         validEmail(value) {
             const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
             return pattern.test(value) || 'Endereço de e-mail inválido'
+        },
+        clienteLogado() {
+            this.$refs.Navbarteste.clienteLogado = true;
+        },
+
+
+
+        async login() {
+            try {
+                if (this.email !== '' && this.senha !== '') {
+
+                    const body = {
+                        email: this.email,
+                        senha: this.senha
+                    }
+
+                    axios.post('http://localhost:8080/login', body)
+                        .then(response => {
+                            if (response.status == 200) {
+
+                                this.clienteLogado()
+
+                                this.textsnackbar = 'Login realizado!'
+                                this.snackbar = true
+                                router.push('/Home')
+
+                            } else {
+                                this.textsnackbar = 'Login e/ou senha inválidos!'
+                                this.snackbar = true
+                            }
+
+                        })
+
+                } else {
+                    this.textsnackbar = 'Preencha todos os campos'
+                    this.snackbar = true
+                }
+            } catch (err) {
+                console.log(err)
+            }
         }
 
     },

@@ -37,4 +37,27 @@ module.exports = class ScoreController {
         })
     }
 
+    async loginUser(req, res) {
+        const { email, senha } = req.body
+        connection.query(`SELECT * FROM Clientes WHERE email = '${email}' AND senha = '${senha}'`, function (err, rows) {
+            if (!err) {
+
+                if (rows.length > 0) {
+                    res.status(200).json({
+                        message: "Login realizado!",
+                        data: {rows}
+                    })
+                    console.log(rows)
+                } else {
+                    res.status(400).json({
+                        message: "Login e/ou senha inválidos!"
+                    })
+                    console.log("Login e/ou senha inválidos!")
+                }
+            } else {
+                console.log(err)
+            }
+        })
+    }
+
 }

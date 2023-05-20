@@ -7,7 +7,7 @@
     </router-link>
 
 
-    <v-col v-if="sessao_user" class="d-flex text-right justify-end">
+    <v-col v-if="clienteLogado" class="d-flex text-right justify-end">
 
       <v-btn to="/pedidos" width="7vw" height="5vh" class="ma-5 bg-red-accent-3" color="white" rounded="shaped"
         :elevation="2" icon>
@@ -75,14 +75,15 @@
 </template>
 
 <script>
-import globalVariables from '@/controllers/globalVariables';
 
 export default {
+  props: {
+
+  },
   data() {
     return {
-      id_user: 0,
-      sessao_user: globalVariables.sessao_login,
-      nome: 'João',
+      clienteLogado: false,
+      cliente: {},
       items: [
         { title: 'Perfil' },
         { title: 'Sair' },

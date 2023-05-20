@@ -11,10 +11,12 @@ this.rangonController = new rangonController()
     router.get('/Home', this.rangonController.productsAll)
 
 
-
     /* Cadastro */
     router.post('/cadastro', this.rangonController.registrationUser)
 
+
+    /* Login */
+    router.post('/login', this.rangonController.loginUser)
 
 
 module.exports = router
