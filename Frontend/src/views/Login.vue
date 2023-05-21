@@ -74,26 +74,27 @@
 
             <template v-slot:actions>
                 <v-btn color="pink" variant="text" @click="snackbar = false">
-                    Close
+                    Fechar
                 </v-btn>
             </template>
         </v-snackbar>
 
 
 
-        <Navbarteste ref="Navbar" v-if="false" />
+        <Navbar ref="Navbar" />
+
     </v-container>
 </template>
 
 <script>
-import router from '@/router';
 import apiURL from '@/services/apiURL';
-import Navbarteste from '@/components/Navbar.vue'
+import Navbar from '@/components/Navbar.vue'
+import globalVariables from '@/controllers/globalVariables'
 import axios from 'axios';
 
 export default ({
     components: {
-        Navbarteste
+        Navbar
     },
     data() {
         return {
@@ -104,7 +105,7 @@ export default ({
             bd_rangon: [],
 
             snackbar: false,
-            textsnackbar: 'testanto'
+            textsnackbar: ''
         }
     },
     methods: {
@@ -115,12 +116,6 @@ export default ({
             const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
             return pattern.test(value) || 'Endereço de e-mail inválido'
         },
-        clienteLogado() {
-            this.$refs.Navbarteste.clienteLogado = true;
-        },
-
-
-
         async login() {
             try {
                 if (this.email !== '' && this.senha !== '') {
@@ -133,14 +128,15 @@ export default ({
                     axios.post('http://localhost:8080/login', body)
                         .then(response => {
                             if (response.status == 200) {
-
-                                this.clienteLogado()
+                                globalVariables.sessaoLogin = true
+                                globalVariables.clienteLogado = response.data.data
 
                                 this.textsnackbar = 'Login realizado!'
                                 this.snackbar = true
-                                router.push('/Home')
+                                this.$router.push('/Home');
 
-                            } else {
+
+                            } else if(response.status == 400) {
                                 this.textsnackbar = 'Login e/ou senha inválidos!'
                                 this.snackbar = true
                             }

@@ -1,6 +1,6 @@
 const globalVariables = {
-    sessao_login: false,
-    id_user: null,
+    sessaoLogin: false,
+    clienteLogado: null,
     btnOptionPedidos: true,
 }
 

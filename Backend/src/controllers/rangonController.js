@@ -10,7 +10,6 @@ module.exports = class ScoreController {
                     rows,
 
                 })
-                console.log(rows)
             } else {
                 console.log(err)
             }
@@ -26,13 +25,9 @@ module.exports = class ScoreController {
                     message: "Cadastro realizado!"
                 })
             } else {
-                if (err === 1366) {
-                    res.status(400).json({
-                        message: "E-mail já cadastrado!"
-                    })
-
-                }
-                console.log(err)
+                res.status(400).json({
+                    message: "E-mail já cadastrado!"
+                })
             }
         })
     }
@@ -45,7 +40,7 @@ module.exports = class ScoreController {
                 if (rows.length > 0) {
                     res.status(200).json({
                         message: "Login realizado!",
-                        data: {rows}
+                        data: rows
                     })
                     console.log(rows)
                 } else {
@@ -55,6 +50,27 @@ module.exports = class ScoreController {
                     console.log("Login e/ou senha inválidos!")
                 }
             } else {
+                console.log(err)
+            }
+        })
+    }
+
+    async finalizarPedido(req, res) {
+        const { cliente, produtos, total } = req.body
+        
+        console.log("Antes format:", produtos)
+
+        const produtosJSON = JSON.stringify(produtos)
+        console.log("Depois format:", produtos)
+        connection.query(`INSERT INTO Pedidos VALUES (null, ${cliente}, '${produtosJSON}', ${total}, 'Em Andamento')`, function(err){
+            if(!err){
+                res.status(200).json({
+                    message: "Pedido Realizado!"
+                })
+            } else {
+                res.status(400).json({
+                    message: "Erro ao realizar pedido!"
+                })
                 console.log(err)
             }
         })

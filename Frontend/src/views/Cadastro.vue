@@ -163,6 +163,11 @@
             </v-row>
 
         </v-sheet>
+
+
+
+        <Navbars ref="Navbars" />
+
     </v-container>
 </template>
 
@@ -170,8 +175,13 @@
 <script>
 import apiURL from '@/services/apiURL'
 import apiViaCEP from '@/services/apiViaCEP'
+import Navbars from '@/components/Navbar.vue'
+
 
 export default {
+    components: {
+        Navbars
+    },
     data() {
         return {
             hint_verifica_senha: '',

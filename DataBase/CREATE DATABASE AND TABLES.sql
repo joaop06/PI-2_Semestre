@@ -11,6 +11,7 @@ CREATE TABLE Produtos (
 );
 SELECT * FROM Produtos;
 
+
 CREATE TABLE Clientes (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     nome_completo VARCHAR(255) NOT NULL,
@@ -27,7 +28,16 @@ CREATE TABLE Clientes (
 SELECT * FROM Clientes;
 
 
-
+CREATE TABLE Pedidos(
+	numpedido INT PRIMARY KEY AUTO_INCREMENT,
+    id_cliente INT NOT NULL,
+    produtos TEXT NOT NULL,
+    total DECIMAL(5,2),
+    statuspedido VARCHAR(50),
+    
+    FOREIGN KEY (id_cliente) REFERENCES Clientes(id)
+);
+SELECT * FROM Pedidos;
 
 
 SELECT user FROM mysql.user;

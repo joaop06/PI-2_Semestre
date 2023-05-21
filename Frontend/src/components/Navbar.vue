@@ -27,7 +27,7 @@
         <template v-slot:activator="{ props }">
           <v-btn width="7vw" height="5vh" class="ma-5 bg-red-accent-3" rounded="shaped" :elevation="2" v-bind="props">
             <div>
-              <p class="text-button my-n2">Olá, {{ nome }}!</p>
+              <p class="text-button my-n2">Olá, {{ primeiroNome() }}!</p>
               <p class="text-subtitle-2 text-decoration-underline">Minha conta</p>
             </div>
           </v-btn>
@@ -75,6 +75,7 @@
 </template>
 
 <script>
+import globalVariables from '@/controllers/globalVariables'
 
 export default {
   props: {
@@ -82,8 +83,8 @@ export default {
   },
   data() {
     return {
-      clienteLogado: false,
-      cliente: {},
+      sessaoLogin: globalVariables.sessaoLogin,
+      clienteLogado: globalVariables.clienteLogado,
       items: [
         { title: 'Perfil' },
         { title: 'Sair' },
@@ -100,10 +101,28 @@ export default {
   },
   methods: {
     deslogar() {
-      this.$router.push('/');
-      this.sessao_user = !this.sessao_user
+      this.$router.push('/')
+      this.sessaoLogin = globalVariables.sessaoLogin = false
       location.reload()
     },
+    primeiroNome() {
+      if (!this.clienteLogado) {
+        return ''
+      } else {
+        const partsNome = this.clienteLogado[0].nome_completo.split(' ')
+        const primeiroNome = partsNome[0]
+        if (!primeiroNome) {
+          return ''
+        } else {
+          return primeiroNome
+        }
+      }
+
+
+    }
+  },
+  mounted() {
+    this.primeiroNome()
   }
 }
 </script>

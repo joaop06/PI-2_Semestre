@@ -9,6 +9,7 @@ this.rangonController = new rangonController()
     /* Home */
     router.get('/', this.rangonController.productsAll)
     router.get('/Home', this.rangonController.productsAll)
+    router.post('/Home/finalizarpedido', this.rangonController.finalizarPedido)
 
 
     /* Cadastro */

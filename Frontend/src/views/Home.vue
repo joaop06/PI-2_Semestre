@@ -19,10 +19,10 @@
             :style="{ 'height': '75%', 'max-height': '75%', 'overflow-y': 'auto', 'border-radius': '8px' }">
 
             <!-- Itens Adicionados a Sacola-->
-            <v-row v-if="quant_total_sacola.length !== 0" class="pa-3" justify="center" :style="{ 'width': '99%' }">
+            <v-row v-if="sacolaPedidos.produtos.length !== 0" class="pa-3" justify="center" :style="{ 'width': '99%' }">
 
               <!-- Card do Produto na Sacola -->
-              <v-sheet v-for="(produto, index) in quant_total_sacola"
+              <v-sheet v-for="(produto, index) in sacolaPedidos.produtos"
                 class="d-flex mt-3 pa-3 justify-space-between align-center"
                 :style="{ 'background-color': '#f1f1f1', 'border': '#FF1744 1px solid' }" :key="index" rounded="shaped"
                 width="90%" :elevation="4">
@@ -30,14 +30,14 @@
                 <div class="d-flex flex-column">
 
                   <p>{{ produto.nome }}</p>
-
-                  <v-list-item-subtitle class="mt-2">
-                    <span>{{ produto.preco }}</span>
+                  <v-list-item-subtitle class="mt-2 ml-3" align="start">
+                    <span>{{ (parseFloat(produto.preco)).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+                    }}</span>
                   </v-list-item-subtitle>
                 </div>
 
                 <v-btn class="bg-red-accent-3" icon="mdi-delete" size="40" :elevation="0"
-                  @click="remove_Sacola(index, prdouto)"></v-btn>
+                  @click="remove_Sacola(index, produto)"></v-btn>
               </v-sheet>
             </v-row>
 
@@ -51,12 +51,17 @@
 
           <!-- Rodapé da Sacola (Total e Botão de Finalizar Pedido)-->
           <v-card class="mt-8 text-start" :elevation="0" color="rgb(0, 0, 0, 0)" width="90%" height="3vh">
-            <span>Total: R$ <span v-if="quant_total_sacola !== 0">{{ total_ValorSacola }}</span></span>
+
+            <span v-if="sacolaPedidos.total == null">Total: R$ 0,00</span>
+            <span v-else-if="sacolaPedidos.total <= 0">Total: R$ 0,00</span>
+            <span v-else>Total: {{ (sacolaPedidos.total).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+            }} </span>
           </v-card>
 
 
           <!-- Botão p/ Finalizar Pedido-->
-          <v-btn v-if="quant_total_sacola !== 0" class="mt-5 bg-red-accent-3" justify="center" width="90%" rounded="lg">
+          <v-btn @click="finalizarPedido" v-if="sacolaPedidos.produtos.length > 0" class="mt-5 bg-red-accent-3"
+            justify="center" width="90%" rounded="lg">
             Finalizar Pedido
           </v-btn>
 
@@ -68,7 +73,7 @@
       <!-- LISTA DE PRODUTOS (CARDÁPIO) -->
       <v-col class="ma-auto" cols="9" rounded="xl">
         <v-row justify="start">
-          <v-col v-for="(produto, index) in produtos" class="d-flex justify-space-around aligin-center" :key="index"
+          <v-col v-for="(produto, index) in cardapio" class="d-flex justify-space-around aligin-center" :key="index"
             cols="4">
 
             <v-card color="rgb(0, 0, 0, 0)" rounded="lg" width="25vw" height="30vh" min-height="200px">
@@ -95,7 +100,9 @@
                     <v-row justify="space-between" no-gutters>
                       <v-card class="font-weight-black d-flex justify-center ma-5 pa-1" color="rgb(255, 255, 255, 0)"
                         :elevation="0">
-                        <span :style="{ 'color': 'white', 'font-weight': 'bold' }">{{ produto.preco }}</span>
+                        <span :style="{ 'color': 'white', 'font-weight': 'bold' }">{{
+                          parseFloat(produto.preco).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })
+                        }}</span>
                       </v-card>
 
                       <v-btn class="ma-4 bg-red-accent-3" rounded="lg" @click="add_Sacola(produto)">
@@ -126,34 +133,74 @@
 
 <script>
 import apiURL from '@/services/apiURL.js'
-
+import axios from 'axios';
+import globalVariables from '@/controllers/globalVariables'
 
 
 export default ({
   data() {
     return {
-      produtos: [],
+      cardapio: [],
+      sacolaPedidos: {
+        cliente: null,
+        produtos: [],
+        total: null
+      },
       quant_total_sacola: [],
       total_ValorSacola: 0,
     }
   },
   methods: {
     // Adiciona o produto desejado na Sacola de Produtos
-    add_Sacola: function (produto) {
-      this.quant_total_sacola.splice(0, 0, produto)
-      this.total_ValorSacola += produto.preco
+    add_Sacola(produto) {
+
+      const produtoSacola = {
+        id: produto.id,
+        nome: produto.nome,
+        preco: produto.preco
+      }
+
+      this.sacolaPedidos.produtos.splice(0, 0, produtoSacola)
+      this.sacolaPedidos.total += parseFloat(produtoSacola.preco)
+
     },
 
     // Remove o item selecionado da Sacola de Produtos
-    remove_Sacola: function (index, prdouto) {
-      this.quant_total_sacola.splice(index, 1)
-
+    remove_Sacola (index, produto) {
+      this.sacolaPedidos.total -= parseFloat(this.sacolaPedidos.produtos[index].preco)
+      this.sacolaPedidos.produtos.splice(index, 1)
     },
+
+    // Finaliza o pedido guardando todas as informações de produtos, total, id_cliente, etc
+    async finalizarPedido() {
+      try {
+        if (!globalVariables.clienteLogado) {
+          alert("Faça login para finalizar o pedido")
+        } else {
+          const body = {
+            cliente: globalVariables.clienteLogado[0].id,
+            produtos: this.sacolaPedidos.produtos,
+            total: this.sacolaPedidos.total
+          }
+          console.log(body)
+          apiURL.post('/Home/finalizarpedido', body).then(response => {
+            if (response.status == 200) {
+              alert("Pedido Realizado!!!")
+            } else {
+              alert("Erro ao Realizar Pedido!!!")
+            }
+          })
+        }
+
+      } catch (err) {
+        console.log(err)
+      }
+
+    }
   },
-  mounted(){
+  mounted() {
     apiURL.get('/Home').then(response => {
-      this.produtos = response.data.rows;
-      console.log(response.data)
+      this.cardapio = response.data.rows;
     })
   }
 

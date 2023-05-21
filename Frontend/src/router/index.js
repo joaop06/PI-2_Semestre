@@ -49,7 +49,7 @@ const routes = [
   {
     path: '/admin',
     name: 'Admin_Login',
-    component: () => import('@/views/admin/Login.vue'),
+    component: () => import('@/views/admin/login.vue'),
   },
   {
     path: '/admin/Pedidos',
