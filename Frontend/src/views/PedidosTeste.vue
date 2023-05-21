@@ -1,53 +1,28 @@
 <template>
   <v-container>
-    <MenuPedidosTeste />
-    <span>{{ OptionPedidos }}</span>
+    <v-row class="d-flex mt-12 pa-2 bg-brown-lighten-2" justify="space-around" align="center" rounded="lg">
+      <v-btn :class="classBtn1" width="45%" height="4vh" @click="mudaOpcaoBtn1">
+        Em Andamento
+      </v-btn>
 
-
-    <v-row class="mt-12">
-
-      <v-col v-if="OptionPedidos == true">
-
-        <v-card v-if="qntdpedidos > 0" width="95%" class="bg-brown-lighten-5 ma-auto">
-
-          <v-card theme="dark" flat rounded="0">
-
-            <v-window v-model="onboarding">
-              <v-window-item v-for="n in length" :key="`card-${n}`" :value="n">
-                <v-card height="200" class="d-flex justify-center align-center">
-                  <span class="text-h2">
-                    Pedido {{ n }}
-                  </span>
-                </v-card>
-              </v-window-item>
-            </v-window>
-
-            <v-card-actions class="justify-space-between">
-              <v-btn variant="plain" icon="mdi-chevron-left" hei @click="prev">
-              </v-btn>
-
-              <v-item-group v-model="onboarding" class="text-center" mandatory>
-                <v-item v-for="n in length" :key="`btn-${n}`" v-slot="{ isSelected, toggle }" :value="n">
-                  <v-btn :variant="isSelected ? 'outlined' : 'text'" icon="mdi-record" @click="toggle">
-
-                  </v-btn>
-                </v-item>
-              </v-item-group>
-
-              <v-btn variant="plain" icon="mdi-chevron-right" @click="next">
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-
-        </v-card>
-      </v-col>
-
-
-      <v-col v-if="OptionPedidos == false">
-        <h1>Histórico De Pedidos</h1>
-      </v-col>
-
+      <v-btn :class="classBtn2" width="45%" height="4vh" @click="mudaOpcaoBtn2">
+        Histórico de Pedidos
+      </v-btn>
     </v-row>
+    {{ cliente }}
+    <v-row>
+      <v-card v-if="optionBtn" class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0)" width="70%" height="70%">
+        <v-card v-for="(pedido, index) in pedidosAndamento" :key="index" class="ma-2 pa-5" border="red" :elevation="2">
+          <p class="text-h5">Pedidos {{status}}</p>
+        </v-card>
+
+      </v-card>
+
+      <v-card v-else>
+
+      </v-card>
+    </v-row>
+
   </v-container>
 </template>
 
@@ -55,6 +30,7 @@
 <script>
 import MenuPedidosTeste from '@/components/MenuPedidosTeste.vue'
 import globalVariables from '@/controllers/globalVariables'
+import apiURL from '@/services/apiURL'
 
 export default {
   components: {
@@ -62,25 +38,35 @@ export default {
   },
   data() {
     return {
-      sempedidos: "O histórico está zerado? Isso quer dizer que está na hora de enchermos ele, não é mesmo?!",
-      qntdpedidos: 1,
-      onboarding: 0,
-      length: 10,
-      OptionPedidos: globalVariables.btnOptionPedidos
+      cliente: globalVariables.clienteLogado,
+      classBtn1: 'bg-brown-darken-2',
+      classBtn2: 'bg-brown-lighten-3',
+      optionBtn: true,
+      pedidosAndamento: [],
+      pedidosFinalizados: []
     }
   },
-  
+
   methods: {
-    next() {
-      this.onboarding = this.onboarding + 1 > this.length
-        ? 1
-        : this.onboarding + 1
+    mudaOpcaoBtn1() {
+      this.classBtn1 = 'bg-brown-darken-2';
+      this.classBtn2 = 'bg-brown-lighten-3';
+      this.optionBtn = true;
     },
-    prev() {
-      this.onboarding = this.onboarding - 1 <= 0
-        ? this.length
-        : this.onboarding - 1
-    },
+    mudaOpcaoBtn2() {
+      this.classBtn1 = 'bg-brown-lighten-3';
+      this.classBtn2 = 'bg-brown-darken-2';
+      this.optionBtn = false;
+    }
+  },
+  mounted(){
+    apiURL.get('/pedidos/andamento', ).then(response => {
+      this.pedidosAndamento = response.data
+    })
+
+    apiURL.get('/pedidos/finalizado').then(response => {
+      this.pedidosFinalizados = response.data
+    })
   }
 }
 

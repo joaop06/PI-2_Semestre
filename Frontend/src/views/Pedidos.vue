@@ -1,90 +1,102 @@
 <template>
+  <v-container>
+    <v-row class="d-flex mt-12 pa-2 bg-brown-lighten-2" justify="space-around" align="center" rounded="lg">
+      <v-btn :class="classBtn1" width="45%" height="4vh" @click="mudaOpcaoBtn1">
+        Em Andamento
+      </v-btn>
 
-  <v-row class="mt-10 d-flex flex-column">
+      <v-btn :class="classBtn2" width="45%" height="4vh" @click="mudaOpcaoBtn2">
+        Histórico de Pedidos
+      </v-btn>
+    </v-row>
 
-    <v-col id="pedidos_andamento" class="" :style="{'height' : '30vh'}">
+    {{ pedidosAndamento[0] }}
 
-        <v-card class="bg-brown-lighten-2 pa-2 d-flex justify-center" width="100%">
-
-          <v-card id="produto1" class="bg-brown-darken-1 d-flex flex-column align-center" height="80%" width="50%" :elevation="0">
-
-            <div class="d-flex flex-column align-center" :style="{ 'justify-content': 'space-between' }">
-              <h2>Pedidos</h2>
-              <p v-if="qntdpedidos === 0"> {{ sempedidos }} </p>
-            </div>
-
-          </v-card>
-
-      </v-card>
-
-    </v-col>
-
-    <v-col id="hitorico_pedidos">
-
-      <v-card v-if="qntdpedidos > 0" width="95%" class="bg-brown-lighten-5 ma-auto">
-      
-        <v-card theme="dark" flat rounded="0">
-          
-          <v-window  v-model="onboarding">
-            <v-window-item v-for="n in length" :key="`card-${n}`" :value="n">
-              <v-card height="200" class="d-flex justify-center align-center">
-                <span class="text-h2">
-                  Pedido {{ n }}
-                </span>
-              </v-card>
-            </v-window-item>
-          </v-window>
-
-          <v-card-actions class="justify-space-between">
-            <v-btn variant="plain" icon="mdi-chevron-left" hei @click="prev">
-            </v-btn>
-
-            <v-item-group v-model="onboarding" class="text-center" mandatory>
-              <v-item v-for="n in length" :key="`btn-${n}`" v-slot="{ isSelected, toggle }" :value="n">
-                <v-btn :variant="isSelected ? 'outlined' : 'text'" icon="mdi-record" @click="toggle">
-                  
-                </v-btn>
-              </v-item>
-            </v-item-group>
-
-            <v-btn variant="plain" icon="mdi-chevron-right" @click="next">
-            </v-btn>
-          </v-card-actions>
+    <v-row>
+      <v-card v-if="optionBtn" class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%" height="70%">
+        <v-card v-for="(pedido, index) in pedidosAndamento.length" :key="index" class="ma-2 pa-1" border="red" rounded="xl"
+          :elevation="2">
+          <p class="text-h6">Status: {{ pedido.statuspedido }}</p>
+          {{ pedido.produtos[4] }}
+          <p v-for="item in pedido.produtos" :key="item"> <span>{{ item.nome }}</span> </p>
         </v-card>
 
       </v-card>
 
-    </v-col>
+      <v-card v-else>
 
-  </v-row>
+      </v-card>
+    </v-row>
 
+  </v-container>
 </template>
 
 
 <script>
+import MenuPedidosTeste from '@/components/MenuPedidosTeste.vue'
+import globalVariables from '@/controllers/globalVariables'
+import apiURL from '@/services/apiURL'
 
 export default {
+  components: {
+    MenuPedidosTeste
+  },
   data() {
-    return { 
-      sempedidos: "O histórico está zerado? Isso quer dizer que está na hora de enchermos ele, não é mesmo?!",
-      qntdpedidos: 1,
-      onboarding: 0,
-      length: 10,
+    return {
+      cliente: globalVariables.clienteLogado[0].id,
+      classBtn1: 'bg-brown-darken-2',
+      classBtn2: 'bg-brown-lighten-3',
+      optionBtn: true,
+      pedidosAndamento: [],
+      pedidosFinalizados: []
     }
   },
 
   methods: {
-      next () {
-        this.onboarding = this.onboarding + 1 > this.length
-          ? 1
-          : this.onboarding + 1
-      },
-      prev () {
-        this.onboarding = this.onboarding - 1 <= 0
-          ? this.length
-          : this.onboarding - 1
-      },
+    mudaOpcaoBtn1() {
+      this.classBtn1 = 'bg-brown-darken-2';
+      this.classBtn2 = 'bg-brown-lighten-3';
+      this.optionBtn = true;
+    },
+    mudaOpcaoBtn2() {
+      this.classBtn1 = 'bg-brown-lighten-3';
+      this.classBtn2 = 'bg-brown-darken-2';
+      this.optionBtn = false;
+    },
+    pedidos() {
+      if (this.cliente == null) {
+        return 0
+      } else {
+        const body = {
+          cliente: this.cliente
+        }
+        apiURL.post('/pedidos/andamento', body).then(response => {
+          
+          const listaPedidos = JSON.parse(response.data.data)
+          this.pedidosAndamento = listaPedidos
+        })
+      }
     }
+
+  },
+  mounted() {
+    this.pedidos()
+
+  }
 }
 
 </script>
+
+
+
+<style>
+.slide-x-enter-active,
+.slide-x-leave-active {
+  transition: transform 0.3s;
+}
+
+.slide-x-enter,
+.slide-x-leave-to {
+  transform: translateX(100%);
+}
+</style>

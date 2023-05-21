@@ -57,13 +57,15 @@ module.exports = class ScoreController {
 
     async finalizarPedido(req, res) {
         const { cliente, produtos, total } = req.body
-        
-        console.log("Antes format:", produtos)
+
+        const newProdutos = []
+        for (let i = 0; i < produtos.length; i++) {
+            newProdutos.splice(0, 0, produtos[i])
+        }
 
         const produtosJSON = JSON.stringify(produtos)
-        console.log("Depois format:", produtos)
-        connection.query(`INSERT INTO Pedidos VALUES (null, ${cliente}, '${produtosJSON}', ${total}, 'Em Andamento')`, function(err){
-            if(!err){
+        connection.query(`INSERT INTO Pedidos VALUES (null, ${cliente}, '${produtosJSON}', ${total}, 'Em Andamento')`, function (err) {
+            if (!err) {
                 res.status(200).json({
                     message: "Pedido Realizado!"
                 })
@@ -73,6 +75,27 @@ module.exports = class ScoreController {
                 })
                 console.log(err)
             }
+        })
+    }
+
+    async pedidosAndamento(req, res) {
+        const { cliente } = req.body
+        console.log(cliente)
+        connection.query(`SELECT * FROM Pedidos WHERE id_cliente = ${cliente} AND statuspedido = 'Em Andamento'`, function (err, rows) {
+
+            if (!err) {
+                res.status(200).json({
+                    message: "Pedidos Em Andamento!",
+                    data: rows
+                })
+                console.log(rows)
+            } else {
+                res.status(400).json({
+                    message: "Erro ao buscar pedidos em andamento!"
+                })
+                console.log(err)
+            }
+
         })
     }
 

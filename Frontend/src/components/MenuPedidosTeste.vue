@@ -26,15 +26,11 @@ export default {
             this.classBtn1 = 'bg-brown-darken-2';
             this.classBtn2 = 'bg-brown-lighten-3';
             globalVariables.btnOptionPedidos = false;
-
-            console.log(globalVariables.btnOptionPedidos)
         },
         mudaOpcaoBtn2() {
             this.classBtn1 = 'bg-brown-lighten-3';
             this.classBtn2 = 'bg-brown-darken-2';
             globalVariables.btnOptionPedidos = true;
-
-            console.log(globalVariables.btnOptionPedidos)
         }
     }
 }

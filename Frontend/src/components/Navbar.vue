@@ -12,13 +12,13 @@
       <v-btn to="/pedidos" width="7vw" height="5vh" class="ma-5 bg-red-accent-3" color="white" rounded="shaped"
         :elevation="2" icon>
         <v-icon class="mr-2">mdi-history</v-icon>
-        <p class="text-body-1">Pedidos</p>
+        <p class="text-subtitle-2">Pedidos</p>
       </v-btn>
 
       <v-btn to="/sobre" width="7vw" height="5vh" class="ma-5 bg-red-accent-3" color="white" rounded="shaped"
         :elevation="2" icon>
         <v-icon class="mr-2">mdi-information</v-icon>
-        <p class="text-overline-1">Sobre</p>
+        <p class="text-subtitle-2">Sobre</p>
       </v-btn>
 
 
@@ -27,7 +27,7 @@
         <template v-slot:activator="{ props }">
           <v-btn width="7vw" height="5vh" class="ma-5 bg-red-accent-3" rounded="shaped" :elevation="2" v-bind="props">
             <div>
-              <p class="text-button my-n2">Olá, {{ primeiroNome() }}!</p>
+              <p class="text-subtitle-2 my-n1">Olá, {{ primeiroNome() }}!</p>
               <p class="text-subtitle-2 text-decoration-underline">Minha conta</p>
             </div>
           </v-btn>
@@ -38,7 +38,7 @@
             <v-list-item-title>
               <v-btn to="/perfil" width="100%" color="rgb(0,0,0,0)" :elevation="0" rounded="lg" icon>
                 <v-icon class="mr-2" color="red-accent-3">mdi-account-box</v-icon>
-                <p class="text-button">Perfil</p>
+                <p class="text-subtitle-2">Perfil</p>
               </v-btn>
             </v-list-item-title>
           </v-list-item>
@@ -47,7 +47,7 @@
             <v-list-item-title>
               <v-btn @click="deslogar" width="100%" color="rgb(0,0,0,0)" :elevation="0" rounded="lg" icon>
                 <v-icon class="mr-2" color="red-accent-3">mdi-logout</v-icon>
-                <p class="text-button">Sair</p>
+                <p class="text-subtitle-2">Sair</p>
               </v-btn>
             </v-list-item-title>
           </v-list-item>

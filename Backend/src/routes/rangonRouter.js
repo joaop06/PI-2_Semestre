@@ -20,4 +20,8 @@ this.rangonController = new rangonController()
     router.post('/login', this.rangonController.loginUser)
 
 
+    /* Pedidos */
+    router.post('/pedidos/andamento', this.rangonController.pedidosAndamento)
+
+
 module.exports = router
