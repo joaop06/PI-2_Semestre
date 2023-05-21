@@ -174,24 +174,34 @@ export default ({
     // Finaliza o pedido guardando todas as informações de produtos, total, id_cliente, etc
     async finalizarPedido() {
       try {
+
         if (!globalVariables.clienteLogado) {
           alert("Faça login para finalizar o pedido")
         } else {
+
           const body = {
             cliente: globalVariables.clienteLogado[0].id,
             produtos: this.sacolaPedidos.produtos,
             total: this.sacolaPedidos.total
           }
-          console.log(body)
+
+          console.log(body.produtos)
+
+          for(let i = 0; i <= body.produtos.length; i++){
+            body.produtos[i] = body.produtos[i].id
+          }
+
           apiURL.post('/Home/finalizarpedido', body).then(response => {
+
             if (response.status == 200) {
               alert("Pedido Realizado!!!")
             } else {
               alert("Erro ao Realizar Pedido!!!")
             }
-          })
-        }
 
+          })
+
+        }
       } catch (err) {
         console.log(err)
       }
