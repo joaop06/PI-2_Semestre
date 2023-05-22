@@ -22,6 +22,8 @@ this.rangonController = new rangonController()
 
     /* Pedidos */
     router.post('/pedidos/andamento', this.rangonController.pedidosAndamento)
+    router.get('/pedidos/procuraproduto', this.rangonController.procuraproduto)
+
 
 
 module.exports = router

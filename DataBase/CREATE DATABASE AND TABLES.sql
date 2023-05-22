@@ -57,7 +57,12 @@ CREATE TABLE Pedidos(
     FOREIGN KEY (id_cliente) REFERENCES Clientes(id)
 );
 SELECT * FROM Pedidos;
+DELETE FROM Pedidos;
 
 
+
+
+
+SET SQL_SAFE_UPDATES = 0;
 SELECT user FROM mysql.user;
 select @@datadir;

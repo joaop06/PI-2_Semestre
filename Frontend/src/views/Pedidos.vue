@@ -10,17 +10,17 @@
       </v-btn>
     </v-row>
 
-    {{ pedidosAndamento[0] }}
+
 
     <v-row>
       <v-card v-if="optionBtn" class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%" height="70%">
-        <v-card v-for="(pedido, index) in pedidosAndamento.length" :key="index" class="ma-2 pa-1" border="red" rounded="xl"
-          :elevation="2">
-          <p class="text-h6">Status: {{ pedido.statuspedido }}</p>
-          {{ pedido.produtos[4] }}
-          <p v-for="item in pedido.produtos" :key="item"> <span>{{ item.nome }}</span> </p>
-        </v-card>
+        <v-card v-for="(pedido, index) in pedidosAndamento" :key="index" class="ma-2 pa-1" border="red"
+          rounded="lg" :style="{'border' : 'solid 2px #76FF03'}" :elevation="2">
+          <p class="text-h6">Pedido: {{ pedido.numpedido }}</p>
+          <span v-for="(produto, index) in JSON.parse(pedido.produtos)" :key="index"> {{ typeof(produto) }} </span>
 
+          
+        </v-card>
       </v-card>
 
       <v-card v-else>
@@ -63,18 +63,34 @@ export default {
       this.classBtn2 = 'bg-brown-darken-2';
       this.optionBtn = false;
     },
-    pedidos() {
+    async pedidos() {
       if (this.cliente == null) {
         return 0
       } else {
         const body = {
           cliente: this.cliente
         }
-        apiURL.post('/pedidos/andamento', body).then(response => {
-          
-          const listaPedidos = JSON.parse(response.data.data)
-          this.pedidosAndamento = listaPedidos
-        })
+        const response = await apiURL.post('/pedidos/andamento', body)
+
+        if (response.status == 200) {
+          console.log(response.data.data)
+          console.log(typeof(response.data.data))
+
+          this.pedidosAndamento = response.data.data
+        }
+
+      }
+    },
+    procuraProduto(produto){
+
+      const body = {
+        id: produto
+      }
+      const response = apiURL.get('/pedidos/procuraproduto', body)
+
+      if(response.status == 200){
+        const produto = response.data.data
+        console.log(produto)
       }
     }
 

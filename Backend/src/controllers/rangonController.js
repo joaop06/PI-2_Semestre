@@ -7,8 +7,7 @@ module.exports = class ScoreController {
         connection.query("SELECT * FROM Produtos", function (err, rows) {
             if (!err) {
                 res.status(200).json({
-                    rows,
-
+                    rows
                 })
             } else {
                 console.log(err)
@@ -42,12 +41,10 @@ module.exports = class ScoreController {
                         message: "Login realizado!",
                         data: rows
                     })
-                    console.log(rows)
                 } else {
                     res.status(400).json({
                         message: "Login e/ou senha inválidos!"
                     })
-                    console.log("Login e/ou senha inválidos!")
                 }
             } else {
                 console.log(err)
@@ -56,14 +53,9 @@ module.exports = class ScoreController {
     }
 
     async finalizarPedido(req, res) {
-        const { cliente, produtos, total } = req.body
+        const { cliente, id_Produtos, total } = req.body
 
-        const newProdutos = []
-        for (let i = 0; i < produtos.length; i++) {
-            newProdutos.splice(0, 0, produtos[i])
-        }
-
-        const produtosJSON = JSON.stringify(produtos)
+        const produtosJSON = JSON.stringify(id_Produtos)
         connection.query(`INSERT INTO Pedidos VALUES (null, ${cliente}, '${produtosJSON}', ${total}, 'Em Andamento')`, function (err) {
             if (!err) {
                 res.status(200).json({
@@ -96,6 +88,20 @@ module.exports = class ScoreController {
                 console.log(err)
             }
 
+        })
+    }
+
+    async procuraproduto(req, res) {
+        const { id } = req.body
+        console.log(id)
+        connection.query(`SELECT * FROM Produtos WHERE id = ${id}`, function (err, rows) {
+            if (!err) {
+                res.status(200).json({
+                    rows
+                })
+            } else {
+                console.log(err)
+            }
         })
     }
 

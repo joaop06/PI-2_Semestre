@@ -146,6 +146,7 @@ export default ({
       sacolaPedidos: {
         cliente: null,
         produtos: [],
+        id_Produtos: [],
         total: null
       },
       quant_total_sacola: [],
@@ -163,6 +164,7 @@ export default ({
       }
 
       this.sacolaPedidos.produtos.splice(0, 0, produtoSacola)
+      this.sacolaPedidos.id_Produtos.splice(0, 0, produto.id)
       this.sacolaPedidos.total += parseFloat(produtoSacola.preco)
 
     },
@@ -170,38 +172,35 @@ export default ({
     // Remove o item selecionado da Sacola de Produtos
     remove_Sacola(index, produto) {
       this.sacolaPedidos.total -= parseFloat(this.sacolaPedidos.produtos[index].preco)
+      this.sacolaPedidos.id_Produtos.splice(index, 1)
       this.sacolaPedidos.produtos.splice(index, 1)
     },
 
     // Finaliza o pedido guardando todas as informações de produtos, total, id_cliente, etc
     async finalizarPedido() {
       try {
-
         if (!globalVariables.clienteLogado) {
-          alert("Faça login para finalizar o pedido")
+          alert("Faça login para finalizar o pedido");
         } else {
-
           const body = {
             cliente: globalVariables.clienteLogado[0].id,
-            produtos: this.sacolaPedidos.produtos,
+            id_Produtos: this.sacolaPedidos.id_Produtos,
             total: this.sacolaPedidos.total
+          };
+
+          const response = await apiURL.post('/Home/finalizarpedido', body);
+
+          if (response.status == 200) {
+            alert("Pedido Realizado!!!");
+            this.sacolaPedidos.produtos = []
+            this.sacolaPedidos.id_Produtos = []
+          } else {
+            alert("Erro ao Realizar Pedido!!!");
           }
-
-          apiURL.post('/Home/finalizarpedido', body).then(response => {
-
-            if (response.status == 200) {
-              alert("Pedido Realizado!!!")
-            } else {
-              alert("Erro ao Realizar Pedido!!!")
-            }
-
-          })
-
         }
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
-
     }
   },
   mounted() {
