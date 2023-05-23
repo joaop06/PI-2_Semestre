@@ -49,15 +49,14 @@ SELECT * FROM Clientes;
 
 CREATE TABLE Pedidos(
 	numpedido INT PRIMARY KEY AUTO_INCREMENT,
-    id_cliente INT NOT NULL,
-    produtos TEXT NOT NULL,
+    id_cliente_fk INT NOT NULL,
+    id_produtos TEXT NOT NULL,
     total DECIMAL(5,2),
     statuspedido VARCHAR(50),
     
-    FOREIGN KEY (id_cliente) REFERENCES Clientes(id)
+    FOREIGN KEY (id_cliente_fk) REFERENCES Clientes(id)
 );
 SELECT * FROM Pedidos;
-DELETE FROM Pedidos;
 
 
 

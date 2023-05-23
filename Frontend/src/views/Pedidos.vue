@@ -10,16 +10,35 @@
       </v-btn>
     </v-row>
 
+    <p v-if="msgLogin !== ''">{{ msgLogin }}</p>
+    {{ pedidosAndamento }}
 
+    <!--
+[ 
+  { 
+    "numpedido": 1,
+    "id_cliente_fk": 1,
+    "id_produtos": "[1]",
+    "total": "10.50",
+    "statuspedido": "Em Andamento"
+  }
+]
+
+
+    -->
 
     <v-row>
       <v-card v-if="optionBtn" class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%" height="70%">
-        <v-card v-for="(pedido, index) in pedidosAndamento" :key="index" class="ma-2 pa-1" border="red"
-          rounded="lg" :style="{'border' : 'solid 2px #76FF03'}" :elevation="2">
+        <v-card v-for="(pedido, index) in pedidosAndamento" :key="index" class="ma-2 pa-1" border="red" rounded="lg"
+          :style="{ 'border': 'solid 2px #76FF03' }" :elevation="2">
           <p class="text-h6">Pedido: {{ pedido.numpedido }}</p>
-          <span v-for="(produto, index) in JSON.parse(pedido.produtos)" :key="index"> {{ typeof(produto) }} </span>
 
-          
+          <p >
+            Produtos: {{ pedido.id_produtos }}
+          </p>
+
+          <p>Total: {{ parseFloat(pedido.total).toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}}</p>
+
         </v-card>
       </v-card>
 
@@ -48,7 +67,13 @@ export default {
       classBtn2: 'bg-brown-lighten-3',
       optionBtn: true,
       pedidosAndamento: [],
-      pedidosFinalizados: []
+      produtosAndamento: [],
+
+      pedidosFinalizados: [],
+      produtosFinalizados: [],
+
+      msgLogin: ''
+
     }
   },
 
@@ -63,40 +88,34 @@ export default {
       this.classBtn2 = 'bg-brown-darken-2';
       this.optionBtn = false;
     },
-    async pedidos() {
+    async pedidosEmAndamento() {
       if (this.cliente == null) {
-        return 0
+        return this.msgLogin = 'Faça login para ver seus pedidos!'
       } else {
+
         const body = {
           cliente: this.cliente
         }
         const response = await apiURL.post('/pedidos/andamento', body)
 
         if (response.status == 200) {
-          console.log(response.data.data)
-          console.log(typeof(response.data.data))
-
           this.pedidosAndamento = response.data.data
+          console.log(this.pedidosAndamento)
+
+          
         }
 
       }
     },
-    procuraProduto(produto){
+    nomeproduto(id_produtos){
+      console.log(id_produtos.length)
 
-      const body = {
-        id: produto
-      }
-      const response = apiURL.get('/pedidos/procuraproduto', body)
 
-      if(response.status == 200){
-        const produto = response.data.data
-        console.log(produto)
-      }
+
     }
-
   },
   mounted() {
-    this.pedidos()
+    this.pedidosEmAndamento()
 
   }
 }

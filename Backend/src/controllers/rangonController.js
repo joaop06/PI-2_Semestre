@@ -53,10 +53,11 @@ module.exports = class ScoreController {
     }
 
     async finalizarPedido(req, res) {
-        const { cliente, id_Produtos, total } = req.body
+        const { id_cliente_fk, id_produtos, total } = req.body
 
-        const produtosJSON = JSON.stringify(id_Produtos)
-        connection.query(`INSERT INTO Pedidos VALUES (null, ${cliente}, '${produtosJSON}', ${total}, 'Em Andamento')`, function (err) {
+        const listProdutos = JSON.parse(id_produtos)
+
+        connection.query(`INSERT INTO Pedidos VALUES (null, ${id_cliente_fk}, '${listProdutos}', ${total}, 'Em Andamento')`, function (err) {
             if (!err) {
                 res.status(200).json({
                     message: "Pedido Realizado!"
@@ -70,10 +71,10 @@ module.exports = class ScoreController {
         })
     }
 
-    async pedidosAndamento(req, res) {
+    async pedidosEmAndamento(req, res) {
         const { cliente } = req.body
-        console.log(cliente)
-        connection.query(`SELECT * FROM Pedidos WHERE id_cliente = ${cliente} AND statuspedido = 'Em Andamento'`, function (err, rows) {
+
+        connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND statuspedido = 'Em Andamento'`, function (err, rows) {
 
             if (!err) {
                 res.status(200).json({
@@ -81,6 +82,7 @@ module.exports = class ScoreController {
                     data: rows
                 })
                 console.log(rows)
+
             } else {
                 res.status(400).json({
                     message: "Erro ao buscar pedidos em andamento!"
@@ -91,18 +93,20 @@ module.exports = class ScoreController {
         })
     }
 
-    async procuraproduto(req, res) {
+    async nomeproduto(req, res) {
         const { id } = req.body
-        console.log(id)
-        connection.query(`SELECT * FROM Produtos WHERE id = ${id}`, function (err, rows) {
+        connection.query(`SELECT nome FROM Produtos WHERE id = ${id}`, function (err, rows) {
             if (!err) {
+
                 res.status(200).json({
-                    rows
+                    data: rows
                 })
+                console.log(rows)
             } else {
                 console.log(err)
             }
         })
+
     }
 
 }

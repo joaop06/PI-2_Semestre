@@ -163,10 +163,14 @@ export default ({
         preco: produto.preco
       }
 
-      this.sacolaPedidos.produtos.splice(0, 0, produtoSacola)
-      this.sacolaPedidos.id_Produtos.splice(0, 0, produto.id)
-      this.sacolaPedidos.total += parseFloat(produtoSacola.preco)
+      const listProdutos = {
+        id: produto.id,
+        nome: produto.nome
+      }
 
+      this.sacolaPedidos.produtos.splice(0, 0, produtoSacola)
+      this.sacolaPedidos.id_Produtos.splice(0, 0, listProdutos)
+      this.sacolaPedidos.total += parseFloat(produtoSacola.preco)
     },
 
     // Remove o item selecionado da Sacola de Produtos
@@ -183,8 +187,8 @@ export default ({
           alert("Faça login para finalizar o pedido");
         } else {
           const body = {
-            cliente: globalVariables.clienteLogado[0].id,
-            id_Produtos: this.sacolaPedidos.id_Produtos,
+            id_cliente_fk: globalVariables.clienteLogado[0].id,
+            id_produtos: this.sacolaPedidos.id_Produtos,
             total: this.sacolaPedidos.total
           };
 
@@ -195,6 +199,7 @@ export default ({
             this.sacolaPedidos.produtos = []
             this.sacolaPedidos.id_Produtos = []
           } else {
+            console.log(this.sacolaPedidos.id_Produtos)
             alert("Erro ao Realizar Pedido!!!");
           }
         }
