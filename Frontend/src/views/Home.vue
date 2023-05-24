@@ -130,6 +130,17 @@
       </v-row>
     </v-card>
 
+
+    <v-snackbar v-model="snackbar" top>
+      {{ textsnackbar }}
+
+      <template v-slot:actions>
+        <v-btn color="pink" variant="text" @click="snackbar = false">
+          Fechar
+        </v-btn>
+      </template>
+    </v-snackbar>
+
   </v-container>
 </template>
 
@@ -151,6 +162,9 @@ export default ({
       },
       quant_total_sacola: [],
       total_ValorSacola: 0,
+
+      snackbar: false,
+      textsnackbar: ''
     }
   },
   methods: {
@@ -193,7 +207,8 @@ export default ({
           const response = await apiURL.post('/Home/finalizarpedido', body);
 
           if (response.status == 200) {
-            alert("Pedido Realizado!!!");
+            this.textsnackbar = 'Pedido Realizado!'
+            this.snackbar = true
             this.sacolaPedidos.list_produtos = []
             this.sacolaPedidos.total = 0
           } else {
