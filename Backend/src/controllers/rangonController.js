@@ -53,11 +53,10 @@ module.exports = class ScoreController {
     }
 
     async finalizarPedido(req, res) {
-        const { id_cliente_fk, id_produtos, total } = req.body
+        const { id_cliente_fk, list_produtos, total } = req.body
 
-        const listProdutos = JSON.parse(id_produtos)
 
-        connection.query(`INSERT INTO Pedidos VALUES (null, ${id_cliente_fk}, '${listProdutos}', ${total}, 'Em Andamento')`, function (err) {
+        connection.query(`INSERT INTO Pedidos VALUES (null, ${id_cliente_fk}, '${list_produtos}', ${total}, 'Em Andamento')`, function (err) {
             if (!err) {
                 res.status(200).json({
                     message: "Pedido Realizado!"
@@ -74,7 +73,7 @@ module.exports = class ScoreController {
     async pedidosEmAndamento(req, res) {
         const { cliente } = req.body
 
-        connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND statuspedido = 'Em Andamento'`, function (err, rows) {
+        connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND status_pedido = 'Em Andamento'`, function (err, rows) {
 
             if (!err) {
                 res.status(200).json({
@@ -93,20 +92,26 @@ module.exports = class ScoreController {
         })
     }
 
-    async nomeproduto(req, res) {
-        const { id } = req.body
-        connection.query(`SELECT nome FROM Produtos WHERE id = ${id}`, function (err, rows) {
-            if (!err) {
+    async pedidosFinalizados(req, res) {
+        const { cliente } = req.body
 
+        connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND status_pedido = 'Finalizado'`, function (err, rows) {
+
+            if (!err) {
                 res.status(200).json({
+                    message: "Pedidos Finalizados!",
                     data: rows
                 })
                 console.log(rows)
+
             } else {
+                res.status(400).json({
+                    message: "Erro ao buscar pedidos finalizados!"
+                })
                 console.log(err)
             }
-        })
 
+        })
     }
 
 }

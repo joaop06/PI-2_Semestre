@@ -10,40 +10,52 @@
       </v-btn>
     </v-row>
 
-    <p v-if="msgLogin !== ''">{{ msgLogin }}</p>
-    {{ pedidosAndamento }}
+    <p v-if="msgLogin">{{ msgLogin }}</p>
 
-    <!--
-[ 
-  { 
-    "numpedido": 1,
-    "id_cliente_fk": 1,
-    "id_produtos": "[1]",
-    "total": "10.50",
-    "statuspedido": "Em Andamento"
-  }
-]
-
-
-    -->
 
     <v-row>
       <v-card v-if="optionBtn" class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%" height="70%">
-        <v-card v-for="(pedido, index) in pedidosAndamento" :key="index" class="ma-2 pa-1" border="red" rounded="lg"
-          :style="{ 'border': 'solid 2px #76FF03' }" :elevation="2">
-          <p class="text-h6">Pedido: {{ pedido.numpedido }}</p>
+        <v-card v-for="(pedido, index) in pedidosAndamento" :key="index" class="ma-2 pa-2 bg-light-green-lighten-4" border="red"
+          rounded="lg" :style="{ 'border': 'solid 3px #1B5E20' }" :elevation="2">
 
-          <p >
-            Produtos: {{ pedido.id_produtos }}
+          <span class="d-flex justify-space-between ma-2">
+            <p class="text-h5 text-green-darken-4">Pedido: {{ pedido.num_pedido }}</p>
+
+            <p class="text-h5 text-green-darken-4">Status: {{ pedido.status_pedido }}</p>
+          </span>
+
+          <p class="ma-2">
+            <span class="text-h6 text-green-darken-4">Produtos:</span> {{ pedido.list_produtos }}
           </p>
 
-          <p>Total: {{ parseFloat(pedido.total).toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}}</p>
+          <p class="ml-2 text-h6 text-green-darken-4">Total: {{ parseFloat(pedido.total).toLocaleString("pt-BR", {
+            style: "currency", currency:
+              "BRL"
+          }) }}</p>
 
         </v-card>
       </v-card>
 
-      <v-card v-else>
+      <v-card v-else class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%" height="70%">
+        <v-card v-for="(pedido, index) in pedidosFinalizado" :key="index" class="ma-2 pa-2 bg-grey-lighten-4" border="red"
+          rounded="lg" :style="{ 'border': 'solid 3px #424242' }" :elevation="2">
+          
+          <span class="d-flex justify-space-between ma-2">
+            <p class="text-h5 text-grey-darken-3">Pedido: {{ pedido.num_pedido }}</p>
 
+            <p class="text-h5 text-grey-darken-3">Status: {{ pedido.status_pedido }}</p>
+          </span>
+
+          <p class="ma-2">
+            <span class="text-h6 text-grey-darken-3">Produtos:</span> {{ pedido.list_produtos }}
+          </p>
+
+          <p class="ml-2 text-h6 text-grey-darken-3">Total: {{ parseFloat(pedido.total).toLocaleString("pt-BR", {
+            style: "currency", currency:
+              "BRL"
+          }) }}</p>
+
+        </v-card>
       </v-card>
     </v-row>
 
@@ -67,12 +79,9 @@ export default {
       classBtn2: 'bg-brown-lighten-3',
       optionBtn: true,
       pedidosAndamento: [],
-      produtosAndamento: [],
+      pedidosFinalizado: [],
 
-      pedidosFinalizados: [],
-      produtosFinalizados: [],
-
-      msgLogin: ''
+      msgLogin: null
 
     }
   },
@@ -82,11 +91,13 @@ export default {
       this.classBtn1 = 'bg-brown-darken-2';
       this.classBtn2 = 'bg-brown-lighten-3';
       this.optionBtn = true;
+      this.pedidosEmAndamento()
     },
     mudaOpcaoBtn2() {
       this.classBtn1 = 'bg-brown-lighten-3';
       this.classBtn2 = 'bg-brown-darken-2';
       this.optionBtn = false;
+      this.pedidosFinalizados()
     },
     async pedidosEmAndamento() {
       if (this.cliente == null) {
@@ -102,21 +113,33 @@ export default {
           this.pedidosAndamento = response.data.data
           console.log(this.pedidosAndamento)
 
-          
+
         }
 
       }
     },
-    nomeproduto(id_produtos){
-      console.log(id_produtos.length)
+    async pedidosFinalizados() {
+      if (this.cliente == null) {
+        return this.msgLogin = 'Faça login para ver seus pedidos!'
+      } else {
+
+        const body = {
+          cliente: this.cliente
+        }
+        const response = await apiURL.post('/pedidos/finalizados', body)
+
+        if (response.status == 200) {
+          this.pedidosFinalizado = response.data.data
 
 
+        }
 
-    }
+      }
+    },
   },
   mounted() {
     this.pedidosEmAndamento()
-
+    this.pedidosFinalizados()
   }
 }
 

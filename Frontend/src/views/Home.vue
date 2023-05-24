@@ -20,10 +20,11 @@
               :style="{ 'height': '75%', 'max-height': '75%', 'overflow-y': 'auto', 'border-radius': '8px' }">
 
               <!-- Itens Adicionados a Sacola-->
-              <v-row v-if="sacolaPedidos.produtos.length !== 0" class="pa-3" justify="center" :style="{ 'width': '99%' }">
+              <v-row v-if="sacolaPedidos.list_produtos.length !== 0" class="pa-3" justify="center"
+                :style="{ 'width': '99%' }">
 
                 <!-- Card do Produto na Sacola -->
-                <v-sheet v-for="(produto, index) in sacolaPedidos.produtos"
+                <v-sheet v-for="(produto, index) in sacolaPedidos.list_produtos"
                   class="d-flex mt-3 pa-3 justify-space-between align-center"
                   :style="{ 'background-color': '#f1f1f1', 'border': '#FF1744 1px solid' }" :key="index" rounded="shaped"
                   width="90%" :elevation="4">
@@ -61,7 +62,7 @@
 
 
             <!-- Botão p/ Finalizar Pedido-->
-            <v-btn @click="finalizarPedido" v-if="sacolaPedidos.produtos.length > 0" class="mt-5 bg-red-accent-3"
+            <v-btn @click="finalizarPedido" v-if="sacolaPedidos.list_produtos.length > 0" class="mt-5 bg-red-accent-3"
               justify="center" width="90%" rounded="lg">
               Finalizar Pedido
             </v-btn>
@@ -144,9 +145,8 @@ export default ({
     return {
       cardapio: [],
       sacolaPedidos: {
-        cliente: null,
-        produtos: [],
-        id_Produtos: [],
+        id_cliente: null,
+        list_produtos: [],
         total: null
       },
       quant_total_sacola: [],
@@ -162,22 +162,14 @@ export default ({
         nome: produto.nome,
         preco: produto.preco
       }
-
-      const listProdutos = {
-        id: produto.id,
-        nome: produto.nome
-      }
-
-      this.sacolaPedidos.produtos.splice(0, 0, produtoSacola)
-      this.sacolaPedidos.id_Produtos.splice(0, 0, listProdutos)
+      this.sacolaPedidos.list_produtos.splice(0, 0, produtoSacola)
       this.sacolaPedidos.total += parseFloat(produtoSacola.preco)
     },
 
     // Remove o item selecionado da Sacola de Produtos
     remove_Sacola(index, produto) {
-      this.sacolaPedidos.total -= parseFloat(this.sacolaPedidos.produtos[index].preco)
-      this.sacolaPedidos.id_Produtos.splice(index, 1)
-      this.sacolaPedidos.produtos.splice(index, 1)
+      this.sacolaPedidos.total -= parseFloat(this.sacolaPedidos.list_produtos[index].preco)
+      this.sacolaPedidos.list_produtos.splice(index, 1)
     },
 
     // Finaliza o pedido guardando todas as informações de produtos, total, id_cliente, etc
@@ -186,20 +178,25 @@ export default ({
         if (!globalVariables.clienteLogado) {
           alert("Faça login para finalizar o pedido");
         } else {
+
+          const list_produtos = []
+          for (let i = 0; i < this.sacolaPedidos.list_produtos.length; i++) {
+            list_produtos.push(this.sacolaPedidos.list_produtos[i].nome)
+          }
+
           const body = {
             id_cliente_fk: globalVariables.clienteLogado[0].id,
-            id_produtos: this.sacolaPedidos.id_Produtos,
+            list_produtos: list_produtos,
             total: this.sacolaPedidos.total
-          };
+          }
 
           const response = await apiURL.post('/Home/finalizarpedido', body);
 
           if (response.status == 200) {
             alert("Pedido Realizado!!!");
-            this.sacolaPedidos.produtos = []
-            this.sacolaPedidos.id_Produtos = []
+            this.sacolaPedidos.list_produtos = []
+            this.sacolaPedidos.total = 0
           } else {
-            console.log(this.sacolaPedidos.id_Produtos)
             alert("Erro ao Realizar Pedido!!!");
           }
         }

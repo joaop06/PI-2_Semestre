@@ -12,7 +12,7 @@ CREATE TABLE Produtos (
 SELECT * FROM Produtos;
 DROP TABLE Produtos;
 
-INSERT INTO produtos (nome, descricao, preco, tipo, imagem) VALUES
+INSERT INTO Produtos (nome, descricao, preco, tipo, imagem) VALUES
     ('Hambúrguer', 'Delicioso hambúrguer caseiro', 10.50, 'Lanche', 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Hamburguer.jpg?raw=true'),
     ('Pizza Margherita', 'Pizza tradicional com molho de tomate, queijo e manjericão', 25.00, 'Pizza', 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Pizza.jpg?raw=true'),
     ('Batata Frita', 'Porção de batata frita crocante', 8.50, 'Porção', 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Por%C3%A7%C3%B5es.png?raw=true'),

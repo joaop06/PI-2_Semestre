@@ -24,7 +24,7 @@ this.rangonController = new rangonController()
     router.post('/pedidos/andamento', this.rangonController.pedidosEmAndamento)
 
 
-    router.post('/pedidos/nomeproduto', this.rangonController.nomeproduto)
+    router.post('/pedidos/finalizados', this.rangonController.pedidosFinalizados)
 
 
 
