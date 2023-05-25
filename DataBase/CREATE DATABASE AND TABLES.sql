@@ -12,7 +12,7 @@ CREATE TABLE Produtos (
 SELECT * FROM Produtos;
 DROP TABLE Produtos;
 
-INSERT INTO Produtos (nome, descricao, preco, tipo, imagem) VALUES
+INSERT INTO produtos (nome, descricao, preco, tipo, imagem) VALUES
     ('Hambúrguer', 'Delicioso hambúrguer caseiro', 10.50, 'Lanche', 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Hamburguer.jpg?raw=true'),
     ('Pizza Margherita', 'Pizza tradicional com molho de tomate, queijo e manjericão', 25.00, 'Pizza', 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Pizza.jpg?raw=true'),
     ('Batata Frita', 'Porção de batata frita crocante', 8.50, 'Porção', 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Por%C3%A7%C3%B5es.png?raw=true'),
@@ -48,17 +48,17 @@ SELECT * FROM Clientes;
 
 
 CREATE TABLE Pedidos(
-	numpedido INT PRIMARY KEY AUTO_INCREMENT,
+	num_pedido INT PRIMARY KEY AUTO_INCREMENT,
     id_cliente_fk INT NOT NULL,
-    id_produtos TEXT NOT NULL,
+    list_produtos VARCHAR(1000) DEFAULT '',
     total DECIMAL(5,2),
-    statuspedido VARCHAR(50),
+    status_pedido VARCHAR(50),
     
     FOREIGN KEY (id_cliente_fk) REFERENCES Clientes(id)
 );
 SELECT * FROM Pedidos;
 
-
+UPDATE Pedidos SET status_pedido = 'Finalizado' WHERE num_pedido = 19;
 
 
 
