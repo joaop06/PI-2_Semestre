@@ -27,5 +27,10 @@ this.rangonController = new rangonController()
     router.post('/pedidos/finalizados', this.rangonController.pedidosFinalizados)
 
 
+    /* Admin */
+
+    router.get('/admin-itens', this.rangonController.findItensAdmin)
+
+
 
 module.exports = router

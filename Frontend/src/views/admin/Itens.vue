@@ -80,7 +80,8 @@
 <script>
 import { ref } from 'vue';
 import NewProducts from '@/components/New_product.vue';
-import UpdtProducts from '@/components/Updt_product.vue'
+import UpdtProducts from '@/components/Updt_product.vue';
+import apiURL from '@/services/apiURL';
 
 export default {
   components: {
@@ -89,9 +90,8 @@ export default {
   },
   data() {
     return {
-      bd_rangon: [],
-      cardapio: []
-      
+      cardapio: [],
+
     }
   },
   methods: {
@@ -100,9 +100,17 @@ export default {
     },
     eventActiveUpdtProducts(produto_id) {
       this.$refs.UpdtProducts.dialog = true;
-      const produto = bd_rangon.produtos.find(item => item.id == produto_id);
+      const produto = ''
       this.$refs.UpdtProducts.produto = produto;
+    },
+    findItensAdmin(){
+      apiURL.get('/admin-itens').then(response => {
+        this.cardapio = response.data.data
+      })
     }
+  },
+  mounted(){
+    this.findItensAdmin()
   }
 }
 
