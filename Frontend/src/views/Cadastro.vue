@@ -255,7 +255,10 @@ export default {
 
         },
         async cadastrar() {
-            if (this.nome_completo !== '' && this.email !== '' && this.senha !== '' && this.confirma_senha == '') {
+            if (this.nome_completo !== '' &&
+                this.email !== '' &&
+                this.senha !== '' &&
+                this.confirma_senha !== '') {
 
                 if (this.senha === this.confirma_senha) {
                     const body = {
@@ -270,6 +273,7 @@ export default {
                         numero: this.infoEndereco.numero
                     }
 
+                    
                     await apiURL.post('/cadastro', body).then(response => {
 
                         if (response.status == 200) {
@@ -283,11 +287,14 @@ export default {
                     })
 
                 } else {
+                    console.log('Não passou do 2º if, Senhas não coincidem.')
                     this.textsnackbar = 'Senhas não coincidem'
                     this.snackbar = true
+
                 }
 
             } else {
+                console.log('Não passou do 1º if, campos obrigatórios não preenchidos.')
                 this.textsnackbar = 'Preencha os campos obrigatórios (*)!'
                 this.snackbar = true
             }
