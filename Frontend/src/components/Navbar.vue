@@ -109,7 +109,9 @@ export default {
       if (!this.clienteLogado) {
         return ''
       } else {
+        console.log(this.clienteLogado)
         const partsNome = this.clienteLogado[0].nome_completo.split(' ')
+
         const primeiroNome = partsNome[0]
         if (!primeiroNome) {
           return ''

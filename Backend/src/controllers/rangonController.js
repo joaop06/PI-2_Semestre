@@ -84,4 +84,18 @@ module.exports = class ScoreController {
         }
     }
 
+    async findUserData(req, res) {
+        try {
+            const { id } = req.body
+            connection.query(`SELECT * FROM Clientes WHERE id = ${id}`, function (err, rows) {
+                res.status(200).json({
+                    message: "Dados do Cliente!",
+                    data: rows
+                })
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
 }

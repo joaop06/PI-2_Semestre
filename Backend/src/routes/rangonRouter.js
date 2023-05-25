@@ -22,10 +22,13 @@ this.rangonController = new rangonController()
 
     /* Pedidos */
     router.post('/pedidos/andamento', this.rangonController.pedidosEmAndamento)
-
-
     router.post('/pedidos/finalizados', this.rangonController.pedidosFinalizados)
 
+    /* Perfil */
+    router.get('/perfil', this.rangonController.findUserData)
+
+
+/* Admin */
 
 
 module.exports = router

@@ -117,38 +117,37 @@ export default ({
             return pattern.test(value) || 'Endereço de e-mail inválido'
         },
         async login() {
-            try {
-                if (this.email !== '' && this.senha !== '') {
 
-                    const body = {
-                        email: this.email,
-                        senha: this.senha
-                    }
+            if (this.email !== '' && this.senha !== '') {
 
-                    axios.post('http://localhost:8080/login', body)
-                        .then(response => {
-                            if (response.status == 200) {
+                const body = {
+                    email: this.email,
+                    senha: this.senha
+                }
+
+                apiURL.post('/login', body)
+                    .then(response => {
+                        if (response.status == 200) {
+                            try {
                                 globalVariables.sessaoLogin = true
                                 globalVariables.clienteLogado = response.data.data
 
                                 this.textsnackbar = 'Login realizado!'
                                 this.snackbar = true
                                 this.$router.push('/Home');
-
-
-                            } else if(response.status == 400) {
-                                this.textsnackbar = 'Login e/ou senha inválidos!'
-                                this.snackbar = true
+                            } catch (err) {
+                                console.log(err)
                             }
+                        } else if (response.status == 400) {
+                            this.textsnackbar = 'Login e/ou senha inválidos!'
+                            this.snackbar = true
+                        }
 
-                        })
+                    })
 
-                } else {
-                    this.textsnackbar = 'Preencha todos os campos'
-                    this.snackbar = true
-                }
-            } catch (err) {
-                console.log(err)
+            } else {
+                this.textsnackbar = 'Preencha todos os campos'
+                this.snackbar = true
             }
         }
 
