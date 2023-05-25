@@ -35,7 +35,7 @@
             </span>
           </v-col>
 
-          <v-col class="d-flex justify-space-between">
+          <v-col class="d-flex justify-space-between my-n5">
             <v-col cols="10">
               <p class="ma-2">
                 <span class="text-h6 text-green-darken-4">Produtos:</span> {{ pedido.list_produtos }}
@@ -186,8 +186,6 @@ export default {
 
         if (response.status == 200) {
           this.pedidosFinalizado = response.data.data
-
-
         }
 
       }
@@ -201,6 +199,10 @@ export default {
         if (response.status == 200) {
           this.snackbar = true,
             this.textsnackbar = `Pedido ${num_pedido} cancelado.`
+          this.classBtn1 = 'bg-brown-lighten-3';
+          this.classBtn2 = 'bg-brown-darken-2';
+          this.optionBtn = false;
+          this.pedidosFinalizados_Cancelados()
         }
       })
     }
