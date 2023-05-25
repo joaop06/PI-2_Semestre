@@ -22,7 +22,9 @@ this.rangonController = new rangonController()
 
     /* Pedidos */
     router.post('/pedidos/andamento', this.rangonController.pedidosEmAndamento)
-    router.post('/pedidos/finalizados', this.rangonController.pedidosFinalizados)
+    router.post('/pedidos/finalizadosCancelados', this.rangonController.pedidosFinalizadosCancelados)
+    router.put('/pedidos/cancelarpedido', this.rangonController.cancelarPedido)
+
 
     /* Perfil */
     router.get('/perfil', this.rangonController.findUserData)

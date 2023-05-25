@@ -32,10 +32,17 @@ module.exports = class ScoreController {
         try {
             const { email, senha } = req.body
             connection.query(`SELECT * FROM Clientes WHERE email = '${email}' AND senha = '${senha}'`, function (err, rows) {
-                res.status(200).json({
-                    message: "Login realizado!",
-                    data: rows
-                })
+                if (!err) {
+                    if (rows.length == 1) {
+                        res.status(200).json({
+                            message: "Login realizado!",
+                            data: rows
+                        })
+                    } else {
+                        res.status(400).send("Login e/ou senha inválidos!")
+                    }
+                }
+
             })
         } catch (err) {
             console.log(err)
@@ -56,10 +63,12 @@ module.exports = class ScoreController {
         }
     }
 
+
+    /* Pedidos */
     async pedidosEmAndamento(req, res) {
         try {
             const { cliente } = req.body
-            connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND status_pedido = 'Em Andamento'`, function (err, rows) {
+            connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND status_pedido = 'Em Andamento' ORDER BY num_pedido DESC`, function (err, rows) {
                 res.status(200).json({
                     message: "Pedidos Em Andamento!",
                     data: rows
@@ -70,10 +79,10 @@ module.exports = class ScoreController {
         }
     }
 
-    async pedidosFinalizados(req, res) {
+    async pedidosFinalizadosCancelados(req, res) {
         try {
             const { cliente } = req.body
-            connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND status_pedido = 'Finalizado'`, function (err, rows) {
+            connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND (status_pedido = 'Finalizado' OR status_pedido = 'Cancelado') ORDER BY num_pedido DESC`, function (err, rows) {
                 res.status(200).json({
                     message: "Pedidos Finalizados!",
                     data: rows
@@ -84,6 +93,21 @@ module.exports = class ScoreController {
         }
     }
 
+    async cancelarPedido(req, res) {
+        try {
+            const { num_pedido } = req.body
+            connection.query(`UPDATE Pedidos SET status_pedido = 'Cancelado' WHERE num_pedido = ${num_pedido}`, function (err) {
+                if (!err) {
+                    res.status(200).send("Pedido cancelado com sucesso!")
+                }
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
+    /* Perfil */
     async findUserData(req, res) {
         try {
             const { id } = req.body

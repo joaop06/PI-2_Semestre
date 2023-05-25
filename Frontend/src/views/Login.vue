@@ -118,35 +118,29 @@ export default ({
         },
         async login() {
 
-            if (this.email !== '' && this.senha !== '') {
+            if (this.email !== '' || this.senha !== '') {
 
                 const body = {
                     email: this.email,
                     senha: this.senha
                 }
 
-                apiURL.post('/login', body)
-                    .then(response => {
-                        if (response.status == 200) {
-                            try {
-                                globalVariables.sessaoLogin = true
-                                globalVariables.clienteLogado = response.data.data
+                await apiURL.post('/login', body).then(response => {
+                    if (response.status == 200) {
+                        globalVariables.sessaoLogin = true
+                        globalVariables.clienteLogado = response.data.data
+                        this.textsnackbar = response.data.message
+                        this.snackbar = true
+                        this.$router.push('/Home');
 
-                                this.textsnackbar = 'Login realizado!'
-                                this.snackbar = true
-                                this.$router.push('/Home');
-                            } catch (err) {
-                                console.log(err)
-                            }
-                        } else if (response.status == 400) {
-                            this.textsnackbar = 'Login e/ou senha inválidos!'
-                            this.snackbar = true
-                        }
-
-                    })
+                    } else {
+                        this.textsnackbar = 'Login e/ou senha inválidos!'
+                        this.snackbar = true
+                    }
+                })
 
             } else {
-                this.textsnackbar = 'Preencha todos os campos'
+                this.textsnackbar = 'Preencha todos os campos!'
                 this.snackbar = true
             }
         }
