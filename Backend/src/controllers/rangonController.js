@@ -96,6 +96,22 @@ module.exports = class ScoreController {
         } catch (err) {
             console.log(err)
         }
+
+    }
+
+
+
+    /* Admin */
+    async findItensAdmin(req, res) {
+        try {
+            connection.query('SELECT * FROM Produtos', function (err, rows) {
+                res.status(200).json({
+                    data: rows
+                })
+            })
+        } catch (err) {
+            console.log(err)
+        }
     }
 
 }

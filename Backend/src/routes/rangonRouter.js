@@ -30,5 +30,10 @@ this.rangonController = new rangonController()
 
 /* Admin */
 
+    /* Admin */
+
+    router.get('/admin-itens', this.rangonController.findItensAdmin)
+
+
 
 module.exports = router
