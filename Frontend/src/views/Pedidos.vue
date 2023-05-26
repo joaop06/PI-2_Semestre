@@ -34,7 +34,7 @@
 
           <v-col>
             <span class="d-flex justify-space-between">
-              <p class="text-h5 text-green-darken-4">Pedido: {{ pedido.num_pedido }}</p>
+              <p class="text-h5 text-green-dar  ken-4">Pedido: {{ pedido.num_pedido }}</p>
 
               <p class="text-h5 text-green-darken-4">Status: {{ pedido.status_pedido }}</p>
             </span>

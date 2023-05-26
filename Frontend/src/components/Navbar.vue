@@ -9,23 +9,22 @@
 
     <v-col v-if="clienteLogado" class="d-flex text-right justify-end">
 
-      <v-btn to="/pedidos" width="7vw" height="5vh" class="ma-5 bg-red-accent-3" color="white" rounded="shaped"
+      <v-btn to="/pedidos" @click="findUserLogado(clienteLogado[0].id)" width="7vw" height="5vh" class="ma-5 bg-red-accent-3" color="white" rounded="shaped"
         :elevation="2" icon>
         <v-icon class="mr-2">mdi-history</v-icon>
         <p class="text-subtitle-2">Pedidos</p>
       </v-btn>
 
-      <v-btn to="/sobre" width="7vw" height="5vh" class="ma-5 bg-red-accent-3" color="white" rounded="shaped"
+      <v-btn to="/sobre" @click="findUserLogado(clienteLogado[0].id)" width="7vw" height="5vh" class="ma-5 bg-red-accent-3" color="white" rounded="shaped"
         :elevation="2" icon>
         <v-icon class="mr-2">mdi-information</v-icon>
         <p class="text-subtitle-2">Sobre</p>
       </v-btn>
 
 
-
       <v-menu location="bottom">
         <template v-slot:activator="{ props }">
-          <v-btn width="7vw" height="5vh" class="ma-5 bg-red-accent-3" rounded="shaped" :elevation="2" v-bind="props">
+          <v-btn @click="findUserLogado(clienteLogado[0].id)" width="7vw" height="5vh" class="ma-5 bg-red-accent-3" rounded="shaped" :elevation="2" v-bind="props">
             <div>
               <p class="text-subtitle-2 my-n1">Olá, {{ primeiroNome() }}!</p>
               <p class="text-subtitle-2 text-decoration-underline">Minha conta</p>
@@ -36,7 +35,7 @@
         <v-list>
           <v-list-item>
             <v-list-item-title>
-              <v-btn to="/perfil" width="100%" color="rgb(0,0,0,0)" :elevation="0" rounded="lg" icon>
+              <v-btn to="/perfil" @click="findUserLogado(clienteLogado[0].id)" width="100%" color="rgb(0,0,0,0)" :elevation="0" rounded="lg" icon>
                 <v-icon class="mr-2" color="red-accent-3">mdi-account-box</v-icon>
                 <p class="text-subtitle-2">Perfil</p>
               </v-btn>
@@ -76,6 +75,7 @@
 
 <script>
 import globalVariables from '@/controllers/globalVariables'
+import apiURL from '@/services/apiURL'
 
 export default {
   props: {
@@ -119,8 +119,19 @@ export default {
           return primeiroNome
         }
       }
+    },
+    async findUserLogado(id) {
+      await apiURL.get(`/find-user?id=${id}`).then(response => {
+        if (response.status !== 200) {
+          globalVariables.sessaoLogin = false
+          globalVariables.clienteLogado = null
 
-
+        } else {
+          globalVariables.clienteLogado = response.data.data
+          this.clienteLogado = globalVariables.clienteLogado
+          console.log(response.data.data)
+        }
+      })
     }
   },
   mounted() {

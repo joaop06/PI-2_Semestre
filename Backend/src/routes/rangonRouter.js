@@ -32,6 +32,9 @@ this.rangonController = new rangonController()
     router.get('/update-data-user', this.rangonController.updateDataUser)
 
 
+    /* Geral */
+    router.get('/find-user', this.rangonController.findUserLogado)
+
 
 /* Admin */
 

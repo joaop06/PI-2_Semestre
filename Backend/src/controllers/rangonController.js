@@ -17,7 +17,7 @@ module.exports = class ScoreController {
     async registrationUser(req, res) {
         try {
             const { nome_completo, celular, email, senha, cep, cidade, estado, endereco, numero } = req.body
-            
+
 
             connection.query(`INSERT INTO Clientes VALUES (null, '${nome_completo}', ${celular}, '${email}','${senha}',${cep},${cidade}, ${estado}, ${endereco}, ${numero})`, function (err) {
                 if (err) {
@@ -113,6 +113,30 @@ module.exports = class ScoreController {
             })
         } catch (err) {
             console.log(err)
+        }
+    }
+
+
+    /* Geral */
+    async findUserLogado(req, res) {
+        try {
+            const { id } = req.query
+            connection.query(`SELECT * FROM Clientes WHERE id = ${id}`, function (err, rows) {
+                if (!err) {
+                    res.status(200).json({
+                        message: "Cliente encontrado!",
+                        data: rows
+                    })
+
+                } else {
+                    res.status(500).json({
+                        message: "Erro ao buscar o cliente!"
+                    })
+                }
+            })
+
+        } catch (err) {
+
         }
     }
 
