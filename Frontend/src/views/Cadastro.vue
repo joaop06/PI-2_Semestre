@@ -203,16 +203,16 @@ export default {
 
             /* Informações cadastro*/
             nome_completo: '',
-            celular: '',
+            celular: null,
             email: '',
             senha: '',
             confirma_senha: '',
             infoEndereco: {
-                cep: '',
-                cidade: '',
-                estado: '',
-                endereco: '',
-                numero: '',
+                cep: null,
+                cidade: null,
+                estado: null,
+                endereco: null,
+                numero: null,
             },
 
             erroCadastro: '',
@@ -262,18 +262,17 @@ export default {
                 if (this.senha === this.confirma_senha) {
                     const body = {
                         nome_completo: this.nome_completo,
-                        celular: this.celular,
+                        celular: this.celular !== '' ? this.celular : null,
                         email: this.email,
                         senha: this.senha,
-                        cep: this.infoEndereco.cep,
-                        cidade: this.infoEndereco.cidade,
-                        estado: this.infoEndereco.estado,
-                        endereco: this.infoEndereco.endereco,
-                        numero: this.infoEndereco.numero
+                        cep: this.infoEndereco.cep !== '' ? this.infoEndereco.cep : null,
+                        cidade: this.infoEndereco.cidade !== '' ? this.infoEndereco.cidade : null,
+                        estado: this.infoEndereco.estado !== '' ? this.infoEndereco.estado : null,
+                        endereco: this.infoEndereco.endereco !== '' ? this.infoEndereco.endereco : null,
+                        numero: this.infoEndereco.numero !== '' ? this.infoEndereco.numero : null
                     }
 
                     await apiURL.post('/cadastro', body).then(response => {
-
                         if (response.status == 200) {
                             this.textsnackbar = 'Cadastro Realizado!!'
                             this.snackbar = true
@@ -283,6 +282,7 @@ export default {
                             this.snackbar = true
                         }
                     })
+
 
                 } else {
                     this.textsnackbar = 'Senhas não coincidem'

@@ -5,6 +5,8 @@ this.rangonController = new rangonController()
 
 
 
+
+
 /* Cliente */
     /* Home */
     router.get('/', this.rangonController.productsAll)
@@ -27,7 +29,8 @@ this.rangonController = new rangonController()
 
 
     /* Perfil */
-    router.get('/perfil', this.rangonController.findUserData)
+    router.get('/update-data-user', this.rangonController.updateDataUser)
+
 
 
 /* Admin */

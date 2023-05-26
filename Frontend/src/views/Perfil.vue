@@ -7,17 +7,18 @@
 
 <script>
 import apiURL from '@/services/apiURL';
+import globalVariables from '@/controllers/globalVariables'
 
 export default {
   data() {
     return {
-      cliente: {}
+      cliente: globalVariables.clienteLogado[0]
     }
   },
   methods: {
     findUserData() {
       const body = {
-        id: this.$store.state.user.id
+        id: globalVariables.clienteLogado[0].id
       }
 
       apiURL.get('/perfil', body).then(response => {
@@ -26,7 +27,6 @@ export default {
     }
   },
   mounted() {
-    this.findUserData();
   }
 }
 </script>

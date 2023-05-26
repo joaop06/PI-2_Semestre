@@ -1,8 +1,6 @@
 CREATE DATABASE RangOn;
 USE rangon;
 
-DROP DATABASE RangOn;
-
 CREATE TABLE Produtos (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(50) NOT NULL,
@@ -12,7 +10,7 @@ CREATE TABLE Produtos (
     imagem TEXT
 );
 SELECT * FROM Produtos;
-DROP TABLE Produtos;
+
 
 INSERT INTO produtos (nome, descricao, preco, tipo, imagem) VALUES
     ('Hambúrguer', 'Delicioso hambúrguer caseiro', 10.50, 'Lanche', 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Hamburguer.jpg?raw=true'),
@@ -36,36 +34,32 @@ INSERT INTO produtos (nome, descricao, preco, tipo, imagem) VALUES
 CREATE TABLE Clientes (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     nome_completo VARCHAR(255) NOT NULL,
-    celular VARCHAR(11) DEFAULT '',
+    celular INT (11) DEFAULT 0,
     email VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(50) NOT NULL,
-    
-    cep VARCHAR(8) DEFAULT '',
+
+    cep INT(8) DEFAULT 0,
     cidade VARCHAR(50) DEFAULT '',
     estado VARCHAR(2) DEFAULT '',
     endereco VARCHAR(255) DEFAULT '',
-    numero VARCHAR(10) DEFAULT ''
+    numero INT(5) DEFAULT 0
 );
 SELECT * FROM Clientes;
-DROP TABLE Clientes;
+drop table Clientes;
 
-SELECT * FROM Clientes WHERE email = 'joao@teste.com' AND senha = '123';
+
 
 CREATE TABLE Pedidos(
 	num_pedido INT PRIMARY KEY AUTO_INCREMENT,
-    id_cliente_fk INT NOT NULL,
-    list_produtos VARCHAR(1000) DEFAULT '',
-    total DECIMAL(5,2),
-    status_pedido VARCHAR(50),
+    id_cliente_fk INT,
+    list_produtos TEXT,
+    total DECIMAL(9,2),
+    status_pedido VARCHAR(12),
     
     FOREIGN KEY (id_cliente_fk) REFERENCES Clientes(id)
 );
 SELECT * FROM Pedidos;
-DROP TABLE Pedidos;
 
-UPDATE Pedidos SET status_pedido = 'Finalizado' WHERE num_pedido = 7;
-
-SELECT * FROM Pedidos WHERE id_cliente_fk = 4 AND (status_pedido = 'Finalizado' OR status_pedido = 'Cancelado') ORDER BY num_pedido DESC;
 
 
 SET SQL_SAFE_UPDATES = 0;

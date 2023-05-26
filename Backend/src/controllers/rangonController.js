@@ -17,10 +17,20 @@ module.exports = class ScoreController {
     async registrationUser(req, res) {
         try {
             const { nome_completo, celular, email, senha, cep, cidade, estado, endereco, numero } = req.body
-            connection.query(`INSERT INTO Clientes VALUES (null, '${nome_completo}', '${celular}', '${email}','${senha}','${cep}','${cidade}', '${estado}', '${endereco}', '${numero}')`, function (err) {
-                res.status(200).json({
-                    message: "Cadastro realizado!"
-                })
+            
+
+            connection.query(`INSERT INTO Clientes VALUES (null, '${nome_completo}', ${celular}, '${email}','${senha}',${cep},${cidade}, ${estado}, ${endereco}, ${numero})`, function (err) {
+                if (err) {
+                    console.error(err);
+                    res.status(500).json({
+                        message: "Erro ao inserir dados no banco de dados."
+                    });
+                } else {
+                    res.status(200).json({
+                        message: "Cadastro realizado!"
+                    });
+                }
+
             })
 
         } catch (err) {
@@ -108,15 +118,24 @@ module.exports = class ScoreController {
 
 
     /* Perfil */
-    async findUserData(req, res) {
+    async updateDataUser(req, res) {
         try {
-            const { id } = req.body
-            connection.query(`SELECT * FROM Clientes WHERE id = ${id}`, function (err, rows) {
-                res.status(200).json({
-                    message: "Dados do Cliente!",
-                    data: rows
+            const { id, nome_completo, celular, email, cep, cidade, estado, endereco, numero } = req.body
+            connection.query(`
+            UPDATE Clientes SET nome_completo = '${nome_completo}',
+            celular = '${celular}',
+            email = '${email}',
+            cep = '${cep}',
+            cidade = '${cidade}',
+            estado = '${estado}',
+            endereco = '${endereco}',
+            numero = '${numero}'`,
+                function (err, rows) {
+                    res.status(200).json({
+                        message: "Dados do Cliente!",
+                        data: rows
+                    })
                 })
-            })
         } catch (err) {
             console.log(err)
         }
@@ -124,6 +143,7 @@ module.exports = class ScoreController {
     }
 
 
+    /**************************************/
 
     /* Admin */
     async findItensAdmin(req, res) {

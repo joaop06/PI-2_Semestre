@@ -23,6 +23,11 @@
     <v-row>
       <!-- PEDIDOS EM ANDAMENTO -->
       <v-card v-if="optionBtn" class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%">
+
+        <v-card v-if="pedidosAndamento.length == 0">
+          <p>Sem pedidos em andamento</p>
+        </v-card>
+
         <v-card v-for="(pedido, index) in pedidosAndamento" :key="index"
           class="ma-2 bg-light-green-lighten-4 d-flex flex-column" border="red" rounded="lg"
           :style="{ 'border': 'solid 3px #1B5E20' }" :elevation="2">
@@ -163,15 +168,11 @@ export default {
         const body = {
           cliente: this.cliente
         }
-        const response = await apiURL.post('/pedidos/andamento', body)
-
-        if (response.status == 200) {
-          this.pedidosAndamento = response.data.data
-          console.log(this.pedidosAndamento)
-
-
-        }
-
+        await apiURL.post('/pedidos/andamento', body).then(response => {
+          if (response.status == 200) {
+            this.pedidosAndamento = response.data.data
+          }
+        })
       }
     },
     async pedidosFinalizados_Cancelados() {
@@ -182,12 +183,12 @@ export default {
         const body = {
           cliente: this.cliente
         }
-        const response = await apiURL.post('/pedidos/finalizadosCancelados', body)
-
-        if (response.status == 200) {
-          this.pedidosFinalizado = response.data.data
-        }
-
+        await apiURL.post('/pedidos/finalizadosCancelados', body).then(response => {
+          if (response.status == 200) {
+            this.pedidosFinalizado = response.data.data
+            console.log(this.pedidosFinalizado)
+          }
+        })
       }
     },
     cancelarPedido(num_pedido) {

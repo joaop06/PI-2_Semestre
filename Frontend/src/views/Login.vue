@@ -129,6 +129,7 @@ export default ({
                     if (response.status == 200) {
                         globalVariables.sessaoLogin = true
                         globalVariables.clienteLogado = response.data.data
+                        console.log(globalVariables.clienteLogado[0].id)
                         this.textsnackbar = response.data.message
                         this.snackbar = true
                         this.$router.push('/Home');
