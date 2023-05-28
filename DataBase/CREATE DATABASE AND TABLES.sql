@@ -47,6 +47,8 @@ CREATE TABLE Clientes (
 SELECT * FROM Clientes;
 drop table Clientes;
 
+UPDATE Clientes SET nome_completo = 'João' WHERE id = 1;
+
 
 
 CREATE TABLE Pedidos(
@@ -59,7 +61,7 @@ CREATE TABLE Pedidos(
     FOREIGN KEY (id_cliente_fk) REFERENCES Clientes(id)
 );
 SELECT * FROM Pedidos;
-
+UPDATE Pedidos SET status_pedido = 'Finalizado' WHERE num_pedido = 7;
 
 
 SET SQL_SAFE_UPDATES = 0;
