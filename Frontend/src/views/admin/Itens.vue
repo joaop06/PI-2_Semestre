@@ -51,7 +51,7 @@
                               <span :style="{ 'color': 'white', 'font-weight': 'bold' }">{{ produto.preco }}</span>
                             </v-card>
 
-                            <v-btn @click="eventActiveUpdtProducts(produto.id)" class="ma-4 bg-red-accent-3" rounded="lg">
+                            <v-btn @click="eventActiveUpdtProducts(produto)" class="ma-4 bg-red-accent-3" rounded="lg">
                               <v-icon class="mr-2">
                                 mdi-pencil
                               </v-icon>
@@ -90,7 +90,7 @@ export default {
   },
   data() {
     return {
-      cardapio: [],
+      cardapio: [] 
 
     }
   },
@@ -98,10 +98,13 @@ export default {
     eventActiveNewProducts() {
       this.$refs.NewProducts.dialog = true;
     },
-    eventActiveUpdtProducts(produto_id) {
+    eventActiveUpdtProducts(produto) {
       this.$refs.UpdtProducts.dialog = true;
-      const produto = ''
-      this.$refs.UpdtProducts.produto = produto;
+      this.$refs.UpdtProducts.produto.nome = produto.nome;
+      this.$refs.UpdtProducts.produto.descricao = produto.descricao;
+      this.$refs.UpdtProducts.produto.preco = produto.preco;
+      this.$refs.UpdtProducts.produto.tipo = produto.tipo;
+      this.$refs.UpdtProducts.produto.id = produto.id;
     },
     findItensAdmin(){
       apiURL.get('/admin-itens').then(response => {

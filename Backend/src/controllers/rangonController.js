@@ -142,6 +142,21 @@ module.exports = class ScoreController {
 
 
     /* Perfil */
+    async dataUser(req, res) {
+        try {
+            const { id } = req.body
+            connection.query(`SELECT * FROM Clientes WHERE id = ${id}`, function (err, rows) {
+                res.status(200).json({
+                    message: "Cliente Encontrado!",
+                    data: rows
+                })
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
     async updateDataUser(req, res) {
         try {
             const { id, nome_completo, celular, email, cep, cidade, estado, endereco, numero } = req.body
@@ -156,7 +171,7 @@ module.exports = class ScoreController {
             numero = '${numero}'`,
                 function (err, rows) {
                     res.status(200).json({
-                        message: "Dados do Cliente!",
+                        message: "Dados do Cliente Atualizados!",
                         data: rows
                     })
                 })
@@ -167,8 +182,6 @@ module.exports = class ScoreController {
     }
 
 
-    /**************************************/
-
     /* Admin */
     async findItensAdmin(req, res) {
         try {
@@ -176,6 +189,20 @@ module.exports = class ScoreController {
                 res.status(200).json({
                     data: rows
                 })
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
+    async updateProduct(req, res) {
+        try {
+            const { nome, descricao, preco, id } = req.body
+            connection.query(`UPDATE Produtos SET nome = '${nome}', descricao = '${descricao}', preco = ${parseFloat(preco)} WHERE id = ${parseInt(id)}`, function (err) {
+                if (!err) {
+                    res.status(200).send("Produto Atualizado!")
+                }
             })
         } catch (err) {
             console.log(err)

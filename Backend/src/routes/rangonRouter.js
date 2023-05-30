@@ -29,7 +29,8 @@ this.rangonController = new rangonController()
 
 
     /* Perfil */
-    router.get('/update-data-user', this.rangonController.updateDataUser)
+    router.get('/data-user', this.rangonController.dataUser)
+    router.put('/update-data-user', this.rangonController.updateDataUser)
 
 
     /* Geral */
@@ -41,6 +42,8 @@ this.rangonController = new rangonController()
     /* Admin */
 
     router.get('/admin-itens', this.rangonController.findItensAdmin)
+
+    router.put('/update-product', this.rangonController.updateProduct)
 
 
 
