@@ -31,6 +31,8 @@ this.rangonController = new rangonController()
 
     router.get('/admin-itens', this.rangonController.findItensAdmin)
 
+    router.put('/update-product', this.rangonController.updateProduct)
+
 
 
 module.exports = router

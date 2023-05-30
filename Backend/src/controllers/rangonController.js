@@ -84,7 +84,7 @@ module.exports = class ScoreController {
         }
     }
 
-
+    
     /* Admin */
     async findItensAdmin(req, res){
        try{
@@ -96,6 +96,20 @@ module.exports = class ScoreController {
        } catch (err){
         console.log(err)
        }
+    }
+
+
+    async updateProduct(req, res){
+        try{
+            const{nome, descricao, preco, id} = req.body
+            connection.query(`UPDATE Produtos SET nome = '${nome}', descricao = '${descricao}', preco = ${parseFloat(preco)} WHERE id = ${parseInt(id)}`, function (err){
+                if(!err){
+                    res.status(200).send("Produto Atualizado!")
+                }
+            })
+        } catch (err){
+            console.log(err)
+        }
     }
 
 }
