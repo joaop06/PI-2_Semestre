@@ -9,13 +9,13 @@
             </v-row>
             
             <h3 class="pl-3 pr-3">Nome</h3>
-            <v-text-field class="my-custom-text-field pl-3 pr-3 "></v-text-field>
+            <v-text-field class="my-custom-text-field pl-3 pr-3" v-model="produto.nome"></v-text-field>
             <h3 class="pl-3 pr-3 pt-4S">Descrição</h3>
-            <v-text-field class="pl-3 pr-3"></v-text-field>
+            <v-text-field class="pl-3 pr-3" v-model="produto.descricao"></v-text-field>
             <h3 class="pl-3 pr-3">Tipo</h3>
-            <v-select class="pl-3 pr-3" chips :items="['Lanche', 'Pizza', 'Porção']"></v-select>
+            <v-select class="pl-3 pr-3" chips :items="['Lanche', 'Pizza', 'Porção']" v-model="produto.tipo"></v-select>
             <h3 class="pl-3 pr-3">Preço</h3>
-            <v-text-field class="pl-3 pr-3"></v-text-field>
+            <v-text-field class="pl-3 pr-3" v-model="produto.preco"></v-text-field>
             <div class="pl-3 pr-3 pb-4">
                 <v-btn class="popup-close bg-orange" @click="insert()">
                     Inserir Item
@@ -27,6 +27,9 @@
 
 
 <script>
+
+import apiURL from '@/services/apiURL'
+
 export default {
     props:{
 
@@ -34,12 +37,26 @@ export default {
     data(){
         return{
             dialog: false,
+            produto: {
+                nome: '',
+                descricao: '',
+                tipo: '',
+                preco: ''
+            }
         }
     },
     methods: {
         insert(){
-            this.$emit('insert',10),
-            this.dialog = false
+            const body = {
+                nome: this.produto.nome,
+                descricao: this.produto.descricao,
+                preco: this.produto.preco,
+                tipo: this.produto.tipo
+            }
+            console.log(body)
+            apiURL.post('/create-product', body).then(response => {
+                console.log(response)
+            })
         },
         close(){
             this.dialog = false
