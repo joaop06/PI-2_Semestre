@@ -10,7 +10,7 @@ CREATE TABLE Produtos (
     imagem TEXT
 );
 SELECT * FROM Produtos;
-DROP TABLE Produtos;
+
 
 INSERT INTO produtos (nome, descricao, preco, tipo, imagem) VALUES
     ('Hambúrguer', 'Delicioso hambúrguer caseiro', 10.50, 'Lanche', 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Hamburguer.jpg?raw=true'),
@@ -34,32 +34,34 @@ INSERT INTO produtos (nome, descricao, preco, tipo, imagem) VALUES
 CREATE TABLE Clientes (
 	id INT PRIMARY KEY AUTO_INCREMENT,
     nome_completo VARCHAR(255) NOT NULL,
-    celular VARCHAR(11) NOT NULL,
+    celular INT (11) DEFAULT 0,
     email VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(50) NOT NULL,
-    
-    cep VARCHAR(8) NOT NULL,
-    cidade VARCHAR(50) NOT NULL,
-    estado VARCHAR(2) NOT NULL,
-    endereco VARCHAR(255) NOT NULL,
-    numero VARCHAR(10) NOT NULL
+
+    cep INT(8) DEFAULT 0,
+    cidade VARCHAR(50) DEFAULT '',
+    estado VARCHAR(2) DEFAULT '',
+    endereco VARCHAR(255) DEFAULT '',
+    numero INT(5) DEFAULT 0
 );
 SELECT * FROM Clientes;
+drop table Clientes;
+
+UPDATE Clientes SET nome_completo = 'João' WHERE id = 1;
+
 
 
 CREATE TABLE Pedidos(
 	num_pedido INT PRIMARY KEY AUTO_INCREMENT,
-    id_cliente_fk INT NOT NULL,
-    list_produtos VARCHAR(1000) DEFAULT '',
-    total DECIMAL(5,2),
-    status_pedido VARCHAR(50),
+    id_cliente_fk INT,
+    list_produtos TEXT,
+    total DECIMAL(9,2),
+    status_pedido VARCHAR(12),
     
     FOREIGN KEY (id_cliente_fk) REFERENCES Clientes(id)
 );
 SELECT * FROM Pedidos;
-
-UPDATE Pedidos SET status_pedido = 'Finalizado' WHERE num_pedido = 19;
-
+UPDATE Pedidos SET status_pedido = 'Finalizado' WHERE num_pedido = 7;
 
 
 SET SQL_SAFE_UPDATES = 0;

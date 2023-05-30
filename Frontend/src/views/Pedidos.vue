@@ -13,51 +13,110 @@
     <p v-if="msgLogin">{{ msgLogin }}</p>
 
 
+
+
+
+
+
+
+
     <v-row>
-      <v-card v-if="optionBtn" class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%" height="70%">
-        <v-card v-for="(pedido, index) in pedidosAndamento" :key="index" class="ma-2 pa-2 bg-light-green-lighten-4" border="red"
-          rounded="lg" :style="{ 'border': 'solid 3px #1B5E20' }" :elevation="2">
+      <!-- PEDIDOS EM ANDAMENTO -->
+      <v-card v-if="optionBtn" class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%">
 
-          <span class="d-flex justify-space-between ma-2">
-            <p class="text-h5 text-green-darken-4">Pedido: {{ pedido.num_pedido }}</p>
+        <v-card v-if="pedidosAndamento.length == 0">
+          <p>Sem pedidos em andamento</p>
+        </v-card>
 
-            <p class="text-h5 text-green-darken-4">Status: {{ pedido.status_pedido }}</p>
-          </span>
+        <v-card v-for="(pedido, index) in pedidosAndamento" :key="index"
+          class="ma-2 bg-light-green-lighten-4 d-flex flex-column" border="red" rounded="lg"
+          :style="{ 'border': 'solid 3px #1B5E20' }" :elevation="2">
 
-          <p class="ma-2">
-            <span class="text-h6 text-green-darken-4">Produtos:</span> {{ pedido.list_produtos }}
-          </p>
+          <v-col>
+            <span class="d-flex justify-space-between">
+              <p class="text-h5 text-green-dar  ken-4">Pedido: {{ pedido.num_pedido }}</p>
 
-          <p class="ml-2 text-h6 text-green-darken-4">Total: {{ parseFloat(pedido.total).toLocaleString("pt-BR", {
-            style: "currency", currency:
-              "BRL"
-          }) }}</p>
+              <p class="text-h5 text-green-darken-4">Status: {{ pedido.status_pedido }}</p>
+            </span>
+          </v-col>
+
+          <v-col class="d-flex justify-space-between my-n5">
+            <v-col cols="10">
+              <p class="ma-2">
+                <span class="text-h6 text-green-darken-4">Produtos:</span> {{ pedido.list_produtos }}
+              </p>
+              <p class="ml-2 text-h6 text-green-darken-4">Total: {{ parseFloat(pedido.total).toLocaleString("pt-BR", {
+                style: "currency", currency:
+                  "BRL"
+              }) }}</p>
+            </v-col>
+
+            <v-col>
+              <v-btn @click="cancelarPedido(pedido.num_pedido)" class="ma-auto text-red" icon="mdi-close-thick"
+                color="rgb(0,0,0,0)" :elevation="0"></v-btn>
+            </v-col>
+          </v-col>
 
         </v-card>
       </v-card>
 
+
+
+      <!-- PEDIDOS FINALIZADOS OU CANCELADOS -->
       <v-card v-else class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%" height="70%">
-        <v-card v-for="(pedido, index) in pedidosFinalizado" :key="index" class="ma-2 pa-2 bg-grey-lighten-4" border="red"
-          rounded="lg" :style="{ 'border': 'solid 3px #424242' }" :elevation="2">
-          
-          <span class="d-flex justify-space-between ma-2">
-            <p class="text-h5 text-grey-darken-3">Pedido: {{ pedido.num_pedido }}</p>
+        <v-sheet v-for="(pedido, index) in pedidosFinalizado" :key="index" color="rgb(0,0,0,0)" :elevation="0">
 
-            <p class="text-h5 text-grey-darken-3">Status: {{ pedido.status_pedido }}</p>
-          </span>
+          <v-card v-if="pedido.status_pedido === 'Cancelado'" class="ma-2 pa-2 bg-grey-lighten-4" border="red"
+            rounded="lg" :style="{ 'border': 'solid 3px #B71C1C' }" :elevation="2">
+            <span class="d-flex justify-space-between ma-2">
+              <p class="text-h5 text-grey-darken-3">Pedido: {{ pedido.num_pedido }}</p>
 
-          <p class="ma-2">
-            <span class="text-h6 text-grey-darken-3">Produtos:</span> {{ pedido.list_produtos }}
-          </p>
+              <p class="text-h5 text-red-darken-4">Status: {{ pedido.status_pedido }}</p>
+            </span>
 
-          <p class="ml-2 text-h6 text-grey-darken-3">Total: {{ parseFloat(pedido.total).toLocaleString("pt-BR", {
-            style: "currency", currency:
-              "BRL"
-          }) }}</p>
+            <p class="ma-2">
+              <span class="text-h6 text-grey-darken-3">Produtos:</span> {{ pedido.list_produtos }}
+            </p>
 
-        </v-card>
+            <p class="ml-2 text-h6 text-grey-darken-3">Total: {{ parseFloat(pedido.total).toLocaleString("pt-BR", {
+              style: "currency", currency:
+                "BRL"
+            }) }}</p>
+          </v-card>
+
+          <v-card v-else class="ma-2 pa-2 bg-grey-lighten-4" border="red" rounded="lg"
+            :style="{ 'border': 'solid 3px #424242' }" :elevation="2">
+            <span class="d-flex justify-space-between ma-2">
+              <p class="text-h5 text-grey-darken-3">Pedido: {{ pedido.num_pedido }}</p>
+
+              <p class="text-h5 text-grey-darken-3">Status: {{ pedido.status_pedido }}</p>
+            </span>
+
+            <p class="ma-2">
+              <span class="text-h6 text-grey-darken-3">Produtos:</span> {{ pedido.list_produtos }}
+            </p>
+
+            <p class="ml-2 text-h6 text-grey-darken-3">Total: {{ parseFloat(pedido.total).toLocaleString("pt-BR", {
+              style: "currency", currency:
+                "BRL"
+            }) }}</p>
+          </v-card>
+
+        </v-sheet>
       </v-card>
     </v-row>
+
+
+
+    <v-snackbar v-model="snackbar" top>
+      {{ textsnackbar }}
+
+      <template v-slot:actions>
+        <v-btn color="pink" variant="text" @click="snackbar = false">
+          Fechar
+        </v-btn>
+      </template>
+    </v-snackbar>
 
   </v-container>
 </template>
@@ -81,7 +140,9 @@ export default {
       pedidosAndamento: [],
       pedidosFinalizado: [],
 
-      msgLogin: null
+      msgLogin: null,
+      snackbar: false,
+      textsnackbar: ''
 
     }
   },
@@ -97,7 +158,7 @@ export default {
       this.classBtn1 = 'bg-brown-lighten-3';
       this.classBtn2 = 'bg-brown-darken-2';
       this.optionBtn = false;
-      this.pedidosFinalizados()
+      this.pedidosFinalizados_Cancelados()
     },
     async pedidosEmAndamento() {
       if (this.cliente == null) {
@@ -107,18 +168,14 @@ export default {
         const body = {
           cliente: this.cliente
         }
-        const response = await apiURL.post('/pedidos/andamento', body)
-
-        if (response.status == 200) {
-          this.pedidosAndamento = response.data.data
-          console.log(this.pedidosAndamento)
-
-
-        }
-
+        await apiURL.post('/pedidos/andamento', body).then(response => {
+          if (response.status == 200) {
+            this.pedidosAndamento = response.data.data
+          }
+        })
       }
     },
-    async pedidosFinalizados() {
+    async pedidosFinalizados_Cancelados() {
       if (this.cliente == null) {
         return this.msgLogin = 'Faça login para ver seus pedidos!'
       } else {
@@ -126,20 +183,34 @@ export default {
         const body = {
           cliente: this.cliente
         }
-        const response = await apiURL.post('/pedidos/finalizados', body)
-
-        if (response.status == 200) {
-          this.pedidosFinalizado = response.data.data
-
-
-        }
-
+        await apiURL.post('/pedidos/finalizadosCancelados', body).then(response => {
+          if (response.status == 200) {
+            this.pedidosFinalizado = response.data.data
+            console.log(this.pedidosFinalizado)
+          }
+        })
       }
     },
+    cancelarPedido(num_pedido) {
+      const body = {
+        num_pedido: num_pedido
+      }
+
+      apiURL.put('/pedidos/cancelarpedido', body).then(response => {
+        if (response.status == 200) {
+          this.snackbar = true,
+            this.textsnackbar = `Pedido ${num_pedido} cancelado.`
+          this.classBtn1 = 'bg-brown-lighten-3';
+          this.classBtn2 = 'bg-brown-darken-2';
+          this.optionBtn = false;
+          this.pedidosFinalizados_Cancelados()
+        }
+      })
+    }
   },
   mounted() {
     this.pedidosEmAndamento()
-    this.pedidosFinalizados()
+    this.pedidosFinalizados_Cancelados()
   }
 }
 

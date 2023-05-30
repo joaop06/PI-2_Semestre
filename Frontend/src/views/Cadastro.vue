@@ -43,9 +43,9 @@
 
                         <v-row justify="space-between">
                             <v-col>
-                                <v-text-field v-model="nome_completo" name="nome_completo" type="text" label="Nome Completo"
-                                    class="mr-3" :style="{ 'color': 'white' }" bg-color="rgb(255, 255, 255, 0.5)"
-                                    placeholder="Ex: João Silva">
+                                <v-text-field v-model="nome_completo" name="nome_completo" type="text"
+                                    label="Nome Completo *" class="mr-3" :style="{ 'color': 'white' }"
+                                    bg-color="rgb(255, 255, 255, 0.5)" placeholder="Ex: João Silva">
                                 </v-text-field>
                             </v-col>
 
@@ -59,7 +59,7 @@
 
                         <v-row justify="space-between" class="my-n8">
                             <v-col>
-                                <v-text-field v-model="email" name="email" type="email" label="E-mail"
+                                <v-text-field v-model="email" name="email" type="email" label="E-mail *"
                                     :rules="[required, validEmail]" :style="{ 'color': 'white' }"
                                     bg-color="rgb(255, 255, 255, 0.5)" placeholder="Ex: joao_silva@gmail.com">
                                 </v-text-field>
@@ -69,7 +69,7 @@
 
                         <v-row justify="space-between" class="my-n8">
                             <v-col>
-                                <v-text-field v-model="senha" name="senha" label="Senha" :style="{ 'color': 'white' }"
+                                <v-text-field v-model="senha" name="senha" label="Senha *" :style="{ 'color': 'white' }"
                                     bg-color="rgb(255, 255, 255, 0.5)"
                                     :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                                     @click:append-inner="showPassword = !showPassword"
@@ -79,7 +79,8 @@
 
                             <v-col>
                                 <v-text-field v-model="confirma_senha" @blur="validar_senha" name="confirma_senha"
-                                    label="Confirmar Senha" :style="{ 'color': 'white' }" bg-color="rgb(255, 255, 255, 0.5)"
+                                    label="Confirmar Senha *" :style="{ 'color': 'white' }"
+                                    bg-color="rgb(255, 255, 255, 0.5)"
                                     :append-inner-icon="showPassword_confirmar ? 'mdi-eye-off' : 'mdi-eye'"
                                     @click:append-inner="showPassword_confirmar = !showPassword_confirmar"
                                     :type="showPassword_confirmar ? 'text' : 'password'" :hint="hint_verifica_senha"
@@ -168,6 +169,16 @@
 
         <Navbars ref="Navbars" />
 
+        <v-snackbar v-model="snackbar" top>
+            {{ textsnackbar }}
+
+            <template v-slot:actions>
+                <v-btn color="pink" variant="text" @click="snackbar = false">
+                    Fechar
+                </v-btn>
+            </template>
+        </v-snackbar>
+
     </v-container>
 </template>
 
@@ -192,23 +203,24 @@ export default {
 
             /* Informações cadastro*/
             nome_completo: '',
-            celular: '',
+            celular: null,
             email: '',
             senha: '',
             confirma_senha: '',
             infoEndereco: {
-                cep: '',
-                cidade: '',
-                estado: '',
-                endereco: '',
-                numero: '',
+                cep: null,
+                cidade: null,
+                estado: null,
+                endereco: null,
+                numero: null,
             },
 
             erroCadastro: '',
             sucessCadastro: '',
             popupAlert: '',
 
-            apiURL: apiURL
+            snackbar: false,
+            textsnackbar: ''
         }
     },
     methods: {
@@ -229,7 +241,6 @@ export default {
             return pattern.test(value) || 'Endereço de e-mail inválido'
         },
         validaCEP() {
-
             this.infoEndereco.cep = this.infoEndereco.cep.replace('-', '').replace(' ', '').replace('.', '')
             if (this.infoEndereco.cep.length == 8) {
                 apiViaCEP.get(`${this.infoEndereco.cep}/json`).then(response => {
@@ -242,51 +253,46 @@ export default {
             }
 
         },
-
-
         async cadastrar() {
-            try {
-                if (
-                    this.nome_completo === '' &&
-                    this.celular === '' &&
-                    this.email === '' &&
-                    this.senha === '' &&
-                    this.infoEndereco.cep === '' &&
-                    this.infoEndereco.cidade === '' &&
-                    this.infoEndereco.estado === '' &&
-                    this.infoEndereco.endereco === '' &&
-                    this.infoEndereco.numero
-                ) {
-                    this.erroCadastro = 'Preencha todos os campos!'
-                } else {
+            if (this.nome_completo !== '' &&
+                this.email !== '' &&
+                this.senha !== '' &&
+                this.confirma_senha !== '') {
 
-                    const response = await fetch(`http://localhost:8080/cadastro`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            nome_completo: this.nome_completo,
-                            celular: this.celular,
-                            email: this.email,
-                            senha: this.senha,
-                            cep: this.infoEndereco.cep,
-                            cidade: this.infoEndereco.cidade,
-                            estado: this.infoEndereco.estado,
-                            endereco: this.infoEndereco.endereco,
-                            numero: this.infoEndereco.numero
-                        })
+                if (this.senha === this.confirma_senha) {
+                    const body = {
+                        nome_completo: this.nome_completo,
+                        celular: this.celular !== '' ? this.celular : null,
+                        email: this.email,
+                        senha: this.senha,
+                        cep: this.infoEndereco.cep !== '' ? this.infoEndereco.cep : null,
+                        cidade: this.infoEndereco.cidade !== '' ? this.infoEndereco.cidade : null,
+                        estado: this.infoEndereco.estado !== '' ? this.infoEndereco.estado : null,
+                        endereco: this.infoEndereco.endereco !== '' ? this.infoEndereco.endereco : null,
+                        numero: this.infoEndereco.numero !== '' ? this.infoEndereco.numero : null
+                    }
+
+                    await apiURL.post('/cadastro', body).then(response => {
+                        if (response.status == 200) {
+                            this.textsnackbar = 'Cadastro Realizado!!'
+                            this.snackbar = true
+                            this.$router.push('/login')
+                        } else {
+                            this.textsnackbar = 'Erro ao cadastrar o usuário!'
+                            this.snackbar = true
+                        }
                     })
-                        .then(response => {
-                            console.log(response.data)
-                        })
-                    alert(this.sucessCadastro)
+
+
+                } else {
+                    this.textsnackbar = 'Senhas não coincidem'
+                    this.snackbar = true
                 }
 
-            } catch (err) {
-                console.log(err)
+            } else {
+                this.textsnackbar = 'Preencha os campos obrigatórios (*)!'
+                this.snackbar = true
             }
-
         }
     },
 }

@@ -117,38 +117,32 @@ export default ({
             return pattern.test(value) || 'Endereço de e-mail inválido'
         },
         async login() {
-            try {
-                if (this.email !== '' && this.senha !== '') {
 
-                    const body = {
-                        email: this.email,
-                        senha: this.senha
-                    }
+            if (this.email !== '' || this.senha !== '') {
 
-                    axios.post('http://localhost:8080/login', body)
-                        .then(response => {
-                            if (response.status == 200) {
-                                globalVariables.sessaoLogin = true
-                                globalVariables.clienteLogado = response.data.data
-
-                                this.textsnackbar = 'Login realizado!'
-                                this.snackbar = true
-                                this.$router.push('/Home');
-
-
-                            } else if(response.status == 400) {
-                                this.textsnackbar = 'Login e/ou senha inválidos!'
-                                this.snackbar = true
-                            }
-
-                        })
-
-                } else {
-                    this.textsnackbar = 'Preencha todos os campos'
-                    this.snackbar = true
+                const body = {
+                    email: this.email,
+                    senha: this.senha
                 }
-            } catch (err) {
-                console.log(err)
+
+                await apiURL.post('/login', body).then(response => {
+                    if (response.status == 200) {
+                        globalVariables.sessaoLogin = true
+                        globalVariables.clienteLogado = response.data.data
+                        console.log(globalVariables.clienteLogado[0].id)
+                        this.textsnackbar = response.data.message
+                        this.snackbar = true
+                        this.$router.push('/Home');
+
+                    } else {
+                        this.textsnackbar = 'Login e/ou senha inválidos!'
+                        this.snackbar = true
+                    }
+                })
+
+            } else {
+                this.textsnackbar = 'Preencha todos os campos!'
+                this.snackbar = true
             }
         }
 

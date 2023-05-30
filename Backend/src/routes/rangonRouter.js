@@ -5,6 +5,8 @@ this.rangonController = new rangonController()
 
 
 
+
+
 /* Cliente */
     /* Home */
     router.get('/', this.rangonController.productsAll)
@@ -22,10 +24,19 @@ this.rangonController = new rangonController()
 
     /* Pedidos */
     router.post('/pedidos/andamento', this.rangonController.pedidosEmAndamento)
+    router.post('/pedidos/finalizadosCancelados', this.rangonController.pedidosFinalizadosCancelados)
+    router.put('/pedidos/cancelarpedido', this.rangonController.cancelarPedido)
 
 
-    router.post('/pedidos/finalizados', this.rangonController.pedidosFinalizados)
+    /* Perfil */
+    router.get('/update-data-user', this.rangonController.updateDataUser)
 
+
+    /* Geral */
+    router.get('/find-user', this.rangonController.findUserLogado)
+
+
+/* Admin */
 
     /* Admin */
 
