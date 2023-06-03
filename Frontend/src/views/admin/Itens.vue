@@ -2,11 +2,11 @@
   <main>
     <v-card>
       <v-layout>
-        <v-navigation-drawer rail permanent style="width: 4vw;" class="bg-red-accent-2">
+        <v-navigation-drawer rail permanent style="width: 4vw;" class="bg-red-accent-2 elevation-7">
 
-            <v-btn to="admin/PedidosGerais" icon="mdi-circle" class="" variant="tonal"></v-btn>
+            <v-btn to="admin/PedidosGerais" icon="mdi-circle" class="elevation-1" variant="tonal"></v-btn>
 
-            <v-btn to="/admin" variant="tonal" icon="mdi-logout" class=""></v-btn>
+            <v-btn to="/admin" variant="tonal" icon="mdi-logout" class="elevation-1"></v-btn>
 
         </v-navigation-drawer>
 
@@ -34,6 +34,12 @@
                           <v-progress-circular color="grey-lighten-4" indeterminate></v-progress-circular>
                         </div>
                       </template>
+
+                      <v-btn @click="eventActiveDelProducts(produto)" class="ma-4 bg-red-accent-2" rounded="lg">
+                        <v-icon>
+                          mdi-delete
+                        </v-icon>
+                      </v-btn>
 
                       <v-card color="transparent" :elevation="0">
 
@@ -73,6 +79,7 @@
 
     <NewProducts ref="NewProducts" />
     <UpdtProducts ref="UpdtProducts" />
+    <DelProducts ref="DelProducts" />
 
   </main>
 </template>
@@ -81,12 +88,14 @@
 import { ref } from 'vue';
 import NewProducts from '@/components/New_product.vue';
 import UpdtProducts from '@/components/Updt_product.vue';
+import DelProducts from '@/components/Del_product.vue';
 import apiURL from '@/services/apiURL';
 
 export default {
   components: {
     NewProducts,
-    UpdtProducts
+    UpdtProducts,
+    DelProducts
   },
   data() {
     return {
@@ -110,6 +119,10 @@ export default {
       apiURL.get('/admin-itens').then(response => {
         this.cardapio = response.data.data
       })
+    },
+    eventActiveDelProducts(produto) {
+      this.$refs.DelProducts.dialog = true;
+      this.$refs.UpdtProducts.produto.id = produto.id
     }
   },
   mounted(){

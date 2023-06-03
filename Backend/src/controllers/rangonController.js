@@ -230,5 +230,17 @@ module.exports = class ScoreController {
         }
     }
 
+    async deleteProduct(req, res) {
+        try {
+            const { id } = req.body
+            connection.query(`DELETE FROM Produtos WHERE id = ${parseInt(id)}`, function (err) {
+                if (!err) {
+                    res.status(200).send("Produto deletado!")
+                }
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
 }

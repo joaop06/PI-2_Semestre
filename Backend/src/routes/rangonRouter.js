@@ -47,6 +47,8 @@ this.rangonController = new rangonController()
 
     router.post('/create-product', this.rangonController.createProduct)
 
+    router.delete('/delete-product', this.rangonController.deleteProduct)
+
 
 
 module.exports = router
