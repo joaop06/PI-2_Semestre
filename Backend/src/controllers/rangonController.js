@@ -194,24 +194,24 @@ module.exports = class ScoreController {
         }
     }
 
-    async createProduct(req, res){
-        try{
-            const{nome, descricao, preco, tipo} = req.body
+    async createProduct(req, res) {
+        try {
+            const { nome, descricao, preco, tipo } = req.body;
             let imagem = ''
             if(tipo == 'Lanche'){
-                imagem = 'Lanche'
+                imagem = 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Hamburguer.jpg?raw=true'
             }else if (tipo == 'Pizza'){
-                imagem = 'Pizza'
+                imagem = 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Pizza.jpg?raw=true'
             }else {
-                imagem = 'Porção'
+                imagem = 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Por%C3%A7%C3%B5es.png?raw=true'
             }
-            connection.query(`INSERT INTO Produtos (nome, descricao, preco, tipo, imagem) VALUES ('${nome}','${descricao}', ${parseFloat(preco)}, '${tipo}', '${imagem}'`, function (err){
-                if(!err){
-                    res.status(200).send("Produto Atualizado!")
+            connection.query(`INSERT INTO Produtos (nome, descricao, preco, tipo, imagem) VALUES ('${nome}', '${descricao}', ${parseFloat(preco)}, '${tipo}', '${imagem}')`, function (err) {
+                if (!err) {
+                    res.status(200).send("Produto Atualizado!");
                 }
-            })
-        } catch (err){
-            console.log(err)
+            });
+        } catch (err) {
+            console.log(err);
         }
     }
 

@@ -54,6 +54,7 @@ export default {
                 tipo: this.produto.tipo
             }
             console.log(body)
+            this.dialog = false
             apiURL.post('/create-product', body).then(response => {
                 console.log(response)
             })
