@@ -7,7 +7,7 @@
                 </v-btn>
             </v-row>
             
-            <h3 class="pl-3 pr-3 ma-2">Confirme a exclusão do Item!</h3>
+            <h3 class="pl-3 pr-3 ma-2">Confirme a exclusão do Item {{ produto.nome }}!</h3>
             <div class="pl-3 pr-3 pb-4">
                 <v-btn class="popup-close bg-orange ma-1" @click="delete">
                     Excluir
@@ -29,7 +29,8 @@ export default {
         return{
             dialog: false,
             produto: {
-                id: ''
+            id: '',
+            nome: ''
             }
         } 
     },
@@ -39,8 +40,7 @@ export default {
                 id: id
             }
             apiURL.delete('/delete-product', body).then(response => {
-                console.log(response)
-            })
+                console.log(response)})
             this.dialog = false
 
         },

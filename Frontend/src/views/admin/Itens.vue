@@ -122,7 +122,8 @@ export default {
     },
     eventActiveDelProducts(produto) {
       this.$refs.DelProducts.dialog = true;
-      this.$refs.UpdtProducts.produto.id = produto.id
+      this.$refs.DelProducts.produto.id = produto.id;
+      this.$refs.DelProducts.produto.nome = produto.nome
     }
   },
   mounted(){
