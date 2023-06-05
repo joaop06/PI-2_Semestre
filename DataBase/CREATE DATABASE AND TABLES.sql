@@ -9,6 +9,18 @@ CREATE TABLE Produtos (
     tipo VARCHAR(15),
     imagem TEXT
 );
+
+CREATE TABLE Admin (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    nome_completo VARCHAR(255),
+    email VARCHAR(255) NOT NULL UNIQUE,
+    senha VARCHAR(50) NOT NULL
+);
+
+INSERT INTO Admin VALUES (NULL, 'admin', 'admin', '1234');
+
+SELECT * FROM Admin;
+
 SELECT * FROM Produtos;
 
 

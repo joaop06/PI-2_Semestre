@@ -243,4 +243,25 @@ module.exports = class ScoreController {
         }
     }
 
+    async loginUserAdm(req, res) {
+        try {
+            const { email, password } = req.body
+            connection.query(`SELECT * FROM Admin WHERE email = '${email}' AND senha = '${password}'`, function (err, rows) {
+                if (!err) {
+                    if (rows.length == 1) {
+                        res.status(200).json({
+                            message: "Login realizado!",
+                            data: rows
+                        })
+                    } else {
+                        res.status(400).send("Login e/ou senha inválidos!")
+                    }
+                }
+
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
 }

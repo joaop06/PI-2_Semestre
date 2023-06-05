@@ -49,6 +49,9 @@ this.rangonController = new rangonController()
 
     router.delete('/delete-product', this.rangonController.deleteProduct)
 
+    /* Login */
+    router.post('/loginAdm', this.rangonController.loginUserAdm)
+
 
 
 module.exports = router

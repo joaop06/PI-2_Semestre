@@ -3,8 +3,9 @@
         <v-container class="d-flex justify-center mt-12">
             <v-card class="bg-white pa-7" title="Login Admin" height="60vh" width="65%" rounded="xl" :elevation="10"
                 variant="outlined">
-                <v-text-field label="Login" hint="Digite seu login de administrador"></v-text-field>
-                <v-text-field class="mt-5" name="senha" color="white" v-model="password"
+                <v-text-field v-model="email" name="email" label="Login"
+                    hint="Digite seu login de administrador"></v-text-field>
+                <v-text-field class="mt-5" name="password" color="white" v-model="password"
                     :append-inner-icon="showPassword ? 'mdi-eye-off' : 'mdi-eye'"
                     @click:append-inner="showPassword = !showPassword" :type="showPassword ? 'text' : 'password'"
                     label="Senha" hint="Digite sua senha de administrador">
@@ -28,14 +29,17 @@
                     </v-dialog>
                 </div>
                 <v-row no-gutters justify="center">
-                    <v-btn to="/admin/Itens" class="bg-black ma-8 pl-6 pr-6">Acessar</v-btn>
-                </v-row> 
+                    <v-btn @click="loginAdm" class="bg-black ma-8 pl-6 pr-6">Acessar</v-btn>
+                    <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+                </v-row>
             </v-card>
         </v-container>
     </main>
 </template>
 
 <script>
+import apiURL from '@/services/apiURL';
+
 export default {
     data() {
         return {
@@ -43,8 +47,33 @@ export default {
             showPassword: false,
             dialog: false
         }
+    },
+    methods: {
+        async loginAdm() {
+
+            if (this.email !== '' || this.password !== '') {
+
+                const body = {
+                    email: this.email,
+                    password: this.password,
+                    errorMessage: ''
+                }
+
+                await apiURL.post('/loginAdm', body).then(response => {
+                    if (response.status == 200) {
+                        this.$router.push('/admin/Itens');
+
+                    } else {
+                        this.errorMessage = 'Login e/ou senha inválidos!';
+                    }
+                })
+            } else {
+                this.errorMessage = 'Preencha todos os campos!';
+            }
+        }
     }
 }
+
 </script>
 
 <style>

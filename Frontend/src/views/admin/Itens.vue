@@ -2,7 +2,7 @@
   <main>
     <v-card>
       <v-layout>
-        <v-navigation-drawer rail permanent style="width: 4vw;" class="bg-red-accent-2 elevation-7">
+        <v-navigation-drawer rail permanent style="width: 50px;" class="bg-red-accent-2 elevation-7">
 
             <v-btn to="admin/PedidosGerais" icon="mdi-circle" class="elevation-1" variant="tonal"></v-btn>
 
