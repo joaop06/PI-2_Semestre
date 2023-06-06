@@ -267,7 +267,7 @@ module.exports = class ScoreController {
     /* Pedidos Admin */
     async pedidosGerais(req, res) {
         try {
-            connection.query(`SELECT * FROM Pedidos`, function (err, rows) {
+            connection.query(`SELECT Pedidos.*, Clientes.nome_completo FROM Pedidos INNER JOIN Clientes ON Pedidos.id_cliente_fk = Clientes.id`, function (err, rows) {
                 res.status(200).json({
                     data: rows
                 })
