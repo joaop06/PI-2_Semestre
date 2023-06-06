@@ -4,24 +4,30 @@
         <v-row>
             <v-card class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%">
 
-                <!--v-for="(pedido, index) in pedidosAndamento" :key="index"-->
-                <v-card class="ma-2 bg-light-green-lighten-4 d-flex flex-column" border="red" rounded="lg"
+                <!---->
+                <v-card v-for="(pedido, index) in pedidos_gerais" :key="index" class="ma-2 bg-light-green-lighten-4 d-flex flex-column" border="red" rounded="lg"
                     :style="{ 'border': 'solid 3px #1B5E20' }" :elevation="2">
 
                     <v-col>
                         <span class="d-flex justify-space-between">
-                            <p class="text-h5 text-green-dar  ken-4">Pedido: </p>
+                            <p class="text-h5 text-green-dar  ken-4">Pedido: {{pedido.num_pedido}}</p>
 
-                            <p class="text-h5 text-green-darken-4">Status: </p>
+                            <p class="text-h5 text-green-darken-4">Status: {{ pedido.status_pedido }}</p>
                         </span>
                     </v-col>
 
                     <v-col class="d-flex justify-space-between my-n5">
                         <v-col cols="10">
                             <p class="ma-2">
-                                <span class="text-h6 text-green-darken-4">Produtos:</span>
+                                <span class="text-h6 text-green-darken-4">Cliente: <span class="text-black">{{ pedido.nome_completo }}</span></span>
                             </p>
-                            <p class="ml-2 text-h6 text-green-darken-4">Total: </p>
+                            <p class="ma-2">
+                                <span class="text-h6 text-green-darken-4">Produtos: <span class="text-black">{{ pedido.list_produtos }}</span></span>
+                            </p>
+                            <p class="ml-2 text-h6 text-green-darken-4">Total: <span class="text-black">{{ parseFloat(pedido.total).toLocaleString("pt-BR", {
+                                style: "currency", currency:
+                                  "BRL"
+                              }) }}</span></p>
                         </v-col>
 
                         <v-col>
@@ -53,13 +59,18 @@ export default ({
     methods: {
         async pedidosGerais() {
             await apiURL.get('/pedidos-gerais').then(response => {
-                if (response.data.data > 0) {
+                console.log(response.data.data[0])
+                if (response.data.data.length > 0) {
                     this.pedidos_gerais = response.data.data
+                    console.log(this.pedidos_gerais)
                 } else {
                     console.log("Não há pedidos no momento")
                 }
             })
         }
+    },
+    mounted(){
+        this.pedidosGerais()
     }
 })
 </script>
