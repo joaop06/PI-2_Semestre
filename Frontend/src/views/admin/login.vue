@@ -30,7 +30,6 @@
                 </div>
                 <v-row no-gutters justify="center">
                     <v-btn @click="loginAdm" class="bg-black ma-8 pl-6 pr-6">Acessar</v-btn>
-                    <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
                 </v-row>
             </v-card>
         </v-container>
@@ -55,20 +54,19 @@ export default {
 
                 const body = {
                     email: this.email,
-                    password: this.password,
-                    errorMessage: ''
+                    password: this.password
                 }
 
                 await apiURL.post('/loginAdm', body).then(response => {
                     if (response.status == 200) {
-                        this.$router.push('/admin/Itens');
+                        this.$router.push('/admin/pedidos-gerais');
 
                     } else {
-                        this.errorMessage = 'Login e/ou senha inválidos!';
+                        console.log("Login e/ou senha inválidos!")
                     }
                 })
             } else {
-                this.errorMessage = 'Preencha todos os campos!';
+                console.log("Preencha todos os campos")
             }
         }
     }

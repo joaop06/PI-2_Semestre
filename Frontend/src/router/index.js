@@ -52,8 +52,8 @@ const routes = [
     component: () => import('@/views/admin/login.vue'),
   },
   {
-    path: '/admin/Pedidos',
-    name: 'Admin_Pedidos',
+    path: '/admin/pedidos-gerais',
+    name: 'Admin_PedidosGerais',
     component: () => import('@/views/admin/PedidosGerais.vue')
   },
   {
