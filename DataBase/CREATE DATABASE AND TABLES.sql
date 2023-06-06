@@ -61,6 +61,8 @@ SELECT * FROM Admin;
 SELECT * FROM Clientes;
 drop table Clientes;
 
+SELECT Pedidos.*, Clientes.nome_completo FROM Pedidos INNER JOIN Clientes ON Pedidos.id_cliente_fk = Clientes.id;
+
 UPDATE Clientes SET nome_completo = 'João' WHERE id = 1;
 
 
