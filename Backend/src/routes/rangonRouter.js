@@ -49,6 +49,10 @@ this.rangonController = new rangonController()
 
     router.delete('/delete-product', this.rangonController.deleteProduct)
 
+    router.get('/pedidos-gerais', this.rangonController.pedidosGerais)
+
+    router.put('/altera-status', this.rangonController.alteraStatus)
+
     /* Login */
     router.post('/loginAdm', this.rangonController.loginUserAdm)
 

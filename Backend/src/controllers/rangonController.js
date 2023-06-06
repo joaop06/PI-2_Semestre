@@ -264,4 +264,30 @@ module.exports = class ScoreController {
         }
     }
 
+    /* Pedidos Admin */
+    async pedidosGerais(req, res) {
+        try {
+            connection.query(`SELECT * FROM Pedidos`, function (err, rows) {
+                res.status(200).json({
+                    data: rows
+                })
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    async alteraStatus(req, res) {
+        try {
+            const { num_pedido } = req.body
+            connection.query(`UPDATE Pedidos SET status_pedido = 'Finalizado' WHERE num_pedido = ${num_pedido}`, function (err) {
+                if (!err) {
+                    res.status(200).send("Pedido Atualizado!")
+                }
+            })
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
 }

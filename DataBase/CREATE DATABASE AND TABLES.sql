@@ -10,19 +10,7 @@ CREATE TABLE Produtos (
     imagem TEXT
 );
 
-CREATE TABLE Admin (
-	id INT PRIMARY KEY AUTO_INCREMENT,
-    nome_completo VARCHAR(255),
-    email VARCHAR(255) NOT NULL UNIQUE,
-    senha VARCHAR(50) NOT NULL
-);
-
-INSERT INTO Admin VALUES (NULL, 'admin', 'admin', '1234');
-
-SELECT * FROM Admin;
-
 SELECT * FROM Produtos;
-
 
 INSERT INTO produtos (nome, descricao, preco, tipo, imagem) VALUES
     ('Hambúrguer', 'Delicioso hambúrguer caseiro', 10.50, 'Lanche', 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Hamburguer.jpg?raw=true'),
@@ -56,6 +44,20 @@ CREATE TABLE Clientes (
     endereco VARCHAR(255) DEFAULT '',
     numero INT(5) DEFAULT 0
 );
+
+CREATE TABLE Admin (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+    nome_completo VARCHAR(255),
+    email VARCHAR(255) NOT NULL UNIQUE,
+    senha VARCHAR(50) NOT NULL
+);
+
+INSERT INTO Admin VALUES (NULL, 'admin', 'admin', 'admin');
+
+UPDATE Admin SET senha = '1234' WHERE id = 1;
+
+SELECT * FROM Admin;
+
 SELECT * FROM Clientes;
 drop table Clientes;
 
@@ -75,6 +77,7 @@ CREATE TABLE Pedidos(
 SELECT * FROM Pedidos;
 UPDATE Pedidos SET status_pedido = 'Finalizado' WHERE num_pedido = 7;
 
+INSERT INTO Pedidos values(null, 1, 'pao com ovo', 8.00, 'em andamento');
 
 SET SQL_SAFE_UPDATES = 0;
 SELECT user FROM mysql.user;
