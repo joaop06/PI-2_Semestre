@@ -11,6 +11,7 @@ CREATE TABLE Produtos (
 );
 
 SELECT * FROM Produtos;
+DROP TABLE Produtos;
 
 INSERT INTO produtos (nome, descricao, preco, tipo, imagem) VALUES
     ('Hambúrguer', 'Delicioso hambúrguer caseiro', 10.50, 'Lanche', 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Hamburguer.jpg?raw=true'),

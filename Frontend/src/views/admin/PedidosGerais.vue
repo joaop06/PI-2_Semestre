@@ -2,41 +2,46 @@
     <main>
         <NavbarAdmin />
         <v-row>
-            <v-card class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%">
+            <v-card class="ma-auto mt-12 d-flex" :elevation="0" color="rgb(0,0,0)" width="50%">
 
                 <!---->
-                <v-card v-for="(pedido, index) in pedidos_gerais" :key="index" class="ma-2 bg-light-green-lighten-4 d-flex flex-column" border="red" rounded="lg"
-                    :style="{ 'border': 'solid 3px #1B5E20' }" :elevation="2">
-
-                    <v-col>
-                        <span class="d-flex justify-space-between">
-                            <p class="text-h5 text-green-dar  ken-4">Pedido: {{pedido.num_pedido}}</p>
-
-                            <p class="text-h5 text-green-darken-4">Status: {{ pedido.status_pedido }}</p>
-                        </span>
-                    </v-col>
-
-                    <v-col class="d-flex justify-space-between my-n5">
-                        <v-col cols="10">
-                            <p class="ma-2">
-                                <span class="text-h6 text-green-darken-4">Cliente: <span class="text-black">{{ pedido.nome_completo }}</span></span>
-                            </p>
-                            <p class="ma-2">
-                                <span class="text-h6 text-green-darken-4">Produtos: <span class="text-black">{{ pedido.list_produtos }}</span></span>
-                            </p>
-                            <p class="ml-2 text-h6 text-green-darken-4">Total: <span class="text-black">{{ parseFloat(pedido.total).toLocaleString("pt-BR", {
-                                style: "currency", currency:
-                                  "BRL"
-                              }) }}</span></p>
-                        </v-col>
+                <v-col>
+                    <v-card v-for="(pedido, index) in pedidos_gerais" :key="index" class="ma-2 d-flex flex-column"
+                        border="red" rounded="lg" :style="{ 'border': 'solid 3px #000000' }" :elevation="2" min-width="40%"
+                        max-width="40%">
 
                         <v-col>
-                            <v-btn class="ma-auto text-red" icon="mdi-close-thick" color="rgb(0,0,0,0)"
-                                :elevation="0"></v-btn>
-                        </v-col>
-                    </v-col>
+                            <span class="d-flex justify-space-between">
+                                <p class="text-h5">Pedido: {{ pedido.num_pedido }}</p>
 
-                </v-card>
+                                <p class="text-h5">Status: {{ pedido.status_pedido }}</p>
+                            </span>
+                        </v-col>
+
+                        <v-col class="d-flex justify-space-between my-n5">
+                            <v-col cols="10">
+                                <p class="ma-2">
+                                    <span class="text-h6">Cliente: <span class="text-black">{{ pedido.nome_completo
+                                    }}</span></span>
+                                </p>
+                                <p class="ma-2">
+                                    <span class="text-h6">Produtos: <span class="text-black">{{ pedido.list_produtos
+                                    }}</span></span>
+                                </p>
+                                <p class="ml-2 text-h6">Total: <span class="text-black">{{
+                                    parseFloat(pedido.total).toLocaleString("pt-BR", {
+                                        style: "currency", currency:
+                                            "BRL"
+                                    }) }}</span></p>
+                            </v-col>
+
+                            <v-col>
+                                <v-btn class="ma-auto text-red" icon="mdi-close-thick" color="rgb(0,0,0,0)"
+                                    :elevation="0"></v-btn>
+                            </v-col>
+                        </v-col>
+                    </v-card>
+                </v-col>
             </v-card>
         </v-row>
     </main>
@@ -69,7 +74,7 @@ export default ({
             })
         }
     },
-    mounted(){
+    mounted() {
         this.pedidosGerais()
     }
 })
