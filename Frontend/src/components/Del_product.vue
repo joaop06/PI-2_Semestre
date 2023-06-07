@@ -50,6 +50,7 @@ export default {
 
             this.dialog = false;
             console.log(body.id);
+            location.reload()
         }
         ,
         close() {

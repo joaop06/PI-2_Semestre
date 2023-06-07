@@ -4,7 +4,7 @@ module.exports = class ScoreController {
 
     async productsAll(req, res) {
         try {
-            connection.query("SELECT * FROM Produtos", function (err, rows) {
+            connection.query("SELECT * FROM Produtos ORDER BY id DESC", function (err, rows) {
                 res.status(200).json({
                     rows
                 })
@@ -185,7 +185,7 @@ module.exports = class ScoreController {
     /* Admin */
     async findItensAdmin(req, res) {
         try {
-            connection.query('SELECT * FROM Produtos', function (err, rows) {
+            connection.query('SELECT * FROM Produtos ORDER BY id DESC', function (err, rows) {
                 res.status(200).json({
                     data: rows
                 })

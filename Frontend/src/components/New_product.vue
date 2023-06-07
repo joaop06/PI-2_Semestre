@@ -58,6 +58,7 @@ export default {
             apiURL.post('/create-product', body).then(response => {
                 console.log(response)
             })
+            location.reload()
         },
         close(){
             this.dialog = false

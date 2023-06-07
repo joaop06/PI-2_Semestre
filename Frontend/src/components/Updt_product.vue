@@ -66,7 +66,7 @@ export default {
                 console.log(response)
             })
             this.dialog = false
-
+            location.reload()
         },
         close(){
             this.dialog = false
