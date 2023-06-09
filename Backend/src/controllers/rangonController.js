@@ -75,29 +75,36 @@ module.exports = class ScoreController {
 
 
     /* Pedidos */
-    async pedidosEmAndamento(req, res) {
+    async pedidosCliente(req, res) {
         try {
-            const { cliente } = req.body
-            connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND status_pedido = 'Em Andamento' ORDER BY num_pedido DESC`, function (err, rows) {
-                res.status(200).json({
-                    message: "Pedidos Em Andamento!",
-                    data: rows
-                })
-            })
-        } catch (err) {
-            console.log(err)
-        }
-    }
+            const { cliente, status_pedido } = req.query
 
-    async pedidosFinalizadosCancelados(req, res) {
-        try {
-            const { cliente } = req.body
-            connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND (status_pedido = 'Finalizado' OR status_pedido = 'Cancelado') ORDER BY num_pedido DESC`, function (err, rows) {
-                res.status(200).json({
-                    message: "Pedidos Finalizados!",
-                    data: rows
+            if(status_pedido == 'Em Andamento'){
+                connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND status_pedido = 'Em Andamento' ORDER BY num_pedido DESC`, function (err, rows) {
+                    res.status(200).json({
+                        message: "Pedidos Em Andamento!",
+                        data: rows
+                    })
                 })
-            })
+            } else if(status_pedido == 'Finalizado' || status_pedido == 'Cancelado'){
+                connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND status_pedido IN ('Finalizado', 'Cancelado') ORDER BY num_pedido DESC`, function (err, rows) {
+                    res.status(200).json({
+                        message: "Pedidos Finalizado / Cancelados!",
+                        data: rows
+                    })
+                })
+            } else{
+                connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} ORDER BY num_pedido DESC`, function (err, rows) {
+                    res.status(200).json({
+                        message: "Todos os Pedidos!",
+                        data: rows
+                    })
+                })
+            }
+
+
+
+            
         } catch (err) {
             console.log(err)
         }
@@ -213,11 +220,11 @@ module.exports = class ScoreController {
         try {
             const { nome, descricao, preco, tipo } = req.body;
             let imagem = ''
-            if(tipo == 'Lanche'){
+            if (tipo == 'Lanche') {
                 imagem = 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Hamburguer.jpg?raw=true'
-            }else if (tipo == 'Pizza'){
+            } else if (tipo == 'Pizza') {
                 imagem = 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Pizza.jpg?raw=true'
-            }else {
+            } else {
                 imagem = 'https://github.com/joaop06/imagens-PI-2_Semestre/blob/main/Por%C3%A7%C3%B5es.png?raw=true'
             }
             connection.query(`INSERT INTO Produtos (nome, descricao, preco, tipo, imagem) VALUES ('${nome}', '${descricao}', ${parseFloat(preco)}, '${tipo}', '${imagem}')`, function (err) {
@@ -277,12 +284,12 @@ module.exports = class ScoreController {
         }
     }
 
-    async alteraStatus(req, res) {
+    async alteraStatusPedido(req, res) {
         try {
-            const { num_pedido } = req.body
-            connection.query(`UPDATE Pedidos SET status_pedido = 'Finalizado' WHERE num_pedido = ${num_pedido}`, function (err) {
+            const { num_pedido, status_pedido } = req.query
+            connection.query(`UPDATE Pedidos SET status_pedido = '${status_pedido}' WHERE num_pedido = ${num_pedido}`, function (err) {
                 if (!err) {
-                    res.status(200).send("Pedido Atualizado!")
+                    res.status(200).send("Status do pedido atualizado!")
                 }
             })
         } catch (err) {

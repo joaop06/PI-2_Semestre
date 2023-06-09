@@ -2,47 +2,180 @@
     <main>
         <NavbarAdmin />
         <v-row>
-            <v-card class="ma-auto mt-12 d-flex" :elevation="0" color="rgb(0,0,0)" width="50%">
+            <v-col cols="5" class="ma-auto">
+                <v-sheet class="mt-8 pa-5 justify-center text-center" color="rgb(0,0,0,0.2)" height="85vh" width="100%"
+                    rounded="xl" :elevation="10">
+                    <v-list-item-title class="text-center">
+                        <span class="text-h4 text-white">
+                            Em Andamento
+                        </span>
+                    </v-list-item-title>
 
-                <!---->
-                <v-col>
-                    <v-card v-for="(pedido, index) in pedidos_gerais" :key="index" class="ma-2 d-flex flex-column"
-                        border="red" rounded="lg" :style="{ 'border': 'solid 3px #000000' }" :elevation="2" min-width="40%"
-                        max-width="40%">
+                    <v-divider></v-divider>
+                    <v-divider></v-divider>
+                    <v-divider></v-divider>
 
-                        <v-col>
-                            <span class="d-flex justify-space-between">
-                                <p class="text-h5">Pedido: {{ pedido.num_pedido }}</p>
+                    <div class="scrollbar-estilo"
+                        :style="{ 'height': '90%', 'overflow-y': 'auto', 'border-radius': '8px' }">
 
-                                <p class="text-h5">Status: {{ pedido.status_pedido }}</p>
-                            </span>
-                        </v-col>
+                        <v-row v-if="pedidosAndamento.length !== 0" class="mt-2" :style="{ 'width': '100%' }">
+                            <v-col v-for="(pedido, index) in pedidosAndamento" :key="index" cols="12" :elevation="0"
+                                color="rgb(0,0,0)">
 
-                        <v-col class="d-flex justify-space-between my-n5">
-                            <v-col cols="10">
-                                <p class="ma-2">
-                                    <span class="text-h6">Cliente: <span class="text-black">{{ pedido.nome_completo
-                                    }}</span></span>
-                                </p>
-                                <p class="ma-2">
-                                    <span class="text-h6">Produtos: <span class="text-black">{{ pedido.list_produtos
-                                    }}</span></span>
-                                </p>
-                                <p class="ml-2 text-h6">Total: <span class="text-black">{{
-                                    parseFloat(pedido.total).toLocaleString("pt-BR", {
-                                        style: "currency", currency:
-                                            "BRL"
-                                    }) }}</span></p>
+                                <v-card class="ma-auto d-flex flex-column" rounded="lg"
+                                    :style="{ 'border': 'solid 2px #000000' }" max-width="80%" max-height="300px">
+
+                                    <v-row>
+                                        <v-col class="mt-1 d-flex justify-space-around">
+                                            <p :style="{ 'font-size': '20px' }">Pedido: {{ pedido.num_pedido }}</p>
+
+                                            <p :style="{ 'font-size': '20px' }">Status: {{ pedido.status_pedido }}</p>
+                                        </v-col>
+                                    </v-row>
+
+                                    <v-row>
+                                        <v-col cols="8" class="d-flex flex-column align-start ma-2">
+
+                                            <p class="text-h6 text-black">Cliente: <span
+                                                    class="text-body-1 font-weight-regular"> {{
+                                                        pedido.nome_completo }} </span></p>
+
+                                            <p class="text-h6 text-black text-start">Produtos:
+                                                <span class="text-body-1 font-weight-regular">
+                                                    {{ pedido.list_produtos }}
+                                                </span>
+                                            </p>
+                                            <p class="text-h6 text-black">Total: <span
+                                                    class="text-body-1 font-weight-regular">{{
+                                                        parseFloat(pedido.total).toLocaleString("pt-BR", {
+                                                            style: "currency", currency:
+                                                                "BRL"
+                                                        }) }}</span></p>
+                                        </v-col>
+
+                                        <v-col cols="3">
+                                            <v-btn @click="alteraStatusPedido(pedido.num_pedido, 'Finalizado')"
+                                                class="ma-auto mr-5 text-white" icon="mdi-check-bold" color="green"
+                                                :elevation="5">
+                                            </v-btn>
+                                            <v-btn @click="alteraStatusPedido(pedido.num_pedido, 'Cancelado')"
+                                                class="ma-auto text-white" icon="mdi-close-thick" color="red"
+                                                :elevation="5">
+                                            </v-btn>
+
+                                        </v-col>
+                                    </v-row>
+                                </v-card>
+
                             </v-col>
+                        </v-row>
 
-                            <v-col>
-                                <v-btn class="ma-auto text-red" icon="mdi-close-thick" color="rgb(0,0,0,0)"
-                                    :elevation="0"></v-btn>
+                        <v-sheet v-else class="d-flex justify-center align-center text-body-1" color="rgb(0,0,0,0)"
+                            height="100%">
+                            <p class="text-h4 text-white">Não há pedidos Em Andamento!</p>
+                        </v-sheet>
+                    </div>
+                </v-sheet>
+            </v-col>
+
+
+
+            <v-col cols="5" class="ma-auto">
+                <v-sheet class="mt-8 pa-5 justify-center text-center" color="rgb(0,0,0,0.2)" height="85vh" width="100%"
+                    rounded="xl" :elevation="10">
+                    <v-list-item-title class="text-center">
+                        <span class="text-h4 text-white">
+                            Finalizados / Cancelados
+                        </span>
+                    </v-list-item-title>
+
+                    <v-divider></v-divider>
+                    <v-divider></v-divider>
+                    <v-divider></v-divider>
+
+                    <div class="scrollbar-estilo"
+                        :style="{ 'height': '90%', 'overflow-y': 'auto', 'border-radius': '8px' }">
+
+                        <v-row v-if="pedidosFinalizadoCancelados.length !== 0" class="mt-2" :style="{ 'width': '100%' }">
+                            <v-col v-for="(pedido, index) in pedidosFinalizadoCancelados" :key="index" cols="12"
+                                :elevation="0" color="rgb(0,0,0)">
+
+                                <v-card v-if="pedido.status_pedido == 'Cancelado'" class="ma-auto d-flex flex-column"
+                                    rounded="lg" :style="{ 'border': 'solid 2px red' }" max-width="80%" max-height="300px">
+
+                                    <v-row>
+                                        <v-col class="mt-1 d-flex justify-space-around">
+                                            <p class="text-red" :style="{ 'font-size': '20px' }">Pedido: {{
+                                                pedido.num_pedido }}</p>
+
+                                            <p class="text-red" :style="{ 'font-size': '20px' }">Status: {{
+                                                pedido.status_pedido }}</p>
+                                        </v-col>
+                                    </v-row>
+
+                                    <v-row>
+                                        <v-col class="d-flex flex-column align-start ma-2">
+
+                                            <p class="text-h6 text-red">Cliente: <span
+                                                    class="text-body-1 text-black font-weight-regular"> {{
+                                                        pedido.nome_completo }} </span></p>
+
+                                            <p class="text-h6 text-red text-start">Produtos:
+                                                <span class="text-body-1 text-black font-weight-regular">
+                                                    {{ pedido.list_produtos }}
+                                                </span>
+                                            </p>
+                                            <p class="text-h6 text-red">Total: <span
+                                                    class="text-body-1 text-black font-weight-regular">{{
+                                                        parseFloat(pedido.total).toLocaleString("pt-BR", {
+                                                            style: "currency", currency:
+                                                                "BRL"
+                                                        }) }}</span></p>
+                                        </v-col>
+
+                                    </v-row>
+                                </v-card>
+
+
+                                <v-card v-else class="ma-auto d-flex flex-column" rounded="lg"
+                                    :style="{ 'border': 'solid 2px #000000' }" max-width="80%" max-height="300px">
+
+                                    <v-row>
+                                        <v-col class="mt-1 d-flex justify-space-around">
+                                            <p :style="{ 'font-size': '20px' }">Pedido: {{ pedido.num_pedido }}</p>
+
+                                            <p :style="{ 'font-size': '20px' }">Status: {{ pedido.status_pedido }}</p>
+                                        </v-col>
+                                    </v-row>
+
+                                    <v-row>
+                                        <v-col class="d-flex flex-column align-start ma-2">
+
+                                            <p class="text-h6 text-black">Cliente: <span
+                                                    class="text-body-1 font-weight-regular"> {{
+                                                        pedido.nome_completo }} </span></p>
+
+                                            <p class="text-h6 text-black text-start">Produtos:
+                                                <span class="text-body-1 font-weight-regular">
+                                                    {{ pedido.list_produtos }}
+                                                </span>
+                                            </p>
+                                            <p class="text-h6 text-black">Total: <span
+                                                    class="text-body-1 font-weight-regular">{{
+                                                        parseFloat(pedido.total).toLocaleString("pt-BR", {
+                                                            style: "currency", currency:
+                                                                "BRL"
+                                                        }) }}</span></p>
+                                        </v-col>
+                                    </v-row>
+                                </v-card>
+
                             </v-col>
-                        </v-col>
-                    </v-card>
-                </v-col>
-            </v-card>
+                        </v-row>
+                    </div>
+                </v-sheet>
+            </v-col>
+
         </v-row>
     </main>
 </template>
@@ -58,24 +191,70 @@ export default ({
     },
     data() {
         return {
-            pedidos_gerais: []
+            pedidosAndamento: [],
+            pedidosFinalizadoCancelados: []
         }
     },
     methods: {
         async pedidosGerais() {
             await apiURL.get('/pedidos-gerais').then(response => {
-                console.log(response.data.data[0])
+                this.pedidosAndamento = []
+                this.pedidosFinalizadoCancelados = []
+
                 if (response.data.data.length > 0) {
-                    this.pedidos_gerais = response.data.data
-                    console.log(this.pedidos_gerais)
+                    for (let i = 0; i < response.data.data.length; i++) {
+                        if (response.data.data[i].status_pedido === 'Em Andamento') {
+                            this.pedidosAndamento.push(response.data.data[i])
+                        } else {
+                            this.pedidosFinalizadoCancelados.splice(0, 0, response.data.data[i])
+                        }
+                    }
                 } else {
                     console.log("Não há pedidos no momento")
                 }
             })
-        }
+        },
+        async alteraStatusPedido(num_pedido, status_pedido) {
+            await apiURL.put(`/altera-status-pedido?num_pedido=${num_pedido}&status_pedido=${status_pedido}`).then(response => {
+                if (response.status == 200) {
+                    console.log(`Pedido ${num_pedido} ${status_pedido} com sucesso!`)
+                    location.reload()
+                }
+            })
+        },
     },
     mounted() {
         this.pedidosGerais()
+        setInterval(() => {
+            this.pedidosGerais();
+        }, 10000);
+
     }
 })
 </script>
+
+
+
+<style>
+main {
+    background-color: #42A5F5;
+}
+
+
+.scrollbar-estilo::-webkit-scrollbar {
+    width: 9px;
+}
+
+.scrollbar-estilo::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255);
+}
+
+.scrollbar-estilo::-webkit-scrollbar-thumb {
+    background: #0D47A1;
+    border-radius: 3px;
+}
+
+.scrollbar-estilo::-webkit-scrollbar-thumb:hover {
+    background: #0D47A1;
+}
+</style>

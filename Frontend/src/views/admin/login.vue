@@ -29,7 +29,7 @@
                     </v-dialog>
                 </div>
                 <v-row no-gutters justify="center">
-                    <v-btn @click="loginAdm" class="bg-black ma-8 pl-6 pr-6">Acessar</v-btn>
+                    <v-btn ref="botLogin" @click="loginAdm" class="bg-black ma-8 pl-6 pr-6">Acessar</v-btn>
                 </v-row>
             </v-card>
         </v-container>
@@ -48,6 +48,11 @@ export default {
         }
     },
     methods: {
+        handleEnterKey(event) {
+            if (event.key === 'Enter') {
+                this.$refs.botLogin.$el.click()
+            }
+        },
         async loginAdm() {
 
             if (this.email !== '' || this.password !== '') {
@@ -69,6 +74,9 @@ export default {
                 console.log("Preencha todos os campos")
             }
         }
+    },
+    mounted() {
+        document.addEventListener('keyup', this.handleEnterKey)
     }
 }
 

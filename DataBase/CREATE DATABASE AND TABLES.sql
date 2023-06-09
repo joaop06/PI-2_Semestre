@@ -52,18 +52,10 @@ CREATE TABLE Admin (
     email VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(50) NOT NULL
 );
-
-INSERT INTO Admin VALUES (NULL, 'admin', 'admin', 'admin');
-
-UPDATE Admin SET senha = '1234' WHERE id = 1;
-
 SELECT * FROM Admin;
-
-SELECT * FROM Clientes;
-drop table Clientes;
+INSERT INTO Admin VALUES (NULL, 'admin', 'admin', '1234');
 
 SELECT Pedidos.*, Clientes.nome_completo FROM Pedidos INNER JOIN Clientes ON Pedidos.id_cliente_fk = Clientes.id;
-
 UPDATE Clientes SET nome_completo = 'João' WHERE id = 1;
 
 
@@ -80,7 +72,8 @@ CREATE TABLE Pedidos(
 SELECT * FROM Pedidos;
 UPDATE Pedidos SET status_pedido = 'Finalizado' WHERE num_pedido = 7;
 
-INSERT INTO Pedidos values(null, 1, 'pao com ovo', 8.00, 'em andamento');
+SELECT * FROM Pedidos WHERE id_cliente_fk = 4 AND status_pedido IN ('Finalizado', 'Cancelado') ORDER BY num_pedido DESC;
+
 
 SET SQL_SAFE_UPDATES = 0;
 SELECT user FROM mysql.user;
