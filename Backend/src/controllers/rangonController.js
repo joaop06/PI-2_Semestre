@@ -87,7 +87,7 @@ module.exports = class ScoreController {
                     })
                 })
             } else if(status_pedido == 'Finalizado' || status_pedido == 'Cancelado'){
-                connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND status_pedido IN ('Finalizado', 'Cancelado') ORDER BY num_pedido DESC`, function (err, rows) {
+                connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND status_pedido IN ('Finalizado', 'Cancelado')`, function (err, rows) {
                     res.status(200).json({
                         message: "Pedidos Finalizado / Cancelados!",
                         data: rows
