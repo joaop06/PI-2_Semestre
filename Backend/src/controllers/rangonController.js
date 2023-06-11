@@ -162,13 +162,13 @@ module.exports = class ScoreController {
             const { id, nome_completo, celular, email, cep, cidade, estado, endereco, numero } = req.body
             connection.query(`
             UPDATE Clientes SET nome_completo = '${nome_completo}',
-            celular = '${celular}',
+            celular = '${parseInt(celular)}',
             email = '${email}',
-            cep = '${cep}',
+            cep = '${parseInt(cep)}',
             cidade = '${cidade}',
             estado = '${estado}',
             endereco = '${endereco}',
-            numero = '${numero}'`,
+            numero = '${parseInt(numero)}' WHERE id = '${parseInt(id)}'`,
                 function (err, rows) {
                     res.status(200).json({
                         message: "Dados do Cliente Atualizados!",
