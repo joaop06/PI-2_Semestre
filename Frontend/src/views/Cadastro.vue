@@ -150,7 +150,7 @@
 
 
             <v-row no-gutters justify="center" class="mt-12">
-                <v-btn @click="cadastrar" color="red-accent-3" size="large" max-width="25%">
+                <v-btn ref="botCadastro" @click="cadastrar" color="red-accent-3" size="large" max-width="25%">
                     Cadastrar
                 </v-btn>
             </v-row>
@@ -224,6 +224,11 @@ export default {
         }
     },
     methods: {
+        handleEnterKey(event) {
+            if (event.key === 'Enter') {
+                this.$refs.botCadastro.$el.click()
+            }
+        },
         validar_senha(value) {
             if (this.senha !== '' && this.confirma_senha !== '' && this.senha !== this.confirma_senha) {
                 this.hint_verifica_senha = 'As senhas não coincidem!'
@@ -295,6 +300,9 @@ export default {
             }
         }
     },
+    mounted() {
+        document.addEventListener('keyup', this.handleEnterKey)
+    }
 }
 
 

@@ -24,11 +24,11 @@
       <!-- PEDIDOS EM ANDAMENTO -->
       <v-card v-if="optionBtn" class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%">
 
-        <v-card v-if="pedidosAndamento.length == 0">
+        <v-card v-if="pedidos.length == 0">
           <p>Sem pedidos em andamento</p>
         </v-card>
 
-        <v-card v-for="(pedido, index) in pedidosAndamento" :key="index"
+        <v-card v-for="(pedido, index) in pedidos" :key="index"
           class="ma-2 bg-light-green-lighten-4 d-flex flex-column" border="red" rounded="lg"
           :style="{ 'border': 'solid 3px #1B5E20' }" :elevation="2">
 
@@ -52,7 +52,7 @@
             </v-col>
 
             <v-col>
-              <v-btn @click="cancelarPedido(pedido.num_pedido)" class="ma-auto text-red" icon="mdi-close-thick"
+              <v-btn @click="alteraStatusPedido(pedido.num_pedido, 'Cancelado')" class="ma-auto text-red" icon="mdi-close-thick"
                 color="rgb(0,0,0,0)" :elevation="0"></v-btn>
             </v-col>
           </v-col>
@@ -64,7 +64,7 @@
 
       <!-- PEDIDOS FINALIZADOS OU CANCELADOS -->
       <v-card v-else class="ma-auto mt-12" :elevation="0" color="rgb(0,0,0,0)" width="70%" height="70%">
-        <v-sheet v-for="(pedido, index) in pedidosFinalizado" :key="index" color="rgb(0,0,0,0)" :elevation="0">
+        <v-sheet v-for="(pedido, index) in pedidos" :key="index" color="rgb(0,0,0,0)" :elevation="0">
 
           <v-card v-if="pedido.status_pedido === 'Cancelado'" class="ma-2 pa-2 bg-grey-lighten-4" border="red"
             rounded="lg" :style="{ 'border': 'solid 3px #B71C1C' }" :elevation="2">
@@ -137,7 +137,7 @@ export default {
       classBtn1: 'bg-brown-darken-2',
       classBtn2: 'bg-brown-lighten-3',
       optionBtn: true,
-      pedidosAndamento: [],
+      pedidos: [],
       pedidosFinalizado: [],
 
       msgLogin: null,
@@ -152,65 +152,42 @@ export default {
       this.classBtn1 = 'bg-brown-darken-2';
       this.classBtn2 = 'bg-brown-lighten-3';
       this.optionBtn = true;
-      this.pedidosEmAndamento()
+      this.pedidosCliente('Em Andamento')
     },
     mudaOpcaoBtn2() {
       this.classBtn1 = 'bg-brown-lighten-3';
       this.classBtn2 = 'bg-brown-darken-2';
       this.optionBtn = false;
-      this.pedidosFinalizados_Cancelados()
+      this.pedidosCliente('Finalizado')
     },
-    async pedidosEmAndamento() {
+    async pedidosCliente(status_pedido) {
       if (this.cliente == null) {
         return this.msgLogin = 'Faça login para ver seus pedidos!'
       } else {
 
-        const body = {
-          cliente: this.cliente
-        }
-        await apiURL.post('/pedidos/andamento', body).then(response => {
+        await apiURL.post(`/pedidos?cliente=${this.cliente}&status_pedido=${status_pedido}`).then(response => {
           if (response.status == 200) {
-            this.pedidosAndamento = response.data.data
+            this.pedidos = response.data.data
+            console.log(this.pedidos)
           }
         })
       }
     },
-    async pedidosFinalizados_Cancelados() {
-      if (this.cliente == null) {
-        return this.msgLogin = 'Faça login para ver seus pedidos!'
-      } else {
-
-        const body = {
-          cliente: this.cliente
-        }
-        await apiURL.post('/pedidos/finalizadosCancelados', body).then(response => {
-          if (response.status == 200) {
-            this.pedidosFinalizado = response.data.data
-            console.log(this.pedidosFinalizado)
-          }
-        })
-      }
-    },
-    cancelarPedido(num_pedido) {
-      const body = {
-        num_pedido: num_pedido
-      }
-
-      apiURL.put('/pedidos/cancelarpedido', body).then(response => {
+    alteraStatusPedido(num_pedido, status_pedido) {
+      apiURL.put(`/altera-status-pedido?num_pedido=${num_pedido}&status_pedido=${status_pedido}`).then(response => {
         if (response.status == 200) {
-          this.snackbar = true,
-            this.textsnackbar = `Pedido ${num_pedido} cancelado.`
+          this.snackbar = true
+          this.textsnackbar = `Pedido ${num_pedido} cancelado.`
           this.classBtn1 = 'bg-brown-lighten-3';
           this.classBtn2 = 'bg-brown-darken-2';
           this.optionBtn = false;
-          this.pedidosFinalizados_Cancelados()
+          this.pedidosCliente('Finalizado')
         }
       })
     }
   },
   mounted() {
-    this.pedidosEmAndamento()
-    this.pedidosFinalizados_Cancelados()
+    this.pedidosCliente('Em Andamento')
   }
 }
 

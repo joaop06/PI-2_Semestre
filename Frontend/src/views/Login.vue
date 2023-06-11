@@ -54,7 +54,7 @@
 
 
             <v-row no-gutters justify="center" class="mt-6 d-flex flex-column">
-                <v-btn @click="login" color="red-accent-3" size="large" class="ma-auto" max-width="25%">
+                <v-btn ref="botLogin" @click="login" color="red-accent-3" size="large" class="ma-auto" max-width="25%">
                     Login
                 </v-btn>
 
@@ -109,6 +109,12 @@ export default ({
         }
     },
     methods: {
+        handleEnterKey(event) {
+            if (event.key === 'Enter') {
+                this.$refs.botLogin.$el.click()
+            }
+        },
+
         required(value) {
             return !!value || 'Este campo é obrigatório'
         },
@@ -147,6 +153,9 @@ export default ({
         }
 
     },
+    mounted() {
+        document.addEventListener('keyup', this.handleEnterKey)
+    }
 })
 
 

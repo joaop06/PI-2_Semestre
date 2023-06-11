@@ -23,9 +23,7 @@ this.rangonController = new rangonController()
 
 
     /* Pedidos */
-    router.post('/pedidos/andamento', this.rangonController.pedidosEmAndamento)
-    router.post('/pedidos/finalizadosCancelados', this.rangonController.pedidosFinalizadosCancelados)
-    router.put('/pedidos/cancelarpedido', this.rangonController.cancelarPedido)
+    router.post('/pedidos', this.rangonController.pedidosCliente)
 
 
     /* Perfil */
@@ -51,7 +49,7 @@ this.rangonController = new rangonController()
 
     router.get('/pedidos-gerais', this.rangonController.pedidosGerais)
 
-    router.put('/altera-status', this.rangonController.alteraStatus)
+    router.put('/altera-status-pedido', this.rangonController.alteraStatusPedido)
 
     /* Login */
     router.post('/loginAdm', this.rangonController.loginUserAdm)
