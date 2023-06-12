@@ -3,28 +3,38 @@
         <v-card rounded="xl" class="pa-8">
             <v-row no-gutters justify="space-between">
                 <h2 class="pl-3 pr-3 pa-2">Alterar Perfil</h2>
-                <v-btn icon="mdi-close" variant="icon"  @click="close">
+                <v-btn icon="mdi-close" variant="icon" @click="close">
                 </v-btn>
             </v-row>
-            
+
             <h1>Informações pessoais</h1>
             <h3 class="pl-3 pr-3">Nome</h3>
-            <v-text-field class="my-custom-text-field pl-3 pr-3" v-model="cliente.nome_completo"></v-text-field>
+            <v-text-field class="my-custom-text-field pl-3 pr-3" bg-color="brown-lighten-4"
+                v-model="cliente.nome_completo"></v-text-field>
+
             <h3 class="pl-3 pr-3 pt-4S">Celular</h3>
-            <v-text-field class="pl-3 pr-3" v-model="cliente.celular"></v-text-field>
+            <v-text-field class="pl-3 pr-3" bg-color="brown-lighten-4" v-model="cliente.celular"></v-text-field>
+
             <h3 class="pl-3 pr-3">E-mail</h3>
-            <v-text-field class="pl-3 pr-3" chips v-model="cliente.email"></v-text-field>
-            <h1>Endereço</h1>  
+            <v-text-field class="pl-3 pr-3" bg-color="brown-lighten-4" chips v-model="cliente.email"></v-text-field>
+
+            <h1>Endereço</h1>
             <h3 class="pl-3 pr-3">Cidade</h3>
-            <v-text-field class="pl-3 pr-3" v-model="cliente.cidade"></v-text-field>
+            <v-text-field class="pl-3 pr-3" bg-color="brown-lighten-4" v-model="cliente.cidade"></v-text-field>
+
             <h3 class="pl-3 pr-3">Estado</h3>
-            <v-text-field class="pl-3 pr-3" v-model="cliente.estado"></v-text-field>
+            <v-select class="pl-3 pr-3" bg-color="brown-lighten-4" :style="{ 'color': 'white' }" name="estado"
+                v-model="cliente.estado" :items="UF" label="Estado" width="10em" valu="SP"></v-select>
+
             <h3 class="pl-3 pr-3">CEP</h3>
-            <v-text-field class="pl-3 pr-3" v-model="cliente.cep"></v-text-field>
+            <v-text-field class="pl-3 pr-3" bg-color="brown-lighten-4" v-model="cliente.cep"></v-text-field>
+
             <h3 class="pl-3 pr-3">Endereco</h3>
-            <v-text-field class="pl-3 pr-3" v-model="cliente.endereco"></v-text-field>
+            <v-text-field class="pl-3 pr-3" bg-color="brown-lighten-4" v-model="cliente.endereco"></v-text-field>
+
             <h3 class="pl-3 pr-3">Número</h3>
-            <v-text-field class="pl-3 pr-3" v-model="cliente.numero"></v-text-field>
+            <v-text-field class="pl-3 pr-3" bg-color="brown-lighten-4" v-model="cliente.numero"></v-text-field>
+
             <div class="pl-3 pr-3 pb-4">
                 <v-btn class="popup-close bg-orange" @click="update()">
                     Editar Perfil
@@ -39,12 +49,13 @@
 import apiURL from '@/services/apiURL'
 
 export default {
-    props:{
+    props: {
 
     },
-    data(){
-        return{
+    data() {
+        return {
             dialog: false,
+            UF: ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RR', 'RO', 'RJ', 'RN', 'RS', 'SC', 'SP', 'SE', 'TO'],
             cliente: {
                 nome_completo: '',
                 celular: '',
@@ -64,13 +75,12 @@ export default {
                 novoEstado: '',
                 novoCep: '',
                 novoEndereco: '',
-                novoNumero: '',
-                id: null
+                novoNumero: ''
             }
-        } 
+        }
     },
     methods: {
-        update(){
+        async update() {
             this.novoCliente.novoNome_completo = this.cliente.nome_completo
             this.novoCliente.novoCelular = this.cliente.celular
             this.novoCliente.novoEmail = this.cliente.email
@@ -79,30 +89,29 @@ export default {
             this.novoCliente.novoCep = this.cliente.cep
             this.novoCliente.novoEndereco = this.cliente.endereco
             this.novoCliente.novoNumero = this.cliente.numero
-            this.novoCliente.id = this.cliente.id
             const body = {
+                id: this.cliente.id,
                 nome_completo: this.novoCliente.novoNome_completo,
-                descricao: this.novoCliente.novoCelular,
-                preco: this.novoCliente.novoEmail,
+                celular: this.novoCliente.novoCelular,
+                email: this.novoCliente.novoEmail,
+                cep: this.novoCliente.novoCep,
                 cidade: this.novoCliente.novoCidade,
                 estado: this.novoCliente.novoEstado,
-                cep: this.novoCliente.novoCep,
                 endereco: this.novoCliente.novoEndereco,
-                numero: this.novoCliente.novoNumero,
-                id: this.novoCliente.id
+                numero: this.novoCliente.novoNumero
             }
-            console.log(body)
-            apiURL.put('/update-data-user', body).then(response => {
-            if(response.status != 200){
-            console.log("Erro ao atualizar dados.")
-            } else{
-            alert("Dados atualizados com sucesso!")
-            }
-      })
+            await apiURL.put('/update-data-user', body).then(response => {
+                if (response.status != 200) {
+                    console.log("Erro ao atualizar dados.")
+                } else {
+                    this.dialog = false
+                    return alert("Dados atualizados com sucesso!")
+                }
+            })
         },
-        close(){
+        close() {
             this.dialog = false
-        }   
+        }
     }
 }
 </script>

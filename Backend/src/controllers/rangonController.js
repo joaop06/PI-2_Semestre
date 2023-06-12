@@ -19,7 +19,7 @@ module.exports = class ScoreController {
             const { nome_completo, celular, email, senha, cep, cidade, estado, endereco, numero } = req.body
 
 
-            connection.query(`INSERT INTO Clientes VALUES (null, '${nome_completo}', ${celular}, '${email}','${senha}',${cep},${cidade}, ${estado}, ${endereco}, ${numero})`, function (err) {
+            connection.query(`INSERT INTO Clientes VALUES (null, '${nome_completo}', ${celular}, '${email}','${senha}',${cep},'${cidade}', '${estado}', '${endereco}', ${numero})`, function (err) {
                 if (err) {
                     console.error(err);
                     res.status(500).json({
@@ -79,21 +79,21 @@ module.exports = class ScoreController {
         try {
             const { cliente, status_pedido } = req.query
 
-            if(status_pedido == 'Em Andamento'){
+            if (status_pedido == 'Em Andamento') {
                 connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND status_pedido = 'Em Andamento' ORDER BY num_pedido DESC`, function (err, rows) {
                     res.status(200).json({
                         message: "Pedidos Em Andamento!",
                         data: rows
                     })
                 })
-            } else if(status_pedido == 'Finalizado' || status_pedido == 'Cancelado'){
+            } else if (status_pedido == 'Finalizado' || status_pedido == 'Cancelado') {
                 connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} AND status_pedido IN ('Finalizado', 'Cancelado')`, function (err, rows) {
                     res.status(200).json({
                         message: "Pedidos Finalizado / Cancelados!",
                         data: rows
                     })
                 })
-            } else{
+            } else {
                 connection.query(`SELECT * FROM Pedidos WHERE id_cliente_fk = ${cliente} ORDER BY num_pedido DESC`, function (err, rows) {
                     res.status(200).json({
                         message: "Todos os Pedidos!",
@@ -104,7 +104,7 @@ module.exports = class ScoreController {
 
 
 
-            
+
         } catch (err) {
             console.log(err)
         }
@@ -167,15 +167,7 @@ module.exports = class ScoreController {
     async updateDataUser(req, res) {
         try {
             const { id, nome_completo, celular, email, cep, cidade, estado, endereco, numero } = req.body
-            connection.query(`
-            UPDATE Clientes SET nome_completo = '${nome_completo}',
-            celular = '${parseInt(celular)}',
-            email = '${email}',
-            cep = '${parseInt(cep)}',
-            cidade = '${cidade}',
-            estado = '${estado}',
-            endereco = '${endereco}',
-            numero = '${parseInt(numero)}' WHERE id = '${parseInt(id)}'`,
+            connection.query(`UPDATE Clientes SET nome_completo = '${nome_completo}',celular = ${celular},email = '${email}',cep = ${cep},cidade = '${cidade}',estado = '${estado}',endereco = '${endereco}',numero = ${numero} WHERE id = ${id}`,
                 function (err, rows) {
                     res.status(200).json({
                         message: "Dados do Cliente Atualizados!",

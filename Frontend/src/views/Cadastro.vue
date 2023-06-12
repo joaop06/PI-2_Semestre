@@ -304,22 +304,6 @@ export default {
         document.addEventListener('keyup', this.handleEnterKey)
     }
 }
-
-
-
-
-
-
-/*
-{
-"logradouro": "Rua Joaquim Garcia de Souza",
-"bairro": "Jardim Paraty",
-"localidade": "Franca",
-"uf": "SP",
-}
-*/
-
-
 </script>
 
 

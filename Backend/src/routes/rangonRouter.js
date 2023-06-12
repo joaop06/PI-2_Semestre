@@ -27,7 +27,7 @@ this.rangonController = new rangonController()
 
 
     /* Perfil */
-    router.get('/data-user', this.rangonController.dataUser)
+    router.post('/data-user', this.rangonController.dataUser)
     router.put('/update-data-user', this.rangonController.updateDataUser)
 
 
