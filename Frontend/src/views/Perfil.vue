@@ -1,17 +1,49 @@
 <template>
   <v-container>
-    <h1> cliente </h1>
+<v-card class="bg-brown-darken-2 mt-10" elevation="5" variant="outlined">
+  <v-list class="bg-white">
+    <v-list-item>
+      
+      <v-card class= "pa-5" variant="outlined">  
 
-    <v-btn @click="eventActiveUpdtDataUser(cliente)" class="ma-4 bg-red-accent-3" rounded="lg">
-      <v-icon class="mr-2">
-        mdi-pencil
-      </v-icon>
-        Alterar
+        <h1>{{ cliente.nome_completo }}</h1>
+        <br>
+
+        <h2>Informações pessoais</h2>
+        <br>
+
+        <v-list-item>
+          <h3>Email: {{ cliente.email }}</h3> 
+          <h3>Telefone: {{ cliente.celular }}</h3>
+        </v-list-item>
+        <br>
+
+        <h2>Endereço</h2>
+        <br>
+
+        <v-list-item>
+            <h3>Rua: {{ cliente.endereco }}</h3>
+            <h3>Nº: {{ cliente.numero }}</h3>
+            <h3>CEP: {{ cliente.cep }}</h3>
+            <h3>Cidade: {{ cliente.cidade }}</h3>
+            <h3>Estado: {{ cliente.estado }}</h3>
+        </v-list-item>
+      </v-card>
+    </v-list-item>
+  </v-list>
+
+  <v-btn @click="eventActiveUpdtDataUser(cliente)" class="ma-5 bg-red-accent-3" rounded="lg">
+    <v-icon class="mr-2">
+      mdi-pencil
+    </v-icon>
+      Editar Perfil
     </v-btn>
-    
-    <Updt_perfil ref="Updt_perfil"/>
 
-  </v-container>
+</v-card>
+
+<Updt_perfil ref="Updt_perfil"/>
+
+</v-container>
 </template>
 
 <script>
@@ -26,6 +58,7 @@ export default {
   data() {
     return {
       cliente: globalVariables.clienteLogado[0]
+
     }
   },
   methods: {
