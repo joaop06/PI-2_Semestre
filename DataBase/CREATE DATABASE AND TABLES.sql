@@ -47,7 +47,6 @@ CREATE TABLE Clientes (
 );
 SELECT * FROM Clientes;
 
-Update Clientes set cidade = 'sampa' where id = 1;
 
 CREATE TABLE Admin (
 	id INT PRIMARY KEY AUTO_INCREMENT,

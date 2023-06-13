@@ -19,7 +19,7 @@ module.exports = class ScoreController {
             const { nome_completo, celular, email, senha, cep, cidade, estado, endereco, numero } = req.body
 
 
-            connection.query(`INSERT INTO Clientes VALUES (null, '${nome_completo}', ${celular}, '${email}','${senha}',${cep},${cidade}, ${estado}, ${endereco}, ${numero})`, function (err) {
+            connection.query(`INSERT INTO Clientes VALUES (null, '${nome_completo}', ${celular}, '${email}','${senha}',${cep},'${cidade}', '${estado}', '${endereco}', ${numero})`, function (err) {
                 if (err) {
                     console.error(err);
                     res.status(500).json({
