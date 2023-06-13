@@ -87,8 +87,8 @@ export default {
             this.novoCliente.id = this.cliente.id
             const body = {
                 nome_completo: this.novoCliente.novoNome_completo,
-                descricao: this.novoCliente.novoCelular,
-                preco: this.novoCliente.novoEmail,
+                celular: this.novoCliente.novoCelular,
+                email: this.novoCliente.novoEmail,
                 cidade: this.novoCliente.novoCidade,
                 estado: this.novoCliente.novoEstado,
                 cep: this.novoCliente.novoCep,
@@ -96,6 +96,7 @@ export default {
                 numero: this.novoCliente.novoNumero,
                 id: this.novoCliente.id
             }
+            console.log(body, 'body')
             apiURL.put('/update-data-user', body).then(response => {
             if(response.status != 200){
             console.log("Erro ao atualizar dados.")
